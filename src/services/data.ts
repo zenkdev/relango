@@ -3,7 +3,14 @@ export const courseData = [
   {
     key: '0000',
     val: () => ({
-      name: 'test course',
+      title: 'test course',
+    }),
+  },
+  {
+    key: '0001',
+    val: () => ({
+      title: 'Grammar and Vocabulate',
+      subTitle: 'Pre-intermediate to intermediate',
     }),
   },
 ];

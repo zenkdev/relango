@@ -4,13 +4,15 @@ type DataSnapshot = any;
 
 export type Course = {
   id: string;
-  name: string;
+  title: string;
+  subTitle?: string;
 };
 
 export function createCourse(payload: DataSnapshot): Course {
-  const { name } = payload.val();
+  const { title, subTitle } = payload.val();
   return {
     id: defaultTo(payload.key, ''),
-    name: defaultTo(name, ''),
+    title: defaultTo(title, ''),
+    subTitle,
   };
 }

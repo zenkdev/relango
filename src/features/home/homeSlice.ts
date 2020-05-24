@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { AppThunk } from '../../app/store';
 import { Course } from '../../models';
-import { courseService } from '../../services';
+import { courseService, alertService } from '../../services';
 
 const { getCources } = courseService;
 
@@ -48,7 +48,7 @@ export const fetchCourses = (): AppThunk => async dispatch => {
     const cources = await getCources();
     dispatch(getCoursesSuccess(cources));
   } catch (e) {
-    // toastService.showError(e);
+    alertService.showError(e);
     dispatch(getCoursesFailure(e.toString()));
   }
 };

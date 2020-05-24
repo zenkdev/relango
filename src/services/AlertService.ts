@@ -170,6 +170,11 @@ class AlertService {
     );
   }
 
+  public showError = (error: string | Error): void => {
+    const message = typeof error === 'string' ? error : error.message;
+    this.showStickyMessage(message, '', MessageSeverity.error);
+  };
+
   private showMessageHelper(summary: string, detail: string | undefined, severity: MessageSeverity, isSticky: boolean): void {
     if (isSticky) {
       this.stickyMessagesObserver.next({ severity, summary, detail });

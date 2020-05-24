@@ -1,12 +1,15 @@
 import { Button, Card, List, PageHeader, Spin } from 'antd';
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { ReloadOutlined } from '@ant-design/icons';
 
 import { RootState } from '../../app/rootReducer';
-import { fetchCourses } from './homeSlice';
 import { alertService } from '../../services';
+import { fetchCourses } from './homeSlice';
+
+const { Meta } = Card;
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
@@ -29,7 +32,11 @@ const HomePage: React.FC = () => {
         dataSource={data}
         renderItem={item => (
           <List.Item>
-            <Card title={item.name}>Card content</Card>
+            <Link to={`/course/${item.id}`}>
+              <Card title={item.title}>
+                <Meta description={item.subTitle} />
+              </Card>
+            </Link>
           </List.Item>
         )}
       />
