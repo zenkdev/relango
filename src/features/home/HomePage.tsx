@@ -6,6 +6,7 @@ import { ReloadOutlined } from '@ant-design/icons';
 
 import { RootState } from '../../app/rootReducer';
 import { fetchCourses } from './homeSlice';
+import { alertService } from '../../services';
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,17 @@ const HomePage: React.FC = () => {
           </List.Item>
         )}
       />
+      <div>
+        <button type="button" onClick={() => alertService.showMessage('test message')}>
+          show test message
+        </button>
+        <button type="button" onClick={() => alertService.showStickyMessage('test sticky message')}>
+          show test sticky message
+        </button>
+        <button type="button" onClick={() => alertService.showDialog('test dialog')}>
+          show test dialog
+        </button>
+      </div>
       {isLoading && <Spin tip="Loading..." />}
     </div>
   );

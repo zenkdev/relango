@@ -1,4 +1,6 @@
-/* eslint-disable import/prefer-default-export */
+import alertService from './AlertService';
 import courseService from './CourseService';
 
-export { courseService };
+export * from './AlertService';
+
+export { alertService, courseService };

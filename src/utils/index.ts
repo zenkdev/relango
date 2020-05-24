@@ -1,4 +1,5 @@
-/* eslint-disable import/prefer-default-export */
 import defaultTo from './defaultTo';
+import safeStringify from './safeStringify';
+import splitInTwo from './splitInTwo';
 
-export { defaultTo };
+export { defaultTo, safeStringify, splitInTwo };
