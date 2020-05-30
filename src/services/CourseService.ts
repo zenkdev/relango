@@ -1,63 +1,58 @@
-import { createCourse, Course } from '../models';
-
-import { courseData } from './data';
+/* eslint-disable class-methods-use-this */
+import { Course, createCourse, Lesson, createLesson } from '../models';
+import { courseData, lessonData } from './data';
 
 class CourseService {
   /** GET cources from the server */
-  public getCources = async (): Promise<Course[]> => {
+  public getCourses = async (): Promise<Course[]> => {
     const snapshot = courseData;
-    const arr: Course[] = [];
+    const courses: Course[] = [];
     snapshot.forEach(payload => {
-      arr.push(createCourse(payload));
+      courses.push(createCourse(payload));
     });
-    return arr;
+    return courses;
   };
 
-  // /** GET dictionary by id. */
-  // public getDictionary = async (id: string): Promise<Dictionary> => {
-  //   return withTrace(`getDictionary(${id})`, async () => {
-  //     const dictionary = await this.getDictionaryById(id);
-  //     const words = await this.getWords(id);
-  //     const statistics = await this.getStatistics(id);
-  //     const values = Object.values(words);
-  //     values.forEach(word => {
-  //       const stat = statistics[word.id];
-  //       if (stat) {
-  //         /* eslint-disable no-param-reassign */
-  //         word.isCompleted = stat.isCompleted;
-  //         word.occurs = stat.occurs;
-  //         word.mistakes = stat.mistakes;
-  //         /* eslint-enable no-param-reassign */
-  //       }
-  //     });
-  //     // console.table(words);
+  /** GET course by id. */
+  public getCourse = async (id: string): Promise<Course> => {
+    const course = await this.getCourseById(id);
+    const lessons = await this.getLessons(id);
+    // const statistics = await this.getStatistics(id);
+    // const values = Object.values(lessons);
+    // values.forEach(lesson => {
+    //   const stat = statistics[lesson.id];
+    //   if (stat) {
+    //     /* eslint-disable no-param-reassign */
+    //     lesson.isCompleted = stat.isCompleted;
+    //     lesson.occurs = stat.occurs;
+    //     lesson.mistakes = stat.mistakes;
+    //     /* eslint-enable no-param-reassign */
+    //   }
+    // });
+    // // console.table(words);
 
-  //     // fix wordsCompleted
-  //     const wordsCompleted = count(values, w => w.isCompleted);
-  //     if (dictionary.wordsCompleted !== wordsCompleted) {
-  //       dictionary.wordsCompleted = wordsCompleted;
-  //     }
-  //     return { ...dictionary, words };
-  //   });
-  // };
+    // // fix wordsCompleted
+    // const wordsCompleted = count(values, w => w.isCompleted);
+    // if (dictionary.wordsCompleted !== wordsCompleted) {
+    //   dictionary.wordsCompleted = wordsCompleted;
+    // }
+    return { ...course, lessons };
+  };
 
-  // private async getDictionaryById(id: string): Promise<Dictionary> {
-  //   return withTrace('getDictionaryById', async () => {
-  //     const snapshot = await this.db.ref(`dictionary/${id}`).once('value');
-  //     return createDictionary(snapshot, this.uid);
-  //   });
-  // }
+  private async getCourseById(id: string): Promise<Course> {
+    const snapshot = courseData.find(x => x.key === id);
+    return createCourse(snapshot);
+  }
 
-  // private async getWords(dictionaryId: string): Promise<Record<string, Word>> {
-  //   return withTrace('getWords', async () => {
-  //     const snapshot = await this.db.ref('word').orderByChild('dictionaryId').equalTo(dictionaryId).once('value');
-  //     const map: Record<string, Word> = {};
-  //     snapshot.forEach(payload => {
-  //       map[payload.key as string] = createWord(payload);
-  //     });
-  //     return map;
-  //   });
-  // }
+  private async getLessons(courseId: string): Promise<Record<string, Lesson>> {
+    const snapshot = lessonData.filter(x => x.courseId === courseId);
+    const lessons: Record<string, Lesson> = {};
+    snapshot.forEach(payload => {
+      const lesson = createLesson(payload);
+      lessons[lesson.id] = lesson;
+    });
+    return lessons;
+  }
 
   // private async getStatistics(dictionaryId: string): Promise<Record<string, Statistic>> {
   //   return withTrace('getStatistics', async () => {

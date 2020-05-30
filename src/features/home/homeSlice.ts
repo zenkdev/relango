@@ -5,7 +5,7 @@ import { AppThunk } from '../../app/store';
 import { Course } from '../../models';
 import { courseService, alertService } from '../../services';
 
-const { getCources } = courseService;
+const { getCourses } = courseService;
 
 export type HomeState = {
   isLoading: boolean;
@@ -45,7 +45,7 @@ export default homeSlice.reducer;
 export const fetchCourses = (): AppThunk => async dispatch => {
   try {
     dispatch(getCoursesStart());
-    const cources = await getCources();
+    const cources = await getCourses();
     dispatch(getCoursesSuccess(cources));
   } catch (e) {
     alertService.showError(e);
