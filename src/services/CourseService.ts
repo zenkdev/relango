@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import { Course, createCourse, Lesson, createLesson } from '../models';
-import { courseData, lessonData } from './data';
+import { courseData, lessonData } from '../database/data';
 
 class CourseService {
   /** GET cources from the server */

@@ -1,5 +1,5 @@
 import { defaultTo } from '../utils';
-import { Lesson } from './Lesson.model';
+import { Lesson } from './Lesson';
 
 type DataSnapshot = any;
 

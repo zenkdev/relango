@@ -1,2 +1,2 @@
-export * from './Course.model';
-export * from './Lesson.model';
+export * from './Course';
+export * from './Lesson';
