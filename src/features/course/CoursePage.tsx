@@ -9,23 +9,23 @@ import { ReloadOutlined } from '@ant-design/icons';
 import { RootState } from '../../app/rootReducer';
 import { AppDispatch } from '../../app/store';
 import * as actions from './courseSlice';
-import LessonContent from './LessonContent';
+import ModuleContent from './ModuleContent';
 import * as selectors from './selectors';
 
 const { Content, Sider } = Layout;
 
 type CoursePageParams = {
   id: string;
-  lessonId?: string;
+  moduleId?: string;
 };
 
 type CoursePageOwnProps = RouteComponentProps<CoursePageParams>;
 
 const mapStateToProps = (state: RootState, { match, location }: CoursePageOwnProps) => {
   const { isLoading, data } = state.course;
-  const { id: courseId, lessonId } = match.params;
+  const { id: courseId, moduleId } = match.params;
   const { pathname } = location;
-  const menuItems = selectors.selectLessons(state).map(({ id, name }) => ({ name, to: `/course/${courseId}/lesson/${id}` }));
+  const menuItems = selectors.selectModules(state).map(({ id, name }) => ({ name, to: `/course/${courseId}/module/${id}` }));
   return {
     isLoading,
     title: data && data.title,
@@ -34,7 +34,7 @@ const mapStateToProps = (state: RootState, { match, location }: CoursePageOwnPro
       items: menuItems,
       selected: pathname,
     },
-    currentLesson: selectors.selectCurrentLesson(state, lessonId),
+    currentModule: selectors.selectCurrentModule(state, moduleId),
   };
 };
 
@@ -42,14 +42,14 @@ const mapDispatchToProps = (dispatch: AppDispatch, { match }: CoursePageOwnProps
   const { id } = match.params;
   return {
     fetchData: () => {
-      dispatch(actions.fetchCourse(id));
+      dispatch(actions.fetchCourse(id) as any);
     },
   };
 };
 
 type CoursePageProps = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
 
-const CoursePage: React.FC<CoursePageProps> = ({ isLoading, title, subTitle, menu, currentLesson, fetchData }) => {
+const CoursePage: React.FC<CoursePageProps> = ({ isLoading, title, subTitle, menu, currentModule, fetchData }) => {
   useEffect(() => fetchData(), [fetchData]);
   return (
     <>
@@ -86,7 +86,7 @@ const CoursePage: React.FC<CoursePageProps> = ({ isLoading, title, subTitle, men
           subTitle={subTitle}
           extra={[<Button key="refresh" type="primary" shape="circle" icon={<ReloadOutlined />} onClick={fetchData} />]}
         />
-        {currentLesson && <LessonContent lesson={currentLesson} prev={currentLesson.prev} next={currentLesson.next} />}
+        {currentModule && <ModuleContent module={currentModule} prev={currentModule.prev} next={currentModule.next} />}
         {isLoading && <Spin tip="Loading..." />}
       </Content>
     </>

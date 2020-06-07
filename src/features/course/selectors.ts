@@ -1,39 +1,39 @@
 import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from '../../app/rootReducer';
-import { Lesson } from '../../models';
+import { Module } from '../../models';
 
 const selectCourse = (state: RootState) => state.course;
 
-const selectLesson = (state: RootState, lessonId?: string): (Lesson & { prev?: string; next?: string }) | null => {
+const selectModule = (state: RootState, moduleId?: string): (Module & { prev?: string; next?: string }) | null => {
   const {
     course: { data },
   } = state;
-  if (!data || !lessonId) {
+  if (!data || !moduleId) {
     return null;
   }
 
-  const { id: courseId, lessons } = data;
-  const lesson = lessons[lessonId];
-  const keys = Object.keys(lessons);
-  const ind = keys.indexOf(lessonId);
-  const prev = ind > 0 ? `/course/${courseId}/lesson/${keys[ind - 1]}` : undefined;
-  const next = ind >= 0 && ind < keys.length - 1 ? `/course/${courseId}/lesson/${keys[ind + 1]}` : undefined;
+  const { id: courseId, modules } = data;
+  const module = modules[moduleId];
+  const keys = Object.keys(modules);
+  const ind = keys.indexOf(moduleId);
+  const prev = ind > 0 ? `/course/${courseId}/module/${keys[ind - 1]}` : undefined;
+  const next = ind >= 0 && ind < keys.length - 1 ? `/course/${courseId}/module/${keys[ind + 1]}` : undefined;
 
   return {
-    ...lesson,
+    ...module,
     prev,
     next,
   };
 };
 
-export const selectLessons = createSelector(selectCourse, ({ data }): Lesson[] => {
+export const selectModules = createSelector(selectCourse, ({ data }): Module[] => {
   if (!data) {
     return [];
   }
 
-  const lessons = Object.values(data.lessons);
-  return lessons;
+  const modules = Object.values(data.modules);
+  return modules;
 });
 
-export const selectCurrentLesson = createSelector(selectLesson, lesson => lesson);
+export const selectCurrentModule = createSelector(selectModule, x => x);

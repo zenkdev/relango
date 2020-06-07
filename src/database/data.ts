@@ -14,7 +14,7 @@ export const courseData = [
   },
 ];
 
-export const lessonData = [
+export const moduleData = [
   {
     key: '0100',
     courseId: '01',
@@ -86,6 +86,505 @@ export const lessonData = [
       name: 'Unit 1',
       subject: 'Grammar',
       description: `Present time: present simple, present continuous, present perfect simple, present perfect continuous, stative verbs`,
+      modalContent: `![p0007](/assets/p0007.png)
+![p0008](/assets/p0008.png)`,
+      tests: [
+        {
+          id: 'A',
+          title: 'Circle the correct word or phrase.',
+          questions: [
+            [
+              {
+                type: 'staticText',
+                value: 'Elizabeth ',
+              },
+              {
+                type: 'singleChoice',
+                value: 'usually goes',
+                options: ['usually goes', 'is usually going'],
+              },
+              {
+                type: 'staticText',
+                value: " to bed at around eleven o'clock.",
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: 'Dan ',
+              },
+              {
+                type: 'singleChoice',
+                value: 'is talking',
+                options: ['talks', 'is talking'],
+              },
+              {
+                type: 'staticText',
+                value: ' on the other phone right now.',
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: 'We ',
+              },
+              {
+                type: 'singleChoice',
+                value: "don't eat",
+                options: ["don't eat", "aren't eating"],
+              },
+              {
+                type: 'staticText',
+                value: " any meat at the moment as we're both on a diet.",
+              },
+            ],
+            [
+              {
+                type: 'singleChoice',
+                value: 'Does air travel get',
+                options: ['Does air travel get', 'Is air travel getting'],
+              },
+              {
+                type: 'staticText',
+                value: ' increasingly safe?',
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: 'My mum ',
+              },
+              {
+                type: 'singleChoice',
+                value: 'calls',
+                options: ['calls', 'is calling'],
+              },
+              {
+                type: 'staticText',
+                value: ' me every weekend without fail.',
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: 'How much ',
+              },
+              {
+                type: 'singleChoice',
+                value: 'do babysitters generally earn',
+                options: ['do babysitters generally earn', 'are babysitters generally earning'],
+              },
+              {
+                type: 'staticText',
+                value: '?',
+              },
+            ],
+            [
+              {
+                type: 'singleChoice',
+                value: 'You always come',
+                options: ['You always come', "You're always coming"],
+              },
+              {
+                type: 'staticText',
+                value: " up with excuses for not having done your homework. It's so annoying!",
+              },
+            ],
+            [
+              {
+                type: 'singleChoice',
+                value: "I'm not going",
+                options: ["I don't go", "I'm not going"],
+              },
+              {
+                type: 'staticText',
+                value: ' out much during the week, but ',
+              },
+              {
+                type: 'singleChoice',
+                value: "I'm always trying",
+                options: ['I always try', "I'm always trying"],
+              },
+              {
+                type: 'staticText',
+                value: ' to go out somewhere on Saturday night.',
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: 'No, the train ',
+              },
+              {
+                type: 'singleChoice',
+                value: 'does stop',
+                options: ['does stop', 'Is stopping'],
+              },
+              {
+                type: 'staticText',
+                value: ' at Cirencester on Saturdays.',
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: 'My mum ',
+              },
+              {
+                type: 'singleChoice',
+                value: 'takes',
+                options: ['takes', 'is taking'],
+              },
+              {
+                type: 'staticText',
+                value: ' part in ice-skating competitions almost every weekend.',
+              },
+            ],
+          ],
+        },
+        {
+          id: 'B',
+          title: 'Rewrite correctly. Change the words or phrases in bold.',
+          questions: [
+            [
+              {
+                type: 'staticText',
+                value: 'My dad ',
+              },
+              {
+                type: 'staticText',
+                value: 'is often getting up',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: ' late on Saturday mornings.',
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'openText',
+                value: 'My dad is often getting up late on Saturday mornings.',
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: 'Are you speaking',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: ' any other languages apart from English?',
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'openText',
+                value: 'Are you speaking any other languages apart from English?',
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: 'I already buy',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: " all my Christmas presents and it's only October!",
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'openText',
+                value: "I already buy all my Christmas presents and it's only October!",
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: "It's the first time ",
+              },
+              {
+                type: 'staticText',
+                value: "I'm ever having",
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: ' a party at home.',
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'openText',
+                value: "It's the first time I'm ever having a party at home.",
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: 'Actually, I think Daren ',
+              },
+              {
+                type: 'staticText',
+                value: 'does works',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: ' quite hard sometimes.',
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'openText',
+                value: 'Actually, I think Daren does works quite hard sometimes.',
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: 'Carlo ',
+              },
+              {
+                type: 'staticText',
+                value: 'is never eating',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: ' Chinese food before.',
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'openText',
+                value: 'Carlo is never eating Chinese food before.',
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: 'Sean ',
+              },
+              {
+                type: 'staticText',
+                value: 'already books',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: ' a table for tonight.',
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'openText',
+                value: 'Sean already books a table for tonight.',
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: 'Needs Melanie',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: ' any help painting her new flat?',
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'openText',
+                value: 'Needs Melanie any help painting her new flat?',
+              },
+            ],
+          ],
+        },
+        {
+          id: 'C',
+          title: 'Complete using the correct form of the verb in brackets.',
+          questions: [
+            [
+              {
+                type: 'staticText',
+                value: "It's the first time ",
+              },
+              {
+                type: 'openText',
+                value: 'I ever eating',
+              },
+              {
+                type: 'staticText',
+                value: ' (I / ever / eat)',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: ' octopus!',
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: 'Sandy ',
+              },
+              {
+                type: 'openText',
+                value: 'has not seen',
+              },
+              {
+                type: 'staticText',
+                value: ' (not / see)',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: ' his sister since she went to university.',
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: 'They ',
+              },
+              {
+                type: 'openText',
+                value: 'going',
+              },
+              {
+                type: 'staticText',
+                value: ' (go)',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: " on holiday to Spain and won't be back until the end of the month.",
+              },
+            ],
+            [
+              {
+                type: 'staticText',
+                value: 'Poor Marusya! She ',
+              },
+              {
+                type: 'openText',
+                value: 'has written',
+              },
+              {
+                type: 'staticText',
+                value: ' (write)',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: " that essay for hours now and she still hasn't finished!",
+              },
+            ],
+            [
+              {
+                type: 'openText',
+                value: 'Have you ever met',
+              },
+              {
+                type: 'staticText',
+                value: ' (you / ever / meet)',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: ' anyone famous?',
+              },
+            ],
+            [
+              {
+                type: 'openText',
+                value: 'I was trying',
+              },
+              {
+                type: 'staticText',
+                value: ' (I / try)',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: " to get in touch with Jenny all morning, but | can't find her anywhere.",
+              },
+            ],
+            [
+              {
+                type: 'openText',
+                value: 'I have not finished',
+              },
+              {
+                type: 'staticText',
+                value: ' (I / not finish)',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: " the book yet so I can't tell you what happens.",
+              },
+            ],
+            [
+              {
+                type: 'openText',
+                value: 'Have you already decided',
+              },
+              {
+                type: 'staticText',
+                value: ' (you / already / decide)',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: "  where you're going this summer?",
+              },
+            ],
+            [
+              {
+                type: 'openText',
+                value: 'We have been living',
+              },
+              {
+                type: 'staticText',
+                value: ' (We / live)',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: ' here for the last six years.',
+              },
+            ],
+            [
+              {
+                type: 'openText',
+                value: 'I have never heard',
+              },
+              {
+                type: 'staticText',
+                value: ' (I / never / hear)',
+                bold: true,
+              },
+              {
+                type: 'staticText',
+                value: ' such nonsense!',
+              },
+            ],
+          ],
+        },
+      ],
     }),
   },
   {

@@ -1,8 +1,8 @@
+import { routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
-/* eslint-disable import/no-extraneous-dependencies */
 import { ThunkAction } from 'redux-thunk';
 
-import { Action, configureStore } from '@reduxjs/toolkit';
+import { Action, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 
 import createRootReducer, { RootState } from './rootReducer';
 
@@ -10,6 +10,7 @@ export const history = createBrowserHistory();
 
 const store = configureStore({
   reducer: createRootReducer(history),
+  middleware: [...getDefaultMiddleware(), routerMiddleware(history)], // for dispatching history actions
 });
 
 if (process.env.NODE_ENV === 'development' && module.hot) {

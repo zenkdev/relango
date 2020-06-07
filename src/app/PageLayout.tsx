@@ -32,7 +32,7 @@ const PageLayout: React.FC = () => (
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/course/:id" component={CoursePage} />
-          <Route exact path="/course/:id/lesson/:lessonId" component={CoursePage} />
+          <Route exact path="/course/:id/module/:moduleId" component={CoursePage} />
           <Route render={() => <div>Miss</div>} />
         </Switch>
       </Layout>

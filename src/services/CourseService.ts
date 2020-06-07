@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
-import { Course, createCourse, Lesson, createLesson } from '../models';
-import { courseData, lessonData } from '../database/data';
+import { Course, createCourse, Module, createModule } from '../models';
+import { courseData, moduleData } from '../database/data';
 
 class CourseService {
   /** GET cources from the server */
@@ -16,16 +16,16 @@ class CourseService {
   /** GET course by id. */
   public getCourse = async (id: string): Promise<Course> => {
     const course = await this.getCourseById(id);
-    const lessons = await this.getLessons(id);
+    const modules = await this.getModules(id);
     // const statistics = await this.getStatistics(id);
-    // const values = Object.values(lessons);
-    // values.forEach(lesson => {
-    //   const stat = statistics[lesson.id];
+    // const values = Object.values(modules);
+    // values.forEach(module => {
+    //   const stat = statistics[module.id];
     //   if (stat) {
     //     /* eslint-disable no-param-reassign */
-    //     lesson.isCompleted = stat.isCompleted;
-    //     lesson.occurs = stat.occurs;
-    //     lesson.mistakes = stat.mistakes;
+    //     module.isCompleted = stat.isCompleted;
+    //     module.occurs = stat.occurs;
+    //     module.mistakes = stat.mistakes;
     //     /* eslint-enable no-param-reassign */
     //   }
     // });
@@ -36,7 +36,7 @@ class CourseService {
     // if (dictionary.wordsCompleted !== wordsCompleted) {
     //   dictionary.wordsCompleted = wordsCompleted;
     // }
-    return { ...course, lessons };
+    return { ...course, modules };
   };
 
   private async getCourseById(id: string): Promise<Course> {
@@ -44,14 +44,14 @@ class CourseService {
     return createCourse(snapshot);
   }
 
-  private async getLessons(courseId: string): Promise<Record<string, Lesson>> {
-    const snapshot = lessonData.filter(x => x.courseId === courseId);
-    const lessons: Record<string, Lesson> = {};
+  private async getModules(courseId: string): Promise<Record<string, Module>> {
+    const snapshot = moduleData.filter(x => x.courseId === courseId);
+    const modules: Record<string, Module> = {};
     snapshot.forEach(payload => {
-      const lesson = createLesson(payload);
-      lessons[lesson.id] = lesson;
+      const module = createModule(payload);
+      modules[module.id] = module;
     });
-    return lessons;
+    return modules;
   }
 
   // private async getStatistics(dictionaryId: string): Promise<Record<string, Statistic>> {

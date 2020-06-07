@@ -1,2 +1,3 @@
 export * from './Course';
-export * from './Lesson';
+export * from './Module';
+export * from './Test';

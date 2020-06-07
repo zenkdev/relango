@@ -1,5 +1,5 @@
 import { defaultTo } from '../utils';
-import { Lesson } from './Lesson';
+import { Module } from './Module';
 
 type DataSnapshot = any;
 
@@ -7,7 +7,7 @@ export type Course = {
   id: string;
   title: string;
   subTitle?: string;
-  lessons: Record<string, Lesson>;
+  modules: Record<string, Module>;
 };
 
 export function createCourse(payload: DataSnapshot): Course {
@@ -16,6 +16,6 @@ export function createCourse(payload: DataSnapshot): Course {
     id: defaultTo(payload.key, ''),
     title: defaultTo(title, ''),
     subTitle,
-    lessons: {},
+    modules: {},
   };
 }
