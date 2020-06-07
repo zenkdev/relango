@@ -16,22 +16,22 @@ const ModuleContent: React.FC<ModuleContentProps> = ({ module, prev, next }) => 
   const extra: any[] = [];
   if (module.modalContent) {
     extra.push(
-      <Link to={{ pathname: location.pathname, hash: 'modal' }}>
-        <Button key="modal" type="primary" icon={<InfoOutlined />} />
+      <Link key="modal" to={{ pathname: location.pathname, hash: 'modal' }}>
+        <Button type="primary" icon={<InfoOutlined />} />
       </Link>,
     );
   }
   if (prev) {
     extra.push(
-      <Link to={prev}>
-        <Button key="prev" type="primary" icon={<BackwardOutlined />} />
+      <Link key="prev" to={prev}>
+        <Button type="primary" icon={<BackwardOutlined />} />
       </Link>,
     );
   }
   if (next) {
     extra.push(
-      <Link to={next}>
-        <Button key="next" type="primary" icon={<ForwardOutlined />} />
+      <Link key="next" to={next}>
+        <Button type="primary" icon={<ForwardOutlined />} />
       </Link>,
     );
   }

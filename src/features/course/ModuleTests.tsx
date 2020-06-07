@@ -1,7 +1,9 @@
 import './ModuleTests.scss';
 
 import { Button, Steps } from 'antd';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
+import { useHistory } from 'react-router';
+import parse from 'url-parse';
 
 import { Test } from '../../models';
 import TestContent from './TestContent';
@@ -9,9 +11,32 @@ import TestContent from './TestContent';
 type ModuleTestsProps = { tests: Test[] };
 
 const ModuleTests: React.FC<ModuleTestsProps> = ({ tests }) => {
-  const [current, setCurrent] = useState(0);
-  const next = useCallback(() => setCurrent(value => value + 1), []);
-  const prev = useCallback(() => setCurrent(value => value - 1), []);
+  const history = useHistory();
+  const current = useMemo(() => {
+    const { search } = history.location;
+    if (!search) {
+      return 0;
+    }
+    const { query } = parse(search, true);
+    const num = Number(query.test);
+    return Number.isNaN(num) ? 0 : num;
+  }, [history.location]);
+  const next = useCallback(() => {
+    const nextCurrent = current + 1;
+    const location = {
+      ...history.location,
+      search: `?test=${nextCurrent}`,
+    };
+    history.push(location);
+  }, [history, current]);
+  const prev = useCallback(() => {
+    const prevCurrent = current - 1;
+    const location = {
+      ...history.location,
+      search: `?test=${prevCurrent}`,
+    };
+    history.push(location);
+  }, [history, current]);
 
   return (
     <div>

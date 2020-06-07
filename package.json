@@ -23,6 +23,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "typescript": "^3.7.5",
+    "url-parse": "^1.4.7",
     "uuid": "^8.1.0",
     "zen-observable": "^0.8.15"
   },
@@ -62,6 +63,7 @@
     "@types/react-redux": "^7.1.9",
     "@types/react-router": "^5.1.7",
     "@types/react-router-dom": "^5.1.5",
+    "@types/url-parse": "^1.4.3",
     "@types/uuid": "^8.0.0",
     "@types/webpack-env": "^1.15.2",
     "@types/zen-observable": "^0.8.0",

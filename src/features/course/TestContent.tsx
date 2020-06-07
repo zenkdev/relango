@@ -1,32 +1,88 @@
-import { Form, Input, Select, Typography } from 'antd';
+/* eslint-disable react/no-array-index-key */
+import { Button, Form, Input, Select, Typography, Tooltip } from 'antd';
 import { Rule } from 'antd/lib/form';
-import React from 'react';
+import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
+import React, { useCallback, useState, Fragment } from 'react';
+
+import { WarningOutlined } from '@ant-design/icons';
 
 import { QuestionPart, Test } from '../../models';
 
-const renderPart = (part: QuestionPart) => {
+const getErrors = (errorFields: ValidateErrorEntity['errorFields'], name: string) => {
+  const errorField = errorFields.find(x => x.name[0] === name);
+  return errorField?.errors;
+};
+
+const renderPart = (name: string, part: QuestionPart, errors: ReturnType<typeof getErrors>) => {
+  const rules: Rule[] = [];
+  const className = errors == null ? undefined : `item--${errors.length ? 'error' : 'success'}`;
   if (part.type === 'staticText') {
-    return <Typography.Text strong={part.bold}>{part.value}</Typography.Text>;
+    return (
+      <Typography.Text key={name} strong={part.bold}>
+        {part.value}
+      </Typography.Text>
+    );
   }
   if (part.type === 'newLine') {
     return <br />;
   }
   if (part.type === 'singleChoice') {
+    rules.push({
+      type: 'string',
+      validator: (_: any, value: string, callback: (error?: string) => void) => {
+        if (!value) {
+          callback('Please select!');
+        } else if (part.value !== value) {
+          callback(part.value);
+        } else {
+          callback();
+        }
+      },
+    });
     return (
-      <Select
-        style={{ width: 120 }}
-        onChange={(...args: any[]) => {
-          console.log(args);
-        }}
-      >
-        {part.options.map(opt => (
-          <Select.Option value={opt}>{opt}</Select.Option>
-        ))}
-      </Select>
+      <Fragment key={name}>
+        <Form.Item name={name} rules={rules} validateTrigger="onChange" noStyle>
+          <Select className={className} style={part.style}>
+            {part.options.map(opt => (
+              <Select.Option key={opt} value={opt}>
+                {opt}
+              </Select.Option>
+            ))}
+          </Select>
+        </Form.Item>
+        {errors && (
+          <Tooltip title={errors.join(' ')}>
+            <WarningOutlined />
+          </Tooltip>
+        )}
+      </Fragment>
     );
   }
   if (part.type === 'openText') {
-    return <Input type="text" maxLength={part.maxLength} style={{ width: 120 }} />;
+    rules.push({
+      type: 'string',
+      validator: (_: any, value: string, callback: (error?: string) => void) => {
+        if (!value) {
+          callback('Please type!');
+        } else if (part.value !== value) {
+          callback(part.value);
+        } else {
+          callback();
+        }
+      },
+    });
+    return (
+      <Fragment key={name}>
+        <Form.Item name={name} rules={rules} validateTrigger="onChange" noStyle>
+          <Input type="text" className={className} style={part.style} maxLength={part.maxLength} />
+        </Form.Item>
+        {errors && (
+          <Tooltip title={errors.join(' ')}>
+            <WarningOutlined />
+          </Tooltip>
+        )}
+      </Fragment>
+    );
   }
   return null;
 };
@@ -34,55 +90,31 @@ const renderPart = (part: QuestionPart) => {
 type TestContentProps = { test: Test };
 
 const TestContent: React.FC<TestContentProps> = ({ test }) => {
-  return (
-    <Form name="basic">
-      <Typography.Title level={3}>{test.title}</Typography.Title>
-      <ol style={{ textAlign: 'left' }}>
-        {test.questions.map((parts: QuestionPart[], n: number) => (
-          <li>
-            {parts.map((part: QuestionPart, m: number) => {
-              const rules: Rule[] = [];
-              if (part.type === 'singleChoice') {
-                rules.push({
-                  type: 'string',
-                  validator: (_: any, value: string, callback: (error?: string) => void) => {
-                    if (!value) {
-                      callback('Please select!');
-                    } else if (part.value !== value) {
-                      callback(part.value);
-                    } else {
-                      callback();
-                    }
-                  },
-                });
-              }
-              // if (part.type === 'openText') {
-              //   rules = [
-              //     {
-              //       required: true,
-              //       message: 'Please type!',
-              //     },
-              //     () => ({
-              //       validator(rule: any, value: string) {
-              //         console.log(rule);
-              //         if (part.value === value) {
-              //           return '';
-              //         }
+  const [errorFields, setErrorFields] = useState<ValidateErrorEntity['errorFields']>([]);
+  const onFinishFailed = useCallback((errorInfo: ValidateErrorEntity) => {
+    setErrorFields(errorInfo.errorFields);
+  }, []);
 
-              //         return part.value;
-              //       },
-              //     }),
-              //   ];
-              // }
-              return (
-                <Form.Item name={`${test.id}_${n}_${m}`} rules={rules} validateTrigger="onChange" noStyle>
-                  {renderPart(part)}
-                </Form.Item>
-              );
+  return (
+    <Form name="basic" className="tests" onFinishFailed={onFinishFailed}>
+      <div className="tests-header">
+        <Typography.Title level={3}>{test.title}</Typography.Title>
+      </div>
+      <ol className="tests-content">
+        {test.questions.map((parts: QuestionPart[], n: number) => (
+          <li key={`${test.id}_${n}`}>
+            {parts.map((part: QuestionPart, m: number) => {
+              const name = `${test.id}_${n}_${m}`;
+              return renderPart(name, part, getErrors(errorFields, name));
             })}
           </li>
         ))}
       </ol>
+      <div className="tests-footer">
+        <Button type="primary" htmlType="submit">
+          Validate
+        </Button>
+      </div>
     </Form>
   );
 };
