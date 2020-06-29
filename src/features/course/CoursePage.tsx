@@ -11,6 +11,7 @@ import { AppDispatch } from '../../app/store';
 import * as actions from './courseSlice';
 import ModuleContent from './ModuleContent';
 import * as selectors from './selectors';
+import { localStoreManager } from '../../services';
 
 const { Content, Sider } = Layout;
 
@@ -21,11 +22,32 @@ type CoursePageParams = {
 
 type CoursePageOwnProps = RouteComponentProps<CoursePageParams>;
 
-const mapStateToProps = (state: RootState, { match, location }: CoursePageOwnProps) => {
+const mapStateToProps = (state: RootState, { history, match, location }: CoursePageOwnProps) => {
   const { isLoading, data } = state.course;
   const { id: courseId, moduleId } = match.params;
+
+  const modules = selectors.selectModules(state);
+
+  let nextLocation: string | undefined;
+  let ensureModuleId: string | null | undefined = moduleId;
+  if (!ensureModuleId) {
+    // try to get last viewed module id
+    ensureModuleId = localStoreManager.getDataObject<string>(`relango::course:${courseId}::module`);
+    if (!ensureModuleId) {
+      // get first module id
+      ensureModuleId = modules[0]?.id;
+    }
+    if (ensureModuleId) {
+      // replace current location
+      nextLocation = `/course/${courseId}/module/${ensureModuleId}`;
+    }
+  }
+
+  // store last viewd module id
+  localStorage.setItem(`relango::course:${courseId}::module`, ensureModuleId);
+
   const { pathname } = location;
-  const menuItems = selectors.selectModules(state).map(({ id, name }) => ({ name, to: `/course/${courseId}/module/${id}` }));
+  const menuItems = modules.map(({ id, name }) => ({ name, to: `/course/${courseId}/module/${id}` }));
   return {
     isLoading,
     title: data && data.title,
@@ -34,7 +56,9 @@ const mapStateToProps = (state: RootState, { match, location }: CoursePageOwnPro
       items: menuItems,
       selected: pathname,
     },
-    currentModule: selectors.selectCurrentModule(state, moduleId),
+    currentModule: selectors.selectCurrentModule(state, ensureModuleId),
+    nextLocation,
+    history,
   };
 };
 
@@ -49,7 +73,12 @@ const mapDispatchToProps = (dispatch: AppDispatch, { match }: CoursePageOwnProps
 
 type CoursePageProps = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
 
-const CoursePage: React.FC<CoursePageProps> = ({ isLoading, title, subTitle, menu, currentModule, fetchData }) => {
+const CoursePage: React.FC<CoursePageProps> = ({ isLoading, title, subTitle, menu, currentModule, nextLocation, history, fetchData }) => {
+  useEffect(() => {
+    if (nextLocation) {
+      history.replace(nextLocation);
+    }
+  }, [nextLocation, history]);
   useEffect(() => fetchData(), [fetchData]);
   return (
     <>
@@ -60,22 +89,6 @@ const CoursePage: React.FC<CoursePageProps> = ({ isLoading, title, subTitle, men
               <Link to={to}>{name}</Link>
             </Menu.Item>
           ))}
-          {/* <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-            <Menu.Item key="5">
-              <Link to="/option5">option5</Link>
-            </Menu.Item>
-            <Menu.Item key="6">
-              <a href="/option6">option6</a>
-            </Menu.Item>
-            <Menu.Item key="7">option7</Menu.Item>
-            <Menu.Item key="8">option8</Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
-            <Menu.Item key="9">option9</Menu.Item>
-            <Menu.Item key="10">option10</Menu.Item>
-            <Menu.Item key="11">option11</Menu.Item>
-            <Menu.Item key="12">option12</Menu.Item>
-          </SubMenu> */}
         </Menu>
         {isLoading && <Spin tip="Loading..." />}
       </Sider>
