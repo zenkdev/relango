@@ -1,20 +1,20 @@
 import React from 'react';
 
-import { QuestionPart, Task } from '../../models';
+import { QuestionPart, TestItem } from '../../models';
 import FormField from './FormField';
 
 type OrderedListProps = {
   testId: string;
-  tasks: Task[];
+  items: TestItem[];
   columns?: number;
 };
 
-const OrderedList: React.FC<OrderedListProps> = ({ testId, tasks, columns }) => (
+const OrderedList: React.FC<OrderedListProps> = ({ testId, items, columns }) => (
   <ol className="tests-orderedList" style={{ columnCount: columns }}>
-    {tasks.map(({ id: taskId, fields }) => (
-      <li key={`test:${testId}::task:${taskId}`}>
+    {items.map(({ id: itemId, fields }) => (
+      <li key={`test:${testId}::item:${itemId}`}>
         {fields.map((part: QuestionPart, m: number) => {
-          const name = `test:${testId}::task:${taskId}::field:${m}`;
+          const name = `test:${testId}::item:${itemId}::field:${m}`;
           return <FormField key={name} name={name} part={part} />;
         })}
       </li>

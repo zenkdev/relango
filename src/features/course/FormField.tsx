@@ -1,9 +1,9 @@
 import { Form, Input, Radio, Select, Typography } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
-import React, { useMemo, useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 
-import { QuestionPart, Test, Option } from '../../models';
+import { Option, QuestionPart } from '../../models';
 import ErrorIcon from './ErrorIcon';
 import { TestContext } from './TestContent';
 import prepareOptions from './utils/prepareOptions';
@@ -43,21 +43,12 @@ function renderOption({ text, value }: Option, selected: string[]) {
   );
 }
 
-function renderMatch(match: { value: string }, selected: string[]) {
-  return (
-    <Select.Option key={match.value} value={match.value} disabled={selected.includes(match.value)}>
-      {match.value}
-    </Select.Option>
-  );
-}
-
 type FormFieldProps = {
   name: string;
-  matches?: Test['matches'];
   part: QuestionPart;
 };
 
-const FormField: React.FC<FormFieldProps> = ({ name, matches, part }) => {
+const FormField: React.FC<FormFieldProps> = ({ name, part }) => {
   const { form, commonOptionNames, commonOptions, errorFields, disabled } = useContext(TestContext);
   const errors = useMemo(() => getErrors(errorFields, name), [errorFields, name]);
   const rules = useMemo(() => getRules(part), [part]);
@@ -76,7 +67,6 @@ const FormField: React.FC<FormFieldProps> = ({ name, matches, part }) => {
           <Form.Item name={name} rules={rules} validateTrigger="onChange" noStyle>
             <Select className={className} style={part.style} disabled={disabled} allowClear={part.useCommonOptions}>
               {options && options.map(option => renderOption(option, selected))}
-              {matches && matches.map(match => renderMatch(match, selected))}
             </Select>
           </Form.Item>
           <ErrorIcon errors={errors} />
@@ -114,6 +104,13 @@ const FormField: React.FC<FormFieldProps> = ({ name, matches, part }) => {
         </>
       );
     }
+    case 'match':
+      return (
+        <div className="tests-matches">
+          <strong>{part.value}</strong>
+          <span className={selected.includes(part.value) ? 'tests-matches--selected' : undefined}>{part.text}</span>
+        </div>
+      );
     default:
       return null;
   }

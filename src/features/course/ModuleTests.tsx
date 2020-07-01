@@ -42,7 +42,7 @@ const ModuleTests: React.FC<ModuleTestsProps> = ({ tests }) => {
     <div>
       <Steps current={current}>
         {tests.map(test => (
-          <Steps.Step key={test.id} title={test.id} description={test.title} />
+          <Steps.Step key={test.id} title={test.id} />
         ))}
       </Steps>
       <div className="steps-content">

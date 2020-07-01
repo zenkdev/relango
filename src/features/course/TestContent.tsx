@@ -1,120 +1,102 @@
-/* eslint-disable react/no-array-index-key */
-import { Button, Form, Input, Select, Typography, Tooltip } from 'antd';
-import { Rule } from 'antd/lib/form';
-import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
-import React, { useCallback, useState, Fragment } from 'react';
+import { Button, Form, Typography } from 'antd';
+import { FormInstance } from 'antd/lib/form';
+import { Store, ValidateErrorEntity } from 'rc-field-form/lib/interface';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { WarningOutlined } from '@ant-design/icons';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import { Option, Test } from '../../models';
+import Article from './Article';
+import CommonOptions from './CommonOptions';
+import Grid from './Grid';
+import OrderedList from './OrderedList';
+import getCommonOptionNames from './utils/getCommonOptionNames';
+import prepareOptions from './utils/prepareOptions';
 
-import { QuestionPart, Test } from '../../models';
+type ErrorFields = ValidateErrorEntity['errorFields'];
 
-const getErrors = (errorFields: ValidateErrorEntity['errorFields'], name: string) => {
-  const errorField = errorFields.find(x => x.name[0] === name);
-  return errorField?.errors;
+const mergeErrors = (nameList: string[], errorFields: ErrorFields, nextErrorFields: ErrorFields): ErrorFields => {
+  return nameList.reduce((acc, name) => {
+    const n = acc.findIndex(x => x.name[0] === name);
+    if (n !== -1) {
+      acc.splice(n, 1);
+    }
+    const errorField = nextErrorFields.find(x => x.name[0] === name);
+    if (errorField) {
+      acc.push(errorField);
+    }
+    return [...acc];
+  }, errorFields);
 };
 
-const renderPart = (name: string, part: QuestionPart, errors: ReturnType<typeof getErrors>) => {
-  const rules: Rule[] = [];
-  const className = errors == null ? undefined : `item--${errors.length ? 'error' : 'success'}`;
-  if (part.type === 'staticText') {
-    return (
-      <Typography.Text key={name} strong={part.bold}>
-        {part.value}
-      </Typography.Text>
-    );
-  }
-  if (part.type === 'newLine') {
-    return <br />;
-  }
-  if (part.type === 'singleChoice') {
-    rules.push({
-      type: 'string',
-      validator: (_: any, value: string, callback: (error?: string) => void) => {
-        if (!value) {
-          callback('Please select!');
-        } else if (part.value !== value) {
-          callback(part.value);
-        } else {
-          callback();
-        }
-      },
-    });
-    return (
-      <Fragment key={name}>
-        <Form.Item name={name} rules={rules} validateTrigger="onChange" noStyle>
-          <Select className={className} style={part.style}>
-            {part.options.map(opt => (
-              <Select.Option key={opt} value={opt}>
-                {opt}
-              </Select.Option>
-            ))}
-          </Select>
-        </Form.Item>
-        {errors && (
-          <Tooltip title={errors.join(' ')}>
-            <WarningOutlined />
-          </Tooltip>
-        )}
-      </Fragment>
-    );
-  }
-  if (part.type === 'openText') {
-    rules.push({
-      type: 'string',
-      validator: (_: any, value: string, callback: (error?: string) => void) => {
-        if (!value) {
-          callback('Please type!');
-        } else if (part.value !== value) {
-          callback(part.value);
-        } else {
-          callback();
-        }
-      },
-    });
-    return (
-      <Fragment key={name}>
-        <Form.Item name={name} rules={rules} validateTrigger="onChange" noStyle>
-          <Input type="text" className={className} style={part.style} maxLength={part.maxLength} />
-        </Form.Item>
-        {errors && (
-          <Tooltip title={errors.join(' ')}>
-            <WarningOutlined />
-          </Tooltip>
-        )}
-      </Fragment>
-    );
-  }
-  return null;
-};
+export const TestContext = React.createContext(
+  {} as {
+    form: FormInstance;
+    commonOptionNames: string[];
+    commonOptions?: Option[];
+    errorFields: ErrorFields;
+    disabled?: boolean;
+  },
+);
 
 type TestContentProps = { test: Test };
 
 const TestContent: React.FC<TestContentProps> = ({ test }) => {
-  const [errorFields, setErrorFields] = useState<ValidateErrorEntity['errorFields']>([]);
-  const onFinishFailed = useCallback((errorInfo: ValidateErrorEntity) => {
-    setErrorFields(errorInfo.errorFields);
-  }, []);
+  const [form] = Form.useForm();
+  const [testContent, setTestContent] = useLocalStorage<Record<string, Store>>('testContent', {});
+  const [errorFields, setErrorFields] = useState<ErrorFields>([]);
+  const handleFinish = useCallback((values: Store) => setTestContent({ ...testContent, [test.id]: values }), [
+    testContent,
+    test.id,
+    setTestContent,
+  ]);
+  const handleFinishFailed = useCallback(({ errorFields: nextErrorFields }: ValidateErrorEntity) => setErrorFields(nextErrorFields), []);
+  const handleValuesChange = useCallback(
+    (changedValues: Store) => {
+      const nameList = Object.keys(changedValues);
+      form
+        .validateFields(nameList)
+        .then(() => setErrorFields([]))
+        .catch(({ errorFields: nextErrorFields }) => setErrorFields(mergeErrors(nameList, errorFields, nextErrorFields)));
+    },
+    [form, errorFields],
+  );
+  const commonOptionNames = useMemo(() => getCommonOptionNames(test), [test]);
+  const commonOptions = useMemo(() => prepareOptions(test.commonOptions), [test.commonOptions]);
+
+  const storedValues = testContent[test.id];
+  useEffect(() => {
+    if (storedValues) {
+      form.setFieldsValue(storedValues);
+    } else {
+      form.resetFields();
+    }
+  }, [form, storedValues]);
 
   return (
-    <Form name="basic" className="tests" onFinishFailed={onFinishFailed}>
-      <div className="tests-header">
-        <Typography.Title level={3}>{test.title}</Typography.Title>
-      </div>
-      <ol className="tests-content">
-        {test.questions.map((parts: QuestionPart[], n: number) => (
-          <li key={`${test.id}_${n}`}>
-            {parts.map((part: QuestionPart, m: number) => {
-              const name = `${test.id}_${n}_${m}`;
-              return renderPart(name, part, getErrors(errorFields, name));
-            })}
-          </li>
-        ))}
-      </ol>
-      <div className="tests-footer">
-        <Button type="primary" htmlType="submit">
-          Validate
-        </Button>
-      </div>
+    <Form
+      form={form}
+      name="basic"
+      className="tests"
+      onFinish={handleFinish}
+      onFinishFailed={handleFinishFailed}
+      onValuesChange={handleValuesChange}
+    >
+      <TestContext.Provider value={{ form, commonOptionNames, commonOptions, errorFields, disabled: !!storedValues }}>
+        <Typography.Title level={3} className="tests-header">
+          {test.title}
+        </Typography.Title>
+        <CommonOptions hide={test.hideCommonOptions} />
+        <div className="tests-content">
+          {test.layout === 'orderedList' && <OrderedList testId={test.id} items={test.items} columns={test.layoutColumns} />}
+          {test.layout === 'article' && <Article testId={test.id} items={test.items} columns={test.layoutColumns} />}
+          {test.layout === 'grid' && <Grid testId={test.id} items={test.items} columns={test.layoutColumns} />}
+        </div>
+        <div className="tests-footer">
+          <Button type="primary" htmlType="submit" disabled={!!storedValues}>
+            Validate
+          </Button>
+        </div>
+      </TestContext.Provider>
     </Form>
   );
 };

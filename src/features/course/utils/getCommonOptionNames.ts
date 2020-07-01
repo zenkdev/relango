@@ -1,6 +1,6 @@
-import { Test, QuestionPart, Task } from '../../../models';
+import { Test, QuestionPart, TestItem } from '../../../models';
 
-export default function getCommonOptionNames({ id: testId, questions, tasks }: Test) {
+export default function getCommonOptionNames({ id: testId, questions, items }: Test) {
   if (questions) {
     return questions.reduce(
       (result: string[], parts: QuestionPart[], n: number) =>
@@ -15,12 +15,12 @@ export default function getCommonOptionNames({ id: testId, questions, tasks }: T
       [],
     );
   }
-  return tasks.reduce(
-    (result: string[], { id: taskId, fields }: Task) =>
+  return items.reduce(
+    (result: string[], { id: itemId, fields }: TestItem) =>
       result.concat(
         ...fields.reduce((acc: string[], part: QuestionPart, m: number) => {
           if ((part.type === 'singleChoice' || part.type === 'openText') && part.useCommonOptions) {
-            return [...acc, `test:${testId}::task:${taskId}::field:${m}`];
+            return [...acc, `test:${testId}::item:${itemId}::field:${m}`];
           }
           return acc;
         }, []),

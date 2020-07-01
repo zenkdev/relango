@@ -1,19 +1,19 @@
 import { Typography } from 'antd';
 import React, { Fragment } from 'react';
 
-import { QuestionPart, Task } from '../../models';
+import { QuestionPart, TestItem } from '../../models';
 import FormField from './FormField';
 
 type ArticleProps = {
   testId: string;
-  tasks: Task[];
+  items: TestItem[];
   columns?: number;
 };
 
-const Article: React.FC<ArticleProps> = ({ testId, tasks, columns }) => (
+const Article: React.FC<ArticleProps> = ({ testId, items, columns }) => (
   <div className="tests-article" style={{ columnCount: columns }}>
-    {tasks.map(({ id: taskId, title, fields }) => (
-      <Fragment key={`test:${testId}::task:${taskId}`}>
+    {items.map(({ id: itemId, title, fields }) => (
+      <Fragment key={`test:${testId}::item:${itemId}`}>
         {title && (
           <Typography.Title level={4} className="tests-article_title">
             {title}
@@ -21,7 +21,7 @@ const Article: React.FC<ArticleProps> = ({ testId, tasks, columns }) => (
         )}
         <p className="tests-article_content">
           {fields.map((part: QuestionPart, m: number) => {
-            const name = `test:${testId}::task:${taskId}::field:${m}`;
+            const name = `test:${testId}::item:${itemId}::field:${m}`;
             return <FormField key={name} name={name} part={part} />;
           })}
         </p>
