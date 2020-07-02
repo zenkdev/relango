@@ -1,7 +1,7 @@
 import { Typography } from 'antd';
 import React, { Fragment } from 'react';
 
-import { QuestionPart, TestItem } from '../../models';
+import { TestField, TestItem } from '../../models';
 import FormField from './FormField';
 
 type ArticleProps = {
@@ -15,14 +15,14 @@ const Article: React.FC<ArticleProps> = ({ testId, items, columns }) => (
     {items.map(({ id: itemId, title, fields }) => (
       <Fragment key={`test:${testId}::item:${itemId}`}>
         {title && (
-          <Typography.Title level={4} className="tests-article_title">
+          <Typography.Title level={4} className="tests-articleTitle">
             {title}
           </Typography.Title>
         )}
-        <p className="tests-article_content">
-          {fields.map((part: QuestionPart, m: number) => {
+        <p className="tests-articleContent">
+          {fields.map((part: TestField, m: number) => {
             const name = `test:${testId}::item:${itemId}::field:${m}`;
-            return <FormField key={name} name={name} part={part} />;
+            return <FormField key={name} name={name} field={part} />;
           })}
         </p>
       </Fragment>

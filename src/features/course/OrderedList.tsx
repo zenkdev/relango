@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { QuestionPart, TestItem } from '../../models';
+import { TestField, TestItem } from '../../models';
 import FormField from './FormField';
 
 type OrderedListProps = {
@@ -13,9 +13,9 @@ const OrderedList: React.FC<OrderedListProps> = ({ testId, items, columns }) => 
   <ol className="tests-orderedList" style={{ columnCount: columns }}>
     {items.map(({ id: itemId, fields }) => (
       <li key={`test:${testId}::item:${itemId}`}>
-        {fields.map((part: QuestionPart, m: number) => {
+        {fields.map((part: TestField, m: number) => {
           const name = `test:${testId}::item:${itemId}::field:${m}`;
-          return <FormField key={name} name={name} part={part} />;
+          return <FormField key={name} name={name} field={part} />;
         })}
       </li>
     ))}

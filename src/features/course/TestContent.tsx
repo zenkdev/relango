@@ -83,10 +83,15 @@ const TestContent: React.FC<TestContentProps> = ({ test }) => {
     >
       <TestContext.Provider value={{ form, commonOptionNames, commonOptions, errorFields, disabled: !!storedValues }}>
         <Typography.Title level={3} className="tests-header">
-          {test.title}
+          {test.name}
         </Typography.Title>
         <CommonOptions hide={test.hideCommonOptions} />
         <div className="tests-content">
+          {test.title && (
+            <Typography.Title level={4} className="tests-title">
+              {test.title}
+            </Typography.Title>
+          )}
           {test.layout === 'orderedList' && <OrderedList testId={test.id} items={test.items} columns={test.layoutColumns} />}
           {test.layout === 'article' && <Article testId={test.id} items={test.items} columns={test.layoutColumns} />}
           {test.layout === 'grid' && <Grid testId={test.id} items={test.items} columns={test.layoutColumns} />}

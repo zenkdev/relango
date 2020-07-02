@@ -11,7 +11,7 @@ const CommonOptions: React.FC<{ hide?: boolean }> = ({ hide }) => {
 
   const selected = Object.values(form.getFieldsValue(commonOptionNames));
   return (
-    <div className="tests-tags">
+    <div className="tests-commonOptions">
       {commonOptions.map(({ text, value }) => (
         <span key={value} className={selected.includes(value) ? 'tests-tags--selected' : undefined}>
           {text}

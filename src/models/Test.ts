@@ -2,6 +2,7 @@ type StaticTextField = {
   type: 'staticText';
   value: string;
   bold?: boolean;
+  style: any;
 };
 
 type NewLineField = {
@@ -40,25 +41,23 @@ type MatchField = {
   style: any;
 };
 
-export type QuestionPart = StaticTextField | NewLineField | SingleChoiceField | OpenTextField | RadioField | MatchField;
-
-export type Question = QuestionPart[];
+export type TestField = StaticTextField | NewLineField | SingleChoiceField | OpenTextField | RadioField | MatchField;
 
 export type Option = { text: string; value: string };
 
 export type TestItem = {
   id: string | number;
   title?: string;
-  fields: QuestionPart[];
+  fields: TestField[];
 };
 
 export type Test = {
   id: string;
-  title: string;
+  name: string;
   layout?: 'orderedList' | 'article' | 'grid';
   layoutColumns?: number;
+  title?: string;
   commonOptions?: Array<string | Option>;
   hideCommonOptions?: boolean;
-  questions: Question[];
   items: TestItem[];
 };

@@ -3,7 +3,7 @@ import { Rule } from 'antd/lib/form';
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import React, { useContext, useMemo } from 'react';
 
-import { Option, QuestionPart } from '../../models';
+import { Option, TestField } from '../../models';
 import ErrorIcon from './ErrorIcon';
 import { TestContext } from './TestContent';
 import prepareOptions from './utils/prepareOptions';
@@ -11,8 +11,8 @@ import prepareOptions from './utils/prepareOptions';
 type ErrorFields = ValidateErrorEntity['errorFields'];
 
 const getErrors = (errorFields: ErrorFields, name: string) => errorFields.find(x => x.name[0] === name)?.errors;
-const getRules = (part: QuestionPart): Rule[] => {
-  if (part.type === 'singleChoice' || part.type === 'openText' || part.type === 'radio') {
+const getRules = (field: TestField): Rule[] => {
+  if (field.type === 'singleChoice' || field.type === 'openText' || field.type === 'radio') {
     return [
       {
         type: 'string',
@@ -20,11 +20,11 @@ const getRules = (part: QuestionPart): Rule[] => {
           new Promise((resolve, reject) => {
             if (!value) {
               // eslint-disable-next-line prefer-promise-reject-errors
-              reject(part.type === 'openText' ? 'Please type!' : 'Please select!');
-            } else if (Array.isArray(part.value) && !part.value.includes(value)) {
-              reject(part.value.join('/'));
-            } else if (!Array.isArray(part.value) && part.value !== value) {
-              reject(part.value);
+              reject(field.type === 'openText' ? 'Please type!' : 'Please select!');
+            } else if (Array.isArray(field.value) && !field.value.includes(value)) {
+              reject(field.value.join('/'));
+            } else if (!Array.isArray(field.value) && field.value !== value) {
+              reject(field.value);
             } else {
               resolve();
             }
@@ -45,27 +45,31 @@ function renderOption({ text, value }: Option, selected: string[]) {
 
 type FormFieldProps = {
   name: string;
-  part: QuestionPart;
+  field: TestField;
 };
 
-const FormField: React.FC<FormFieldProps> = ({ name, part }) => {
+const FormField: React.FC<FormFieldProps> = ({ name, field }) => {
   const { form, commonOptionNames, commonOptions, errorFields, disabled } = useContext(TestContext);
   const errors = useMemo(() => getErrors(errorFields, name), [errorFields, name]);
-  const rules = useMemo(() => getRules(part), [part]);
+  const rules = useMemo(() => getRules(field), [field]);
   const className = errors == null ? undefined : `item--${errors.length ? 'error' : 'success'}`;
   const selected = Object.values(form.getFieldsValue(commonOptionNames));
 
-  switch (part.type) {
+  switch (field.type) {
     case 'staticText':
-      return <Typography.Text strong={part.bold}>{part.value}</Typography.Text>;
+      return (
+        <Typography.Text strong={field.bold} style={field.style}>
+          {field.value}
+        </Typography.Text>
+      );
     case 'newLine':
       return <br />;
     case 'singleChoice': {
-      const options = part.useCommonOptions ? commonOptions : prepareOptions(part.options);
+      const options = field.useCommonOptions ? commonOptions : prepareOptions(field.options);
       return (
         <>
           <Form.Item name={name} rules={rules} validateTrigger="onChange" noStyle>
-            <Select className={className} style={part.style} disabled={disabled} allowClear={part.useCommonOptions}>
+            <Select className={className} style={field.style} disabled={disabled} allowClear={field.useCommonOptions}>
               {options && options.map(option => renderOption(option, selected))}
             </Select>
           </Form.Item>
@@ -76,9 +80,9 @@ const FormField: React.FC<FormFieldProps> = ({ name, part }) => {
     case 'openText':
       return (
         <>
-          {part.label && <strong>{part.label}</strong>}
-          <Form.Item name={name} label={part.label} rules={rules} validateTrigger="onChange" noStyle>
-            <Input type="text" className={className} style={part.style} readOnly={disabled} />
+          {field.label && <strong>{field.label}</strong>}
+          <Form.Item name={name} label={field.label} rules={rules} validateTrigger="onChange" noStyle>
+            <Input type="text" className={className} style={field.style} readOnly={disabled} />
           </Form.Item>
           <ErrorIcon errors={errors} />
         </>
@@ -93,7 +97,7 @@ const FormField: React.FC<FormFieldProps> = ({ name, part }) => {
         <>
           <Form.Item name={name} rules={rules} validateTrigger="onChange" noStyle>
             <Radio.Group disabled={disabled}>
-              {part.options.map(opt => (
+              {field.options.map(opt => (
                 <Radio style={radioStyle} value={opt}>
                   {opt}
                 </Radio>
@@ -107,8 +111,8 @@ const FormField: React.FC<FormFieldProps> = ({ name, part }) => {
     case 'match':
       return (
         <div className="tests-matches">
-          <strong>{part.value}</strong>
-          <span className={selected.includes(part.value) ? 'tests-matches--selected' : undefined}>{part.text}</span>
+          <strong>{field.value}</strong>
+          <span className={selected.includes(field.value) ? 'tests-matches--selected' : undefined}>{field.text}</span>
         </div>
       );
     default:

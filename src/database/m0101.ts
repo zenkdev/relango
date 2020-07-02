@@ -11,7 +11,7 @@ export default {
     tests: [
       {
         id: 'A',
-        title: 'Circle the correct word or phrase.',
+        name: 'Circle the correct word or phrase.',
         layout: 'orderedList',
         items: [
           {
@@ -206,7 +206,7 @@ export default {
       },
       {
         id: 'B',
-        title: 'Rewrite correctly. Change the words or phrases in bold.',
+        name: 'Rewrite correctly. Change the words or phrases in bold.',
         layout: 'orderedList',
         items: [
           {
@@ -409,7 +409,7 @@ export default {
       },
       {
         id: 'C',
-        title: 'Complete using the correct form of the verb in brackets.',
+        name: 'Complete using the correct form of the verb in brackets.',
         layout: 'orderedList',
         items: [
           {
@@ -622,7 +622,7 @@ export default {
       },
       {
         id: 'D',
-        title: 'Complete using the words in the box.',
+        name: 'Complete using the words in the box.',
         layout: 'orderedList',
         commonOptions: ['already', 'before', 'ever', 'for', 'just', 'rarely', 'since', 'so', 'still', 'yet'],
         items: [
@@ -820,7 +820,7 @@ export default {
       },
       {
         id: 'E',
-        title: 'Choose the correct answer.',
+        name: 'Choose the correct answer.',
         layout: 'orderedList',
         layoutColumns: 2,
         items: [
@@ -998,7 +998,7 @@ export default {
       },
       {
         id: 'F',
-        title: 'Complete using the correct form of the words in the box',
+        name: 'Complete using the correct form of the words in the box',
         layout: 'article',
         commonOptions: [
           { text: 'be', value: 'is' },
@@ -1136,7 +1136,7 @@ export default {
       },
       {
         id: 'G',
-        title: 'Match to make sentences.',
+        name: 'Match to make sentences.',
         layout: 'grid',
         layoutColumns: 2,
         commonOptions: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
@@ -1145,6 +1145,12 @@ export default {
           {
             id: 1,
             fields: [
+              {
+                type: 'staticText',
+                value: '1.',
+                bold: true,
+                style: { marginRight: '24px' },
+              },
               {
                 type: 'staticText',
                 value: 'I think ',
@@ -1172,6 +1178,12 @@ export default {
             fields: [
               {
                 type: 'staticText',
+                value: '2.',
+                bold: true,
+                style: { marginRight: '24px' },
+              },
+              {
+                type: 'staticText',
                 value: "I'm thinking ",
               },
               {
@@ -1195,6 +1207,12 @@ export default {
           {
             id: 3,
             fields: [
+              {
+                type: 'staticText',
+                value: '3.',
+                bold: true,
+                style: { marginRight: '24px' },
+              },
               {
                 type: 'staticText',
                 value: "Phil's looking ",
@@ -1222,6 +1240,12 @@ export default {
             fields: [
               {
                 type: 'staticText',
+                value: '4.',
+                bold: true,
+                style: { marginRight: '24px' },
+              },
+              {
+                type: 'staticText',
                 value: 'Phil looks ',
               },
               {
@@ -1245,6 +1269,12 @@ export default {
           {
             id: 5,
             fields: [
+              {
+                type: 'staticText',
+                value: '5.',
+                bold: true,
+                style: { marginRight: '24px' },
+              },
               {
                 type: 'staticText',
                 value: 'Claire has ',
@@ -1272,6 +1302,12 @@ export default {
             fields: [
               {
                 type: 'staticText',
+                value: '6.',
+                bold: true,
+                style: { marginRight: '24px' },
+              },
+              {
+                type: 'staticText',
                 value: 'Claire is having ',
               },
               {
@@ -1295,6 +1331,12 @@ export default {
           {
             id: 7,
             fields: [
+              {
+                type: 'staticText',
+                value: '7.',
+                bold: true,
+                style: { marginRight: '24px' },
+              },
               {
                 type: 'staticText',
                 value: 'Andy is ',
@@ -1322,6 +1364,12 @@ export default {
             fields: [
               {
                 type: 'staticText',
+                value: '8.',
+                bold: true,
+                style: { marginRight: '24px' },
+              },
+              {
+                type: 'staticText',
                 value: 'Andy is being ',
               },
               {
@@ -1346,297 +1394,365 @@ export default {
       },
       {
         id: 'H',
-        title: 'Find the extra word in each tine',
-        questionsHeader: 'International friends',
-        questions: [
-          [
-            {
-              type: 'openText',
-              value: 'to',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: " I've been to travelling round Europe all summer. It’s the first time I've",
-            },
-          ],
-          [
-            {
-              type: 'openText',
-              value: 'going',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: " ever been going abroad, and I've had a fantastic time! I've seen",
-            },
-          ],
-          [
-            {
-              type: 'openText',
-              value: 'to',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: ' loads of interesting places and I have to also made loads of new friends.',
-            },
-          ],
-          [
-            {
-              type: 'openText',
-              value: 'been',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: " I've been decided to stay in touch with them now I'm back. One of",
-            },
-          ],
-          [
-            {
-              type: 'openText',
-              value: 'making',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: ' them, Giselle, is French. She was making on holiday too. We now send',
-            },
-          ],
-          [
-            {
-              type: 'openText',
-              value: 'are',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: " text messages are to each other all the time. They're usually in English",
-            },
-          ],
-          [
-            {
-              type: 'openText',
-              value: 'have',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: " because my French isn't very good! I'm planning to have visit her in",
-            },
-          ],
-          [
-            {
-              type: 'openText',
-              value: 'am',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: ' France next year sometime. I hope I can. I am love meeting people from',
-            },
-          ],
-          [
-            {
-              type: 'openText',
-              value: 'had',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: ' other countries! I want to have had lots of friends from all over the world!',
-            },
-          ],
-          [
-            {
-              type: 'openText',
-              value: 'is',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: ' Travelling certainly broadens the mind, but it also is broadens your circte of friends!',
-            },
-          ],
+        name: 'Find the extra word in each tine',
+        layout: 'orderedList',
+        title: 'International friends',
+        items: [
+          {
+            id: 1,
+            fields: [
+              {
+                type: 'openText',
+                value: 'to',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: " I've been to travelling round Europe all summer. It’s the first time I've",
+              },
+            ],
+          },
+          {
+            id: 2,
+            fields: [
+              {
+                type: 'openText',
+                value: 'going',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: " ever been going abroad, and I've had a fantastic time! I've seen",
+              },
+            ],
+          },
+          {
+            id: 3,
+            fields: [
+              {
+                type: 'openText',
+                value: 'to',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: ' loads of interesting places and I have to also made loads of new friends.',
+              },
+            ],
+          },
+          {
+            id: 4,
+            fields: [
+              {
+                type: 'openText',
+                value: 'been',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: " I've been decided to stay in touch with them now I'm back. One of",
+              },
+            ],
+          },
+          {
+            id: 5,
+            fields: [
+              {
+                type: 'openText',
+                value: 'making',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: ' them, Giselle, is French. She was making on holiday too. We now send',
+              },
+            ],
+          },
+          {
+            id: 6,
+            fields: [
+              {
+                type: 'openText',
+                value: 'are',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: " text messages are to each other all the time. They're usually in English",
+              },
+            ],
+          },
+          {
+            id: 7,
+            fields: [
+              {
+                type: 'openText',
+                value: 'have',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: " because my French isn't very good! I'm planning to have visit her in",
+              },
+            ],
+          },
+          {
+            id: 8,
+            fields: [
+              {
+                type: 'openText',
+                value: 'am',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: ' France next year sometime. I hope I can. I am love meeting people from',
+              },
+            ],
+          },
+          {
+            id: 9,
+            fields: [
+              {
+                type: 'openText',
+                value: 'had',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: ' other countries! I want to have had lots of friends from all over the world!',
+              },
+            ],
+          },
+          {
+            id: 10,
+            fields: [
+              {
+                type: 'openText',
+                value: 'is',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: ' Travelling certainly broadens the mind, but it also is broadens your circle of friends!',
+              },
+            ],
+          },
         ],
       },
       {
         id: 'I',
-        title: 'Write one word in each gap.',
-        questions: [
-          [
-            {
-              type: 'staticText',
-              value: "`You've ",
-            },
-            {
-              type: 'openText',
-              value: 'been',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: " looking at that timetable for the last ten minutes. It can't be that confusing!` said Sheila angrily.",
-            },
-          ],
-          [
-            {
-              type: 'staticText',
-              value: '`I ',
-            },
-            {
-              type: 'openText',
-              value: ['do', 'really'],
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: " wish you'd be quiet! I've ",
-            },
-            {
-              type: 'openText',
-              value: 'get',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: ' splitting headache thanks to you!` replied Matt.',
-            },
-          ],
-          [
-            {
-              type: 'staticText',
-              value: "`Mum! Dad! Please!` said Alison. `You're both ",
-            },
-            {
-              type: 'openText',
-              value: 'being',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: ' very silly. ',
-            },
-            {
-              type: 'openText',
-              value: 'There',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value:
-                " is no point at all in blaming each other. That's not going to help us find out what time the next train to Budapest is due to leave.`",
-            },
-          ],
-          [
-            {
-              type: 'staticText',
-              value: '`You ',
-            },
-            {
-              type: 'openText',
-              value: 'are',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: ' quite right, darling. I ',
-            },
-            {
-              type: 'openText',
-              value: 'am',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: '  sorry,` said Sheila.',
-            },
-          ],
-          [
-            {
-              type: 'staticText',
-              value: "`Me too,` mumbled Matt. `Now, let's have another look at this timetable. Well, it ",
-            },
-            {
-              type: 'openText',
-              value: ['looks', 'seems'],
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: ' like we ',
-            },
-            {
-              type: 'openText',
-              value: 'have',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: " definitely missed the last train today. That was the 18.20 we just missed, wasn't it?`",
-            },
-          ],
-          [
-            {
-              type: 'staticText',
-              value: '`I ',
-            },
-            {
-              type: 'openText',
-              value: 'think',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value:
-                " so,` said Sheila. `I mean, it did leave at 18.20. Whether it's actually going to Budapest or not is another question.",
-            },
-          ],
-          [
-            {
-              type: 'staticText',
-              value: '`Well, one thing is ',
-            },
-            {
-              type: 'openText',
-              value: 'not',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: ' in doubt,` said Matt.',
-            },
-            {
-              type: 'newLine',
-            },
-            {
-              type: 'staticText',
-              value: "`What's that?` asked Sheila and Alison together.",
-            },
-          ],
-          [
-            {
-              type: 'staticText',
-              value: "`This is the worst holiday we've ",
-            },
-            {
-              type: 'openText',
-              value: 'ever',
-              style: { width: '200px' },
-            },
-            {
-              type: 'staticText',
-              value: " been on,` said Matt. `Next year, we're going to try something far less adventurous.",
-            },
-            {
-              type: 'newLine',
-            },
-            {
-              type: 'staticText',
-              value: '`Agreed!` said Sheila and Alison.',
-            },
-          ],
+        name: 'Write one word in each gap.',
+        layout: 'article',
+        items: [
+          {
+            id: 1,
+            fields: [
+              {
+                type: 'staticText',
+                value: "`You've ",
+              },
+              {
+                type: 'openText',
+                value: 'been',
+                label: '(1)',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: " looking at that timetable for the last ten minutes. It can't be that confusing!` said Sheila angrily.",
+              },
+            ],
+          },
+          {
+            id: 2,
+            fields: [
+              {
+                type: 'staticText',
+                value: '`I ',
+              },
+              {
+                type: 'openText',
+                value: ['do', 'really'],
+                label: '(2)',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: " wish you'd be quiet! I've ",
+              },
+              {
+                type: 'openText',
+                value: 'get',
+                label: '(3)',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: ' splitting headache thanks to you!` replied Matt.',
+              },
+            ],
+          },
+          {
+            id: 3,
+            fields: [
+              {
+                type: 'staticText',
+                value: "`Mum! Dad! Please!` said Alison. `You're both ",
+              },
+              {
+                type: 'openText',
+                value: 'being',
+                label: '(4)',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: ' very silly. ',
+              },
+              {
+                type: 'openText',
+                value: 'There',
+                label: '(5)',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value:
+                  " is no point at all in blaming each other. That's not going to help us find out what time the next train to Budapest is due to leave.`",
+              },
+            ],
+          },
+          {
+            id: 4,
+            fields: [
+              {
+                type: 'staticText',
+                value: '`You ',
+              },
+              {
+                type: 'openText',
+                value: 'are',
+                label: '(6)',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: ' quite right, darling. I ',
+              },
+              {
+                type: 'openText',
+                value: 'am',
+                label: '(7)',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: '  sorry,` said Sheila.',
+              },
+            ],
+          },
+          {
+            id: 5,
+            fields: [
+              {
+                type: 'staticText',
+                value: "`Me too,` mumbled Matt. `Now, let's have another look at this timetable. Well, it ",
+              },
+              {
+                type: 'openText',
+                value: ['looks', 'seems'],
+                label: '(8)',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: ' like we ',
+              },
+              {
+                type: 'openText',
+                value: 'have',
+                label: '(9)',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: " definitely missed the last train today. That was the 18.20 we just missed, wasn't it?`",
+              },
+            ],
+          },
+          {
+            id: 6,
+            fields: [
+              {
+                type: 'staticText',
+                value: '`I ',
+              },
+              {
+                type: 'openText',
+                value: 'think',
+                label: '(10)',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value:
+                  " so,` said Sheila. `I mean, it did leave at 18.20. Whether it's actually going to Budapest or not is another question.",
+              },
+            ],
+          },
+          {
+            id: 7,
+            fields: [
+              {
+                type: 'staticText',
+                value: '`Well, one thing is ',
+              },
+              {
+                type: 'openText',
+                value: 'not',
+                label: '(11)',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: ' in doubt,` said Matt.',
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'staticText',
+                value: "`What's that?` asked Sheila and Alison together.",
+              },
+            ],
+          },
+          {
+            id: 8,
+            fields: [
+              {
+                type: 'staticText',
+                value: "`This is the worst holiday we've ",
+              },
+              {
+                type: 'openText',
+                value: 'ever',
+                label: '(12)',
+                style: { width: '200px' },
+              },
+              {
+                type: 'staticText',
+                value: " been on,` said Matt. `Next year, we're going to try something far less adventurous.",
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'staticText',
+                value: '`Agreed!` said Sheila and Alison.',
+              },
+            ],
+          },
         ],
       },
     ],
