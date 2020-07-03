@@ -1755,6 +1755,284 @@ export default {
           },
         ],
       },
+      {
+        id: 'J',
+        name:
+          'Complete each second sentence using the word given so that it has a similar meaning to the first sentence. Write between two and five words in each gap.',
+        layout: 'orderedList',
+        items: [
+          {
+            id: 1,
+            fields: [
+              {
+                type: 'staticText',
+                value: "What's the price of the tickets, Jimmy? ",
+              },
+              {
+                type: 'staticText',
+                value: 'much',
+                bold: true,
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'staticText',
+                value: 'How ',
+              },
+              {
+                type: 'openText',
+                value: ['much do the tickets cost', 'much are the tickets'],
+                style: { width: '300px' },
+              },
+              {
+                type: 'staticText',
+                value: ' Jimmy?',
+              },
+            ],
+          },
+          {
+            id: 2,
+            fields: [
+              {
+                type: 'staticText',
+                value: 'Are these your trainers? ',
+              },
+              {
+                type: 'staticText',
+                value: 'to',
+                bold: true,
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'staticText',
+                value: 'Do ',
+              },
+              {
+                type: 'openText',
+                value: 'these trainers belong to',
+                style: { width: '300px' },
+              },
+              {
+                type: 'staticText',
+                value: ' you?',
+              },
+            ],
+          },
+          {
+            id: 3,
+            fields: [
+              {
+                type: 'staticText',
+                value: "Sasha's not keen on team sports at all. ",
+              },
+              {
+                type: 'staticText',
+                value: 'like',
+                bold: true,
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'staticText',
+                value: 'Sasha ',
+              },
+              {
+                type: 'openText',
+                value: ['does not', "doesn't like"],
+                style: { width: '300px' },
+              },
+              {
+                type: 'staticText',
+                value: ' team sports at all.',
+              },
+            ],
+          },
+          {
+            id: 4,
+            fields: [
+              {
+                type: 'staticText',
+                value: "It's only her second time in a recording studio. ",
+              },
+              {
+                type: 'staticText',
+                value: 'been',
+                bold: true,
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'staticText',
+                value: 'She ',
+              },
+              {
+                type: 'openText',
+                value: 'has only been',
+                style: { width: '300px' },
+              },
+              {
+                type: 'staticText',
+                value: ' in a recording studio once before.',
+              },
+            ],
+          },
+          {
+            id: 5,
+            fields: [
+              {
+                type: 'staticText',
+                value: 'We got here three hours ago. ',
+              },
+              {
+                type: 'staticText',
+                value: 'have',
+                bold: true,
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'staticText',
+                value: 'We ',
+              },
+              {
+                type: 'openText',
+                value: ['have been here', 'have been here for'],
+                style: { width: '300px' },
+              },
+              {
+                type: 'staticText',
+                value: ' three hours.',
+              },
+            ],
+          },
+          {
+            id: 6,
+            fields: [
+              {
+                type: 'staticText',
+                value: "I started writing this hours ago and it's still not right. ",
+              },
+              {
+                type: 'staticText',
+                value: 'writing',
+                bold: true,
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'staticText',
+                value: 'I ',
+              },
+              {
+                type: 'openText',
+                value: 'have been writing this for',
+                style: { width: '300px' },
+              },
+              {
+                type: 'staticText',
+                value: " hours and it's still not right.",
+              },
+            ],
+          },
+          {
+            id: 7,
+            fields: [
+              {
+                type: 'staticText',
+                value: 'This is my first experience of flying alone. ',
+              },
+              {
+                type: 'staticText',
+                value: 'time',
+                bold: true,
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'staticText',
+                value: 'It is the first ',
+              },
+              {
+                type: 'openText',
+                value: 'time I have flown',
+                style: { width: '300px' },
+              },
+              {
+                type: 'staticText',
+                value: ' alone.',
+              },
+            ],
+          },
+          {
+            id: 8,
+            fields: [
+              {
+                type: 'staticText',
+                value: "Sharon's in the bath at the moment. ",
+              },
+              {
+                type: 'staticText',
+                value: 'a',
+                bold: true,
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'staticText',
+                value: 'Sharon ',
+              },
+              {
+                type: 'openText',
+                value: 'is having a bath',
+                style: { width: '300px' },
+              },
+              {
+                type: 'staticText',
+                value: ' at the moment.',
+              },
+            ],
+          },
+          {
+            id: 9,
+            fields: [
+              {
+                type: 'staticText',
+                value: 'Paul enjoys surprises apart from on his birthday. ',
+              },
+              {
+                type: 'staticText',
+                value: 'does',
+                bold: true,
+              },
+              {
+                type: 'newLine',
+              },
+              {
+                type: 'staticText',
+                value: 'Paul ',
+              },
+              {
+                type: 'openText',
+                value: 'does enjoy',
+                style: { width: '300px' },
+              },
+              {
+                type: 'staticText',
+                value: ' surprises, just not on his birthday!',
+              },
+            ],
+          },
+        ],
+      },
     ],
   }),
 };
