@@ -21,6 +21,16 @@ const ModuleTests: React.FC<ModuleTestsProps> = ({ tests }) => {
     const num = Number(query.test);
     return Number.isNaN(num) ? 0 : num;
   }, [history.location]);
+  const handleChange = useCallback(
+    (nextCurrent: number) => {
+      const location = {
+        ...history.location,
+        search: `?test=${nextCurrent}`,
+      };
+      history.push(location);
+    },
+    [history],
+  );
   const next = useCallback(() => {
     const nextCurrent = current + 1;
     const location = {
@@ -40,9 +50,9 @@ const ModuleTests: React.FC<ModuleTestsProps> = ({ tests }) => {
 
   return (
     <div>
-      <Steps current={current}>
-        {tests.map(test => (
-          <Steps.Step key={test.id} title={test.id} />
+      <Steps current={current} onChange={handleChange}>
+        {tests.map((test, n) => (
+          <Steps.Step key={test.id} title={test.id} status={current === n ? 'process' : 'wait'} />
         ))}
       </Steps>
       <div className="steps-content">
@@ -52,11 +62,6 @@ const ModuleTests: React.FC<ModuleTestsProps> = ({ tests }) => {
         {current < tests.length - 1 && (
           <Button type="primary" onClick={next}>
             Next
-          </Button>
-        )}
-        {current === tests.length - 1 && (
-          <Button type="primary" onClick={() => alert('Processing complete!')}>
-            Done
           </Button>
         )}
         {current > 0 && (

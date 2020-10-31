@@ -3,7 +3,6 @@ import { Modal, notification, Typography } from 'antd';
 import { ModalFuncProps } from 'antd/lib/modal';
 import { ArgsProps } from 'antd/lib/notification';
 import React from 'react';
-import { Subscription } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 
 import { SyncOutlined } from '@ant-design/icons';
@@ -19,7 +18,7 @@ class Alerts extends React.Component {
 
   private notificationsLoadingSubscription: any;
 
-  private loginStatusSubscription?: Subscription;
+  private loginStatusSubscription?: ZenObservable.Subscription;
 
   private messageSubscription?: ZenObservable.Subscription;
 

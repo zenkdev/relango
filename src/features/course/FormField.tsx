@@ -53,7 +53,7 @@ const FormField: React.FC<FormFieldProps> = ({ name, field }) => {
   const errors = useMemo(() => getErrors(errorFields, name), [errorFields, name]);
   const rules = useMemo(() => getRules(field), [field]);
   const className = errors == null ? undefined : `item--${errors.length ? 'error' : 'success'}`;
-  const selected = Object.values(form.getFieldsValue(commonOptionNames));
+  const selected = Object.values<string>(form.getFieldsValue(commonOptionNames));
 
   switch (field.type) {
     case 'staticText':
@@ -98,7 +98,7 @@ const FormField: React.FC<FormFieldProps> = ({ name, field }) => {
           <Form.Item name={name} rules={rules} validateTrigger="onChange" noStyle>
             <Radio.Group disabled={disabled}>
               {field.options.map(opt => (
-                <Radio style={radioStyle} value={opt}>
+                <Radio key={opt} style={radioStyle} value={opt}>
                   {opt}
                 </Radio>
               ))}
