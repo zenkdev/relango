@@ -6,7 +6,7 @@ import '@testing-library/jest-dom/extend-expect';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: (query:any) => ({
+  value: (query: any) => ({
     matches: false,
     media: query,
     onchange: null,

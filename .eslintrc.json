@@ -1,13 +1,7 @@
 {
-  "env": {
-    "browser": true,
-    "es6": true,
-    "jest": true
-  },
   "extends": [
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
+    "react-app",
+    "react-app/jest",
     "airbnb",
     "plugin:prettier/recommended"
   ],
@@ -16,15 +10,6 @@
     "SharedArrayBuffer": "readonly",
     "ZenObservable": "readonly"
   },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 2018,
-    "sourceType": "module"
-  },
-  "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "import/extensions": "off",
     "import/no-extraneous-dependencies": "off",
