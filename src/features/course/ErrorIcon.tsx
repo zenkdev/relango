@@ -3,7 +3,7 @@ import React from 'react';
 
 import { WarningOutlined } from '@ant-design/icons';
 
-const ErrorIcon: React.FC<{ errors?: string[] }> = ({ errors }) => {
+function ErrorIcon({ errors }: { errors?: string[] }) {
   if (errors) {
     return (
       <Tooltip title={errors.join(' ')}>
@@ -12,6 +12,6 @@ const ErrorIcon: React.FC<{ errors?: string[] }> = ({ errors }) => {
     );
   }
   return null;
-};
+}
 
 export default ErrorIcon;

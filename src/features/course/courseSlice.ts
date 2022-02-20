@@ -42,13 +42,15 @@ export const { getCourseStart, getCourseSuccess, getCourseFailure } = homeSlice.
 
 export default homeSlice.reducer;
 
-export const fetchCourse = (id: string): AppThunk => async dispatch => {
-  try {
-    dispatch(getCourseStart());
-    const cource = await getCourse(id);
-    dispatch(getCourseSuccess(cource));
-  } catch (e) {
-    alertService.showError(e);
-    dispatch(getCourseFailure(e.toString()));
-  }
-};
+export const fetchCourse =
+  (id: string): AppThunk =>
+  async dispatch => {
+    try {
+      dispatch(getCourseStart());
+      const cource = await getCourse(id);
+      dispatch(getCourseSuccess(cource));
+    } catch (e: any) {
+      alertService.showError(e);
+      dispatch(getCourseFailure(e.toString()));
+    }
+  };

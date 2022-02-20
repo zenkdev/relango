@@ -1,3 +1,4 @@
+/* eslint-disable import/no-import-module-exports */
 import { routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { ThunkAction } from 'redux-thunk';

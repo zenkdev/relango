@@ -47,7 +47,7 @@ export const fetchCourses = (): AppThunk => async dispatch => {
     dispatch(getCoursesStart());
     const cources = await getCourses();
     dispatch(getCoursesSuccess(cources));
-  } catch (e) {
+  } catch (e: any) {
     alertService.showError(e);
     dispatch(getCoursesFailure(e.toString()));
   }

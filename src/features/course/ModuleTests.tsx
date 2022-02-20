@@ -8,9 +8,12 @@ import parse from 'url-parse';
 import { Test } from '../../models';
 import TestContent from './TestContent';
 
-type ModuleTestsProps = { tests: Test[] };
+interface ModuleTestsProps {
+  moduleId: string;
+  tests: Test[];
+}
 
-const ModuleTests: React.FC<ModuleTestsProps> = ({ tests }) => {
+function ModuleTests({ moduleId, tests }: ModuleTestsProps) {
   const history = useHistory();
   const current = useMemo(() => {
     const { search } = history.location;
@@ -23,29 +26,29 @@ const ModuleTests: React.FC<ModuleTestsProps> = ({ tests }) => {
   }, [history.location]);
   const handleChange = useCallback(
     (nextCurrent: number) => {
-      const location = {
+      const nextLocation = {
         ...history.location,
         search: `?test=${nextCurrent}`,
       };
-      history.push(location);
+      history.push(nextLocation);
     },
     [history],
   );
   const next = useCallback(() => {
     const nextCurrent = current + 1;
-    const location = {
+    const nextLocation = {
       ...history.location,
       search: `?test=${nextCurrent}`,
     };
-    history.push(location);
+    history.push(nextLocation);
   }, [history, current]);
   const prev = useCallback(() => {
     const prevCurrent = current - 1;
-    const location = {
+    const nextLocation = {
       ...history.location,
       search: `?test=${prevCurrent}`,
     };
-    history.push(location);
+    history.push(nextLocation);
   }, [history, current]);
 
   return (
@@ -56,7 +59,7 @@ const ModuleTests: React.FC<ModuleTestsProps> = ({ tests }) => {
         ))}
       </Steps>
       <div className="steps-content">
-        <TestContent test={tests[current]} />
+        <TestContent moduleId={moduleId} test={tests[current]} />
       </div>
       <div className="steps-action">
         {current < tests.length - 1 && (
@@ -72,6 +75,6 @@ const ModuleTests: React.FC<ModuleTestsProps> = ({ tests }) => {
       </div>
     </div>
   );
-};
+}
 
 export default ModuleTests;

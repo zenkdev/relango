@@ -3,9 +3,12 @@ import React, { useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useHistory } from 'react-router';
 
-type ModalContentProps = { title: string; modalContent?: string };
+interface ModalContentProps {
+  title: string;
+  modalContent?: string;
+}
 
-const ModalContent: React.FC<ModalContentProps> = ({ title, modalContent }) => {
+function ModalContent({ title, modalContent }: ModalContentProps) {
   const history = useHistory();
   const isModalOpen = history.location.hash === '#modal';
   const handleClose = useCallback(() => {
@@ -25,9 +28,9 @@ const ModalContent: React.FC<ModalContentProps> = ({ title, modalContent }) => {
       footer={null}
       onCancel={handleClose}
     >
-      <ReactMarkdown source={modalContent} />
+      <ReactMarkdown>{modalContent}</ReactMarkdown>
     </Modal>
   );
-};
+}
 
 export default ModalContent;

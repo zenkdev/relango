@@ -12,9 +12,9 @@ import { AlertDialog, AlertMessage, alertService, DialogType, MessageSeverity } 
 const { Title } = Typography;
 
 class Alerts extends React.Component {
-  private newNotificationCount = 0;
+  // private newNotificationCount = 0;
 
-  private dataLoadingConsecutiveFailures = 0;
+  // private dataLoadingConsecutiveFailures = 0;
 
   private notificationsLoadingSubscription: any;
 
@@ -142,44 +142,44 @@ class Alerts extends React.Component {
     }
   }
 
-  private initNotificationsLoading() {
-    // this.notificationsLoadingSubscription = this.notificationService.getNewNotificationsPeriodically().subscribe(
-    //   notifications => {
-    //     this.dataLoadingConsecutiveFailures = 0;
-    //     this.newNotificationCount = notifications.filter(n => !n.isRead).length;
-    //   },
-    //   error => {
-    //     alertService.logError(error);
-    //     if (this.dataLoadingConsecutiveFailures++ < 20) {
-    //       setTimeout(() => this.initNotificationsLoading(), 5000);
-    //     } else {
-    //       alertService.showStickyMessage(
-    //         'Load Error',
-    //         'Loading new notifications from the server failed!',
-    //         MessageSeverity.error,
-    //       );
-    //     }
-    //   },
-    // );
-  }
+  // private initNotificationsLoading() {
+  //   // this.notificationsLoadingSubscription = this.notificationService.getNewNotificationsPeriodically().subscribe(
+  //   //   notifications => {
+  //   //     this.dataLoadingConsecutiveFailures = 0;
+  //   //     this.newNotificationCount = notifications.filter(n => !n.isRead).length;
+  //   //   },
+  //   //   error => {
+  //   //     alertService.logError(error);
+  //   //     if (this.dataLoadingConsecutiveFailures++ < 20) {
+  //   //       setTimeout(() => this.initNotificationsLoading(), 5000);
+  //   //     } else {
+  //   //       alertService.showStickyMessage(
+  //   //         'Load Error',
+  //   //         'Loading new notifications from the server failed!',
+  //   //         MessageSeverity.error,
+  //   //       );
+  //   //     }
+  //   //   },
+  //   // );
+  // }
 
-  private markNotificationsAsRead() {
-    // const recentNotifications = this.notificationService.recentNotifications;
-    // if (recentNotifications.length) {
-    //   this.notificationService.readUnreadNotification(recentNotifications.map(n => n.id), true).subscribe(
-    //     response => {
-    //       for (const n of recentNotifications) {
-    //         n.isRead = true;
-    //       }
-    //       this.newNotificationCount = recentNotifications.filter(n => !n.isRead).length;
-    //     },
-    //     error => {
-    //       alertService.logError(error);
-    //       alertService.showMessage('Notification Error', 'Marking read notifications failed', MessageSeverity.error);
-    //     },
-    //   );
-    // }
-  }
+  // private markNotificationsAsRead() {
+  //   // const recentNotifications = this.notificationService.recentNotifications;
+  //   // if (recentNotifications.length) {
+  //   //   this.notificationService.readUnreadNotification(recentNotifications.map(n => n.id), true).subscribe(
+  //   //     response => {
+  //   //       for (const n of recentNotifications) {
+  //   //         n.isRead = true;
+  //   //       }
+  //   //       this.newNotificationCount = recentNotifications.filter(n => !n.isRead).length;
+  //   //     },
+  //   //     error => {
+  //   //       alertService.logError(error);
+  //   //       alertService.showMessage('Notification Error', 'Marking read notifications failed', MessageSeverity.error);
+  //   //     },
+  //   //   );
+  //   // }
+  // }
 
   public render() {
     return null;

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 
 // Hook
+// eslint-disable-next-line no-unused-vars
 export default function useLocalStorage<T = any>(key: string, initialValue?: T): [T, (nextValue: T) => void] {
   // State to store our value
   // Pass initial state function to useState so logic is only executed once

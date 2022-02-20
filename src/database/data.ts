@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import m0100 from './m0100';
 import m0101 from './m0101';
+import m0102 from './m0102';
 
 export const courseData = [
   {
@@ -21,13 +22,13 @@ export const courseData = [
 export const moduleData = [
   m0100,
   m0101,
+  m0102,
   {
-    key: '0102',
+    key: '0101r',
     courseId: '01',
     val: () => ({
-      name: 'Unit 2',
-      subject: 'Vocabulary',
-      description: `Travel and transport`,
+      name: 'Review 1',
+      subject: 'Units 1 and 2',
     }),
   },
   {

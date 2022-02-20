@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export default {
   key: '0101',
   courseId: '01',
@@ -829,7 +828,7 @@ export default {
             fields: [
               {
                 type: 'staticText',
-                value: 'Ian ............ a shower at the moment, so could you call back in about half an hour?',
+                value: 'Ian ...... a shower at the moment, so could you call back in about half an hour?',
               },
               {
                 type: 'newLine',
@@ -846,7 +845,7 @@ export default {
             fields: [
               {
                 type: 'staticText',
-                value: '............ to Ipswich before?',
+                value: '...... to Ipswich before?',
               },
               {
                 type: 'newLine',
@@ -863,7 +862,7 @@ export default {
             fields: [
               {
                 type: 'staticText',
-                value: 'I ............ to all the local newspapers and TV stations to complain.',
+                value: 'I ...... to all the local newspapers and TV stations to complain.',
               },
               {
                 type: 'newLine',
@@ -880,7 +879,7 @@ export default {
             fields: [
               {
                 type: 'staticText',
-                value: '............ TV for the last four hours? Turn it off and get some exercise!',
+                value: '...... TV for the last four hours? Turn it off and get some exercise!',
               },
               {
                 type: 'newLine',
@@ -897,7 +896,7 @@ export default {
             fields: [
               {
                 type: 'staticText',
-                value: 'Edik, ............ hockey competitively or just for fun?',
+                value: 'Edik, ...... hockey competitively or just for fun?',
               },
               {
                 type: 'newLine',
@@ -914,7 +913,7 @@ export default {
             fields: [
               {
                 type: 'staticText',
-                value: "That's the first time ............ an answer right today!",
+                value: "That's the first time ...... an answer right today!",
               },
               {
                 type: 'newLine',
@@ -931,7 +930,7 @@ export default {
             fields: [
               {
                 type: 'staticText',
-                value: "Jessica has ............ left, i'm afraid.",
+                value: "Jessica has ...... left, i'm afraid.",
               },
               {
                 type: 'newLine',
@@ -948,7 +947,7 @@ export default {
             fields: [
               {
                 type: 'staticText',
-                value: 'Dan ............ in the living room while we redecorate his bedroom.',
+                value: 'Dan ...... in the living room while we redecorate his bedroom.',
               },
               {
                 type: 'newLine',
@@ -965,7 +964,7 @@ export default {
             fields: [
               {
                 type: 'staticText',
-                value: 'Unfortunately, Simone ............ a day off very often.',
+                value: 'Unfortunately, Simone ...... a day off very often.',
               },
               {
                 type: 'newLine',
@@ -982,7 +981,7 @@ export default {
             fields: [
               {
                 type: 'staticText',
-                value: 'Actually, I ............ a cup of tea first thing every morning, but then I switch to coffee.',
+                value: 'Actually, I ...... a cup of tea first thing every morning, but then I switch to coffee.',
               },
               {
                 type: 'newLine',
@@ -1757,8 +1756,7 @@ export default {
       },
       {
         id: 'J',
-        name:
-          'Complete each second sentence using the word given so that it has a similar meaning to the first sentence. Write between two and five words in each gap.',
+        name: 'Complete each second sentence using the word given so that it has a similar meaning to the first sentence. Write between two and five words in each gap.',
         layout: 'orderedList',
         items: [
           {

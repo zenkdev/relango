@@ -11,7 +11,7 @@ import { fetchCourses } from './homeSlice';
 
 const { Meta } = Card;
 
-const HomePage: React.FC = () => {
+function HomePage() {
   const dispatch = useDispatch();
   const { isLoading, data } = useSelector((state: RootState) => state.home);
   const fetchData = useCallback(() => {
@@ -54,6 +54,6 @@ const HomePage: React.FC = () => {
       {isLoading && <Spin tip="Loading..." />}
     </div>
   );
-};
+}
 
 export default HomePage;

@@ -32,6 +32,7 @@ type RadioField = {
   value: string;
   options: string[];
   style: any;
+  layout?: 'horizontal' | 'vertical';
 };
 
 type MatchField = {
