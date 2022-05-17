@@ -10,7 +10,7 @@
     "@types/jest": "27.5.1",
     "@types/node": "16.11.36",
     "@types/react": "18.0.9",
-    "@types/react-dom": "18.0.3",
+    "@types/react-dom": "18.0.4",
     "antd": "4.20.5",
     "connected-react-router": "6.9.2",
     "formik": "2.2.9",
