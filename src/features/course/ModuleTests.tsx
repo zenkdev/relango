@@ -2,7 +2,7 @@ import './ModuleTests.scss';
 
 import { Button, Steps } from 'antd';
 import React, { useCallback, useMemo } from 'react';
-import { useHistory } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import parse from 'url-parse';
 
 import { Test } from '../../models';
@@ -14,42 +14,43 @@ interface ModuleTestsProps {
 }
 
 function ModuleTests({ moduleId, tests }: ModuleTestsProps) {
-  const history = useHistory();
+  const navigate = useNavigate();
+  const location = useLocation();
   const current = useMemo(() => {
-    const { search } = history.location;
+    const { search } = location;
     if (!search) {
       return 0;
     }
     const { query } = parse(search, true);
     const num = Number(query.test);
     return Number.isNaN(num) ? 0 : num;
-  }, [history.location]);
+  }, [location]);
   const handleChange = useCallback(
     (nextCurrent: number) => {
       const nextLocation = {
-        ...history.location,
+        ...location,
         search: `?test=${nextCurrent}`,
       };
-      history.push(nextLocation);
+      navigate(nextLocation);
     },
-    [history],
+    [location, navigate],
   );
   const next = useCallback(() => {
     const nextCurrent = current + 1;
     const nextLocation = {
-      ...history.location,
+      ...location,
       search: `?test=${nextCurrent}`,
     };
-    history.push(nextLocation);
-  }, [history, current]);
+    navigate(nextLocation);
+  }, [current, location, navigate]);
   const prev = useCallback(() => {
     const prevCurrent = current - 1;
     const nextLocation = {
-      ...history.location,
+      ...location,
       search: `?test=${prevCurrent}`,
     };
-    history.push(nextLocation);
-  }, [history, current]);
+    navigate(nextLocation);
+  }, [current, location, navigate]);
 
   return (
     <div>

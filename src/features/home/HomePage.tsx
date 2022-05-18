@@ -1,19 +1,18 @@
 import { Button, Card, List, PageHeader, Spin } from 'antd';
 import React, { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { ReloadOutlined } from '@ant-design/icons';
 
-import { RootState } from '../../app/rootReducer';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { alertService } from '../../services';
 import { fetchCourses } from './homeSlice';
 
 const { Meta } = Card;
 
 function HomePage() {
-  const dispatch = useDispatch();
-  const { isLoading, data } = useSelector((state: RootState) => state.home);
+  const dispatch = useAppDispatch();
+  const { isLoading, data } = useAppSelector(state => state.home);
   const fetchData = useCallback(() => {
     dispatch(fetchCourses());
   }, [dispatch]);

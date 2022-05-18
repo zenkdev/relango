@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import m0100 from './m0100';
 import m0101 from './m0101';
 import m0102 from './m0102';

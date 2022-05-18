@@ -1,29 +1,20 @@
-/* eslint-disable import/no-import-module-exports */
-import { routerMiddleware } from 'connected-react-router';
-import { createBrowserHistory } from 'history';
-import { ThunkAction } from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
 
-import { Action, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-
-import createRootReducer, { RootState } from './rootReducer';
-
-export const history = createBrowserHistory();
+import courseReducer from '../features/course/courseSlice';
+import homeReducer from '../features/home/homeSlice';
 
 const store = configureStore({
-  reducer: createRootReducer(history),
-  middleware: [...getDefaultMiddleware(), routerMiddleware(history)], // for dispatching history actions
+  reducer: {
+    course: courseReducer,
+    home: homeReducer,
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
-if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept('./rootReducer', () => {
-    // eslint-disable-next-line global-require
-    const newRootReducer = require('./rootReducer').default;
-    store.replaceReducer(newRootReducer);
-  });
-}
-
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
-export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>;
 
 export default store;

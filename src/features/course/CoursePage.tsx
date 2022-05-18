@@ -1,15 +1,14 @@
-import { Button, Layout, Menu, PageHeader, Spin } from 'antd';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory, useParams, useLocation } from 'react-router-dom';
+import { Button, Layout, Menu, MenuProps, PageHeader, Spin } from 'antd';
+import React from 'react';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { ReloadOutlined } from '@ant-design/icons';
 
-import { RootState } from '../../app/rootReducer';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { localStoreManager } from '../../services';
 import * as actions from './courseSlice';
 import ModuleContent from './ModuleContent';
 import * as selectors from './selectors';
-import { localStoreManager } from '../../services';
 
 const { Content, Sider } = Layout;
 
@@ -18,36 +17,50 @@ type CoursePageParams = {
   moduleId: string;
 };
 
-const useCoursePage = () => {
-  const { id: courseId, moduleId } = useParams<CoursePageParams>();
-  const { isLoading, data } = useSelector((state: RootState) => state.course);
-  const modules = useSelector(selectors.selectModules);
+const getModuleUrl = (courseId: string, moduleId: string) => `/course/${courseId}/module/${moduleId}`;
 
-  let nextLocation: string | undefined;
+const useCoursePage = () => {
+  const navigate = useNavigate();
+  const { id: courseId, moduleId } = useParams<CoursePageParams>();
+  const { isLoading, data } = useAppSelector(state => state.course);
+  const modules = useAppSelector(selectors.selectModules);
+
+  // let nextLocation: string | undefined;
   let ensureModuleId: string | null | undefined = moduleId;
-  if (!ensureModuleId) {
+  if (!ensureModuleId && courseId) {
     // try to get last viewed module id
-    ensureModuleId = localStoreManager.getDataObject<string>(`relango::course:${courseId}::module`);
+    ensureModuleId = localStoreManager.getModule(courseId);
     if (!ensureModuleId) {
       // get first module id
       ensureModuleId = modules[0]?.id;
     }
     if (ensureModuleId) {
       // replace current location
-      nextLocation = `/course/${courseId}/module/${ensureModuleId}`;
+      navigate(getModuleUrl(courseId, ensureModuleId));
     }
   }
 
   // store last viewd module id
-  localStorage.setItem(`relango::course:${courseId}::module`, ensureModuleId);
+  if (courseId) {
+    if (ensureModuleId) localStoreManager.setModule(courseId, ensureModuleId);
+    else localStoreManager.deleteModule(courseId);
+  }
 
   const { pathname } = useLocation();
-  const { push: navigate } = useHistory();
-  const menuItems = modules.map(({ id, name }) => ({ name, to: `/course/${courseId}/module/${id}` }));
+  const menuItems: MenuProps['items'] = modules.map(({ id, name }) => {
+    const to = courseId ? getModuleUrl(courseId, id) : '';
+    return {
+      label: <Link to={to}>{name}</Link>,
+      key: to,
+    };
+  });
 
-  const currentModule = useSelector((state: RootState) => selectors.selectCurrentModule(state, ensureModuleId as string));
+  const currentModule = useAppSelector(state => selectors.selectCurrentModule(state, ensureModuleId || ''));
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const fetchData = React.useCallback(() => {
+    dispatch(actions.fetchCourse(courseId as string));
+  }, [courseId, dispatch]);
 
   return {
     isLoading,
@@ -58,33 +71,18 @@ const useCoursePage = () => {
       selected: pathname,
     },
     currentModule,
-    nextLocation,
-    navigate,
-    fetchData: () => {
-      dispatch(actions.fetchCourse(courseId as string) as any);
-    },
+    fetchData,
   };
 };
 
 function CoursePage() {
-  const { isLoading, title, subTitle, menu, currentModule, nextLocation, navigate, fetchData } = useCoursePage();
+  const { isLoading, title, subTitle, menu, currentModule, fetchData } = useCoursePage();
+  React.useEffect(() => fetchData(), [fetchData]);
 
-  useEffect(() => {
-    if (nextLocation) {
-      navigate(nextLocation);
-    }
-  }, [nextLocation, navigate]);
-  useEffect(() => fetchData(), [fetchData]);
   return (
     <>
       <Sider className="site-layout-background" width={200}>
-        <Menu mode="inline" selectedKeys={[menu.selected]} style={{ height: '100%' }}>
-          {menu.items.map(({ name, to }) => (
-            <Menu.Item key={to}>
-              <Link to={to}>{name}</Link>
-            </Menu.Item>
-          ))}
-        </Menu>
+        <Menu mode="inline" selectedKeys={[menu.selected]} style={{ height: '100%' }} items={menu.items} />
         {isLoading && <Spin tip="Loading..." />}
       </Sider>
       <Content style={{ padding: '0 24px', minHeight: 280 }}>

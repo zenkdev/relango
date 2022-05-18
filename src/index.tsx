@@ -1,20 +1,25 @@
-/* eslint-disable import/no-import-module-exports */
 import './index.css';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
 
-import * as serviceWorker from './serviceWorker';
+import store from './app/store';
+import reportWebVitals from './reportWebVitals';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const render = () => {
   // eslint-disable-next-line global-require
   const App = require('./app/App').default;
+  const container = document.getElementById('root') as HTMLElement;
+  const root = createRoot(container);
 
-  ReactDOM.render(
+  root.render(
     <React.StrictMode>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </React.StrictMode>,
-    document.getElementById('root'),
   );
 };
 
@@ -26,5 +31,10 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// Learn more about service workers: https://cra.link/PWA
+serviceWorkerRegistration.unregister();
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();

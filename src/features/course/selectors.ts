@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import { RootState } from '../../app/rootReducer';
+import { RootState } from '../../app/store';
 import { Module } from '../../models';
 
 const selectCourse = (state: RootState) => state.course;

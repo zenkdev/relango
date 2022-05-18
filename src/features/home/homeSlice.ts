@@ -1,54 +1,55 @@
-/* eslint-disable no-param-reassign */
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { AppThunk } from '../../app/store';
 import { Course } from '../../models';
-import { courseService, alertService } from '../../services';
+import { alertService, courseService } from '../../services';
 
-const { getCourses } = courseService;
+export const fetchCourses = createAsyncThunk<Course[], void, { state: { home: HomeState }; rejectValue: string }>(
+  'home/fetchCources',
+  async (_, thunkApi) => {
+    try {
+      return courseService.getCourses();
+    } catch (e: any) {
+      alertService.showError(e);
+      return thunkApi.rejectWithValue(e.toString());
+    }
+  },
+  {
+    condition: (_, thunkApi) => {
+      const state = thunkApi.getState().home;
+      return !state.isLoading;
+    },
+  },
+);
 
-export type HomeState = {
+export interface HomeState {
   isLoading: boolean;
   data: Course[];
-  error: string | null;
-};
+  error?: string;
+}
 
 const initialState: HomeState = {
   isLoading: false,
   data: [],
-  error: null,
 };
 
 const homeSlice = createSlice({
   name: 'home',
   initialState,
-  reducers: {
-    getCoursesStart(state: HomeState) {
-      state.isLoading = true;
-    },
-    getCoursesSuccess(state: HomeState, { payload }: PayloadAction<Course[]>) {
-      state.data = payload;
-      state.isLoading = false;
-      state.error = null;
-    },
-    getCoursesFailure(state: HomeState, { payload }: PayloadAction<string>) {
-      state.isLoading = false;
-      state.error = payload;
-    },
-  },
+  reducers: {},
+  extraReducers: builder =>
+    builder
+      .addCase(fetchCourses.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(fetchCourses.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.isLoading = false;
+        state.error = undefined;
+      })
+      .addCase(fetchCourses.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      }),
 });
 
-export const { getCoursesStart, getCoursesSuccess, getCoursesFailure } = homeSlice.actions;
-
 export default homeSlice.reducer;
-
-export const fetchCourses = (): AppThunk => async dispatch => {
-  try {
-    dispatch(getCoursesStart());
-    const cources = await getCourses();
-    dispatch(getCoursesSuccess(cources));
-  } catch (e: any) {
-    alertService.showError(e);
-    dispatch(getCoursesFailure(e.toString()));
-  }
-};

@@ -1,4 +1,4 @@
-export default {
+const cource = {
   key: '0101',
   courseId: '01',
   val: () => ({
@@ -2034,3 +2034,5 @@ export default {
     ],
   }),
 };
+
+export default cource;

@@ -1,4 +1,4 @@
-export default {
+const course = {
   key: '0100',
   courseId: '01',
   val: () => ({
@@ -62,3 +62,5 @@ export default {
   * справочные материалы по словообразованию`,
   }),
 };
+
+export default course;

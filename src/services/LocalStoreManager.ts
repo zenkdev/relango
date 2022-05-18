@@ -5,7 +5,7 @@ import { jsonTryParse } from '../utils';
 /**
  * Provides a wrapper for accessing the web storage API and synchronizing session storage across tabs/windows.
  */
-export class LocalStoreManager {
+class LocalStoreManager {
   private reservedKeys: string[] = [
     'sync_keys',
     'addToSyncKeys',
@@ -136,4 +136,25 @@ export class LocalStoreManager {
   }
 }
 
-export default new LocalStoreManager();
+class ExtendedLocalStoreManager extends LocalStoreManager {
+  public getModule(courseId: string) {
+    const key = this.getModuleKey(courseId);
+    return this.getDataObject<string>(key);
+  }
+
+  public setModule(courseId: string, moduleId: string) {
+    const key = this.getModuleKey(courseId);
+    this.savePermanentData(key, moduleId);
+  }
+
+  public deleteModule(courseId: string) {
+    const key = this.getModuleKey(courseId);
+    this.deleteData(key);
+  }
+
+  private getModuleKey(courseId: string) {
+    return `relango::course:${courseId}::module`;
+  }
+}
+
+export default new ExtendedLocalStoreManager();

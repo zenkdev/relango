@@ -1,7 +1,7 @@
 import { Modal } from 'antd';
 import React, { useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { useHistory } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 interface ModalContentProps {
   title: string;
@@ -9,11 +9,12 @@ interface ModalContentProps {
 }
 
 function ModalContent({ title, modalContent }: ModalContentProps) {
-  const history = useHistory();
-  const isModalOpen = history.location.hash === '#modal';
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isModalOpen = location.hash === '#modal';
   const handleClose = useCallback(() => {
-    history.push(history.location.pathname);
-  }, [history]);
+    navigate(location.pathname);
+  }, [location.pathname, navigate]);
 
   if (!modalContent) {
     return null;
