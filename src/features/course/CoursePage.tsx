@@ -62,6 +62,10 @@ const useCoursePage = () => {
     dispatch(actions.fetchCourse(courseId as string));
   }, [courseId, dispatch]);
 
+  const goBack = React.useCallback(() => {
+    navigate('/');
+  }, [navigate]);
+
   return {
     isLoading,
     title: data && data.title,
@@ -72,11 +76,12 @@ const useCoursePage = () => {
     },
     currentModule,
     fetchData,
+    goBack,
   };
 };
 
 function CoursePage() {
-  const { isLoading, title, subTitle, menu, currentModule, fetchData } = useCoursePage();
+  const { isLoading, title, subTitle, menu, currentModule, fetchData, goBack } = useCoursePage();
   React.useEffect(() => fetchData(), [fetchData]);
 
   return (
@@ -87,7 +92,7 @@ function CoursePage() {
       </Sider>
       <Content style={{ padding: '0 24px', minHeight: 280 }}>
         <PageHeader
-          onBack={() => null}
+          onBack={goBack}
           title={title}
           subTitle={subTitle}
           extra={[<Button key="refresh" type="primary" shape="circle" icon={<ReloadOutlined />} onClick={fetchData} />]}

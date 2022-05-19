@@ -1,19 +1,15 @@
 import m0100 from './m0100';
 import m0101 from './m0101';
+import m0101r from './m0101r';
 import m0102 from './m0102';
 
 export const courseData = [
-  {
-    key: '00',
-    val: () => ({
-      title: 'test course',
-    }),
-  },
   {
     key: '01',
     val: () => ({
       title: 'Macmillan Exam Skills For Russia: Grammar and Vocabulary',
       subTitle: 'Pre-intermediate to intermediate',
+      image: 'assets/p0001.png',
     }),
   },
 ];
@@ -22,14 +18,7 @@ export const moduleData = [
   m0100,
   m0101,
   m0102,
-  {
-    key: '0101r',
-    courseId: '01',
-    val: () => ({
-      name: 'Review 1',
-      subject: 'Units 1 and 2',
-    }),
-  },
+  m0101r,
   {
     key: '0103',
     courseId: '01',

@@ -32,7 +32,7 @@ function HomePage() {
         renderItem={item => (
           <List.Item>
             <Link to={`/course/${item.id}`}>
-              <Card title={item.title}>
+              <Card title={item.title} cover={item.image ? <img src={item.image} alt={item.title} /> : undefined}>
                 <Meta description={item.subTitle} />
               </Card>
             </Link>

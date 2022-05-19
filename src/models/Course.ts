@@ -7,15 +7,17 @@ export type Course = {
   id: string;
   title: string;
   subTitle?: string;
+  image?: string;
   modules: Record<string, Module>;
 };
 
 export function createCourse(payload: DataSnapshot): Course {
-  const { title, subTitle } = payload.val();
+  const { title, subTitle, image } = payload.val();
   return {
     id: defaultTo(payload.key, ''),
     title: defaultTo(title, ''),
     subTitle,
+    image,
     modules: {},
   };
 }
