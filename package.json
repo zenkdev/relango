@@ -13,6 +13,7 @@
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.4",
     "antd": "4.20.5",
+    "chevrotain": "^10.1.2",
     "craco-antd": "^2.0.0",
     "formik": "2.2.9",
     "react": "18.1.0",
@@ -50,7 +51,9 @@
     "prettier": "prettier --write \"./src/{,!(node_modules|dist|build|coverage)/**/}*.{js,jsx,ts,tsx,json}\"",
     "pre-commit": "lint-staged",
     "lint": "tsc --noEmit && eslint ./src/**/*.{js,jsx,ts,tsx}",
-    "lint:fix": "eslint --fix ./src/**/*.{js,jsx,ts,tsx}"
+    "lint:fix": "eslint --fix ./src/**/*.{js,jsx,ts,tsx}",
+    "gen_diagrams": "cd scripts && ts-node gen_diagrams.ts",
+    "gen_dts_signatures": "cd scripts && ts-node gen_dts_signatures.ts"
   },
   "eslintConfig": {
     "extends": [
