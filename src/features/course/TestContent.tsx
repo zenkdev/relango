@@ -38,11 +38,11 @@ function TestContent({ moduleId, test }: TestContentProps) {
 
       test.items.forEach(item => {
         item.fields.forEach((field, m) => {
-          if (field.type === 'singleChoice' || field.type === 'openText' || field.type === 'radio') {
+          if (field.type === 'singleChoice' || field.type === 'textbox' || field.type === 'radio') {
             const name = getFieldName(test.id, item.id, m);
             const value = values[name];
             if (!value) {
-              errors[name] = field.type === 'openText' ? 'Please type!' : 'Please select!';
+              errors[name] = field.type === 'textbox' ? 'Please type!' : 'Please select!';
             } else if (Array.isArray(field.value) && !field.value.includes(value)) {
               errors[name] = field.value.join('/');
             } else if (!Array.isArray(field.value) && field.value !== value) {

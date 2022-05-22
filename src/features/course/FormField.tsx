@@ -60,7 +60,7 @@ function FormField({ name, field }: FormFieldProps) {
   const className = err == null ? undefined : `item--${errors.length ? 'error' : 'success'}`;
 
   switch (field.type) {
-    case 'staticText':
+    case 'text':
       return (
         <Typography.Text strong={field.bold} style={field.style}>
           {field.value}
@@ -91,10 +91,11 @@ function FormField({ name, field }: FormFieldProps) {
         </Field>
       );
     }
-    case 'openText':
+    case 'textbox':
       return (
         <Field name={name}>
           {({ field: { value, onChange } }: FieldProps) => {
+            const style = field.style ?? { width: 'unset' };
             return (
               <>
                 {field.label && (
@@ -108,7 +109,7 @@ function FormField({ name, field }: FormFieldProps) {
                   name={name}
                   value={value}
                   className={className}
-                  style={field.style}
+                  style={style}
                   disabled={disabled}
                   onChange={onChange}
                   htmlSize={field.size}

@@ -6,7 +6,7 @@ export default function getCommonOptionNames({ id: testId, items }: Test): strin
 
   items.forEach(({ id: itemId, fields }) =>
     fields.forEach((field, m) => {
-      if ((field.type === 'singleChoice' || field.type === 'openText') && field.useCommonOptions) {
+      if ((field.type === 'singleChoice' || field.type === 'textbox') && field.useCommonOptions) {
         commonOptionNames.push(getFieldName(testId, itemId, m));
       }
     }),

@@ -1,9 +1,20 @@
-type StaticTextField = {
-  type: 'staticText';
+import { CSSProperties } from 'react';
+
+interface TextboxField {
+  type: 'textbox';
+  label?: string;
+  value: string | string[];
+  useCommonOptions?: boolean;
+  size?: number;
+  style?: CSSProperties;
+}
+
+interface TextField {
+  type: 'text';
   value: string;
   bold?: boolean;
-  style: any;
-};
+  style?: CSSProperties;
+}
 
 type NewLineField = {
   type: 'newLine';
@@ -15,15 +26,6 @@ type SingleChoiceField = {
   value: string | string[];
   useCommonOptions?: boolean;
   options: string[];
-  style: any;
-};
-
-type OpenTextField = {
-  type: 'openText';
-  label?: string;
-  value: string | string[];
-  useCommonOptions?: boolean;
-  size?: number;
   style: any;
 };
 
@@ -42,7 +44,7 @@ type MatchField = {
   style: any;
 };
 
-export type TestField = StaticTextField | NewLineField | SingleChoiceField | OpenTextField | RadioField | MatchField;
+export type TestField = TextboxField | TextField | NewLineField | SingleChoiceField | RadioField | MatchField;
 
 export type Option = { text: string; value: string };
 
