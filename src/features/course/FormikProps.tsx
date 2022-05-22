@@ -9,12 +9,12 @@ function FormikProps() {
         {Object.entries(context)
           .filter(([, value]) => typeof value !== 'function')
           .map(([key, value]) => (
-            <li>
+            <li key={key}>
               {key}
               {typeof value === 'object' ? (
                 <ul>
                   {Object.entries(value as any).map(([skey, svalue]) => (
-                    <li>{`${skey}: ${svalue}`}</li>
+                    <li key={skey}>{`${skey}: ${svalue}`}</li>
                   ))}
                 </ul>
               ) : (

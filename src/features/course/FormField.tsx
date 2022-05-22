@@ -111,6 +111,7 @@ function FormField({ name, field }: FormFieldProps) {
                   style={field.style}
                   disabled={disabled}
                   onChange={onChange}
+                  htmlSize={field.size}
                 />
                 <ErrorIcon errors={err} />
               </>
