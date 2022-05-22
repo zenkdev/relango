@@ -14,7 +14,7 @@ import { createSyntaxDiagramsCode } from 'chevrotain';
 import fs from 'fs';
 import path from 'path';
 
-import { parser } from '../src/services/compiler/grammars/fields';
+import { parser } from '../src/services/parser';
 
 // extract the serialized grammar.
 const serializedGrammar = parser.getSerializedGastProductions();
