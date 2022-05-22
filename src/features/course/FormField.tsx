@@ -61,8 +61,12 @@ function FormField({ name, field }: FormFieldProps) {
 
   switch (field.type) {
     case 'text':
+      const style = field.style ?? {};
+      if (field.italic) {
+        style.fontStyle = 'italic';
+      }
       return (
-        <Typography.Text strong={field.bold} style={field.style}>
+        <Typography.Text strong={field.bold} style={style}>
           {field.value}
         </Typography.Text>
       );

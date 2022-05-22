@@ -17,17 +17,9 @@ export interface FieldCstNode extends CstNode {
 export type FieldCstChildren = {
   textbox?: TextboxCstNode[];
   boldText?: BoldTextCstNode[];
+  italicText?: ItalicTextCstNode[];
   text?: TextCstNode[];
   NewLine?: IToken[];
-};
-
-export interface TextCstNode extends CstNode {
-  name: "text";
-  children: TextCstChildren;
-}
-
-export type TextCstChildren = {
-  AnyText: (IToken)[];
 };
 
 export interface BoldTextCstNode extends CstNode {
@@ -36,7 +28,26 @@ export interface BoldTextCstNode extends CstNode {
 }
 
 export type BoldTextCstChildren = {
-  Bold: (IToken)[];
+  BoldMd: (IToken)[];
+  text: TextCstNode[];
+};
+
+export interface ItalicTextCstNode extends CstNode {
+  name: "italicText";
+  children: ItalicTextCstChildren;
+}
+
+export type ItalicTextCstChildren = {
+  ItalicMd: (IToken)[];
+  text: TextCstNode[];
+};
+
+export interface TextCstNode extends CstNode {
+  name: "text";
+  children: TextCstChildren;
+}
+
+export type TextCstChildren = {
   AnyText: (IToken)[];
 };
 
@@ -106,8 +117,9 @@ export type ValueCstChildren = {
 export interface ICstNodeVisitor<IN, OUT> extends ICstVisitor<IN, OUT> {
   fields(children: FieldsCstChildren, param?: IN): OUT;
   field(children: FieldCstChildren, param?: IN): OUT;
-  text(children: TextCstChildren, param?: IN): OUT;
   boldText(children: BoldTextCstChildren, param?: IN): OUT;
+  italicText(children: ItalicTextCstChildren, param?: IN): OUT;
+  text(children: TextCstChildren, param?: IN): OUT;
   textbox(children: TextboxCstChildren, param?: IN): OUT;
   object(children: ObjectCstChildren, param?: IN): OUT;
   objectItem(children: ObjectItemCstChildren, param?: IN): OUT;

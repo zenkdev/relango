@@ -72,6 +72,16 @@
             "definition": [
               {
                 "type": "NonTerminal",
+                "name": "italicText",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
                 "name": "text",
                 "idx": 0
               }
@@ -90,6 +100,58 @@
             ]
           }
         ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "boldText",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "BoldMd",
+        "label": "BoldMd",
+        "idx": 0,
+        "pattern": "\\*\\*"
+      },
+      {
+        "type": "NonTerminal",
+        "name": "text",
+        "idx": 0
+      },
+      {
+        "type": "Terminal",
+        "name": "BoldMd",
+        "label": "BoldMd",
+        "idx": 2,
+        "pattern": "\\*\\*"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "italicText",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "ItalicMd",
+        "label": "ItalicMd",
+        "idx": 0,
+        "pattern": "\\*"
+      },
+      {
+        "type": "NonTerminal",
+        "name": "text",
+        "idx": 0
+      },
+      {
+        "type": "Terminal",
+        "name": "ItalicMd",
+        "label": "ItalicMd",
+        "idx": 2,
+        "pattern": "\\*"
       }
     ]
   },
@@ -123,53 +185,6 @@
             ]
           }
         ]
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "boldText",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "Terminal",
-        "name": "Bold",
-        "label": "Bold",
-        "idx": 0,
-        "pattern": "\\*\\*"
-      },
-      {
-        "type": "Terminal",
-        "name": "AnyText",
-        "label": "AnyText",
-        "idx": 0,
-        "pattern": "NOT_APPLICABLE"
-      },
-      {
-        "type": "Option",
-        "idx": 0,
-        "definition": [
-          {
-            "type": "Repetition",
-            "idx": 0,
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "AnyText",
-                "label": "AnyText",
-                "idx": 2,
-                "pattern": "NOT_APPLICABLE"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "type": "Terminal",
-        "name": "Bold",
-        "label": "Bold",
-        "idx": 3,
-        "pattern": "\\*\\*"
       }
     ]
   },

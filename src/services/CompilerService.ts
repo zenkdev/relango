@@ -1,4 +1,4 @@
-import { BoldTextCstNode, FieldsCstNode, TextboxCstNode, TextCstNode } from '../parser_cst';
+import { FieldsCstNode, TextboxCstNode, TextCstNode } from '../parser_cst';
 import { parseText } from './parser';
 
 interface TextboxField {
@@ -13,6 +13,7 @@ interface TextField {
   type: 'text';
   value: string;
   bold?: boolean;
+  italic?: boolean;
 }
 
 interface NewLineField {
@@ -60,6 +61,10 @@ function ensureArray<T>(value: T | T[]): T[] {
 }
 
 class CompilerService {
+  constructor() {
+    this.compile = this.compile.bind(this);
+  }
+
   public compile(text: string): Field[] {
     const result = parseText(text);
 
@@ -80,7 +85,9 @@ class CompilerService {
       } else if (field.children.text) {
         fields.push(this.createTextField(field.children.text));
       } else if (field.children.boldText) {
-        fields.push(this.createTextField(field.children.boldText, true));
+        fields.push(this.createTextField(field.children.boldText[0].children.text, { bold: true }));
+      } else if (field.children.italicText) {
+        fields.push(this.createTextField(field.children.italicText[0].children.text, { italic: true }));
       } else if (field.children.NewLine) {
         fields.push({ type: 'newLine' });
       }
@@ -93,7 +100,7 @@ class CompilerService {
     const params = textbox.children.value!;
 
     let label: string | undefined = undefined;
-    if (params.length > 1) {
+    if (params.length > 1 && (params[1].children.StringLiteral || params[1].children.array)) {
       label = unquote(params[0].children.StringLiteral?.[0].image);
       params.shift();
     }
@@ -128,12 +135,13 @@ class CompilerService {
     };
   }
 
-  private createTextField([text]: TextCstNode[] | BoldTextCstNode[], bold = false): TextField {
+  private createTextField([text]: TextCstNode[], { bold, italic }: { bold?: boolean; italic?: boolean } = {}): TextField {
     const { AnyText } = text.children;
     return {
       type: 'text',
       value: AnyText.map(value => value.image).join(''),
       bold,
+      italic,
     };
   }
 }

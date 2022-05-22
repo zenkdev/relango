@@ -16,7 +16,8 @@ const Comma = createToken({ name: 'Comma', pattern: /,/, categories: AnyText });
 const Colon = createToken({ name: 'Colon', pattern: /:/ });
 const SemiColon = createToken({ name: 'SemiColon', pattern: /;/, categories: AnyText });
 const Slash = createToken({ name: 'Slash', pattern: /\//, categories: AnyText });
-const Bold = createToken({ name: 'Bold', pattern: /\*\*/ });
+const BoldMd = createToken({ name: 'BoldMd', pattern: /\*\*/ });
+const ItalicMd = createToken({ name: 'ItalicMd', pattern: /\*/ });
 const StringLiteral = createToken({ name: 'StringLiteral', pattern: /"(?:[^\\"]|\\(?:[bfnrtv"\\/]|u[0-9a-fA-F]{4}))*"/ });
 const NumberLiteral = createToken({ name: 'NumberLiteral', pattern: /-?(0|[1-9]\d*)(\.\d+)?([eE][+-]?\d+)?/, categories: AnyText });
 const NewLine = createToken({ name: 'NewLine', pattern: /\r?\n/ });
@@ -40,7 +41,8 @@ const allTokens = [
   Colon,
   SemiColon,
   Slash,
-  Bold,
+  BoldMd,
+  ItalicMd,
   Word,
   WhiteSpace,
   NewLine,
@@ -69,9 +71,22 @@ class FieldsParserTypeScript extends CstParser {
       // using ES6 Arrow functions to reduce verbosity.
       { ALT: () => this.SUBRULE(this.textbox) },
       { ALT: () => this.SUBRULE(this.boldText) },
+      { ALT: () => this.SUBRULE(this.italicText) },
       { ALT: () => this.SUBRULE(this.text) },
       { ALT: () => this.CONSUME(NewLine) },
     ]);
+  });
+
+  private boldText = this.RULE('boldText', () => {
+    this.CONSUME(BoldMd);
+    this.SUBRULE(this.text);
+    this.CONSUME2(BoldMd);
+  });
+
+  private italicText = this.RULE('italicText', () => {
+    this.CONSUME(ItalicMd);
+    this.SUBRULE(this.text);
+    this.CONSUME2(ItalicMd);
   });
 
   private text = this.RULE('text', () => {
@@ -81,17 +96,6 @@ class FieldsParserTypeScript extends CstParser {
         this.CONSUME2(AnyText);
       });
     });
-  });
-
-  private boldText = this.RULE('boldText', () => {
-    this.CONSUME(Bold);
-    this.CONSUME(AnyText);
-    this.OPTION(() => {
-      this.MANY(() => {
-        this.CONSUME2(AnyText);
-      });
-    });
-    this.CONSUME3(Bold);
   });
 
   private textbox = this.RULE('textbox', () => {

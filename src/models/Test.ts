@@ -13,6 +13,7 @@ interface TextField {
   type: 'text';
   value: string;
   bold?: boolean;
+  italic?: boolean;
   style?: CSSProperties;
 }
 
