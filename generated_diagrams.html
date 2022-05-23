@@ -62,6 +62,16 @@
             "definition": [
               {
                 "type": "NonTerminal",
+                "name": "radio",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
                 "name": "boldText",
                 "idx": 0
               }
@@ -199,6 +209,63 @@
         "label": "Textbox",
         "idx": 0,
         "pattern": "textbox"
+      },
+      {
+        "type": "Terminal",
+        "name": "LParen",
+        "label": "LParen",
+        "idx": 0,
+        "pattern": "\\("
+      },
+      {
+        "type": "Option",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "value",
+            "idx": 0
+          },
+          {
+            "type": "Repetition",
+            "idx": 0,
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "SemiColon",
+                "label": "SemiColon",
+                "idx": 0,
+                "pattern": ";"
+              },
+              {
+                "type": "NonTerminal",
+                "name": "value",
+                "idx": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Terminal",
+        "name": "RParen",
+        "label": "RParen",
+        "idx": 0,
+        "pattern": "\\)"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "radio",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "Textbox",
+        "label": "Textbox",
+        "idx": 0,
+        "pattern": "radio"
       },
       {
         "type": "Terminal",

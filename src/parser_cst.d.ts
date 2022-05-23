@@ -16,6 +16,7 @@ export interface FieldCstNode extends CstNode {
 
 export type FieldCstChildren = {
   textbox?: TextboxCstNode[];
+  radio?: RadioCstNode[];
   boldText?: BoldTextCstNode[];
   italicText?: ItalicTextCstNode[];
   text?: TextCstNode[];
@@ -57,6 +58,19 @@ export interface TextboxCstNode extends CstNode {
 }
 
 export type TextboxCstChildren = {
+  Textbox: IToken[];
+  LParen: IToken[];
+  value?: (ValueCstNode)[];
+  SemiColon?: IToken[];
+  RParen: IToken[];
+};
+
+export interface RadioCstNode extends CstNode {
+  name: "radio";
+  children: RadioCstChildren;
+}
+
+export type RadioCstChildren = {
   Textbox: IToken[];
   LParen: IToken[];
   value?: (ValueCstNode)[];
@@ -121,6 +135,7 @@ export interface ICstNodeVisitor<IN, OUT> extends ICstVisitor<IN, OUT> {
   italicText(children: ItalicTextCstChildren, param?: IN): OUT;
   text(children: TextCstChildren, param?: IN): OUT;
   textbox(children: TextboxCstChildren, param?: IN): OUT;
+  radio(children: RadioCstChildren, param?: IN): OUT;
   object(children: ObjectCstChildren, param?: IN): OUT;
   objectItem(children: ObjectItemCstChildren, param?: IN): OUT;
   array(children: ArrayCstChildren, param?: IN): OUT;

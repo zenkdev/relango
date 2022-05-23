@@ -91,6 +91,11 @@ function TestContent({ moduleId, test }: TestContentProps) {
             {test.layout === 'article' && <Article testId={test.id} items={test.items} columns={test.layoutColumns} />}
             {test.layout === 'grid' && <Grid testId={test.id} items={test.items} columns={test.layoutColumns} />}
           </div>
+          {test.footnote && (
+            <Typography.Title level={5} className="tests-footnote">
+              {test.footnote}
+            </Typography.Title>
+          )}
           <div className="tests-footer">
             <TestContext.Consumer>
               {({ disabled }) => (

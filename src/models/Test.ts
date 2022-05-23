@@ -9,6 +9,14 @@ interface TextboxField {
   style?: CSSProperties;
 }
 
+interface RadioField {
+  type: 'radio';
+  value: string;
+  options: string[];
+  layout?: 'horizontal' | 'vertical';
+  style?: CSSProperties;
+}
+
 interface TextField {
   type: 'text';
   value: string;
@@ -17,9 +25,9 @@ interface TextField {
   style?: CSSProperties;
 }
 
-type NewLineField = {
+interface NewLineField {
   type: 'newLine';
-};
+}
 
 type SingleChoiceField = {
   type: 'singleChoice';
@@ -30,14 +38,6 @@ type SingleChoiceField = {
   style: any;
 };
 
-type RadioField = {
-  type: 'radio';
-  value: string;
-  options: string[];
-  style: any;
-  layout?: 'horizontal' | 'vertical';
-};
-
 type MatchField = {
   type: 'match';
   value: string;
@@ -45,15 +45,17 @@ type MatchField = {
   style: any;
 };
 
-export type TestField = TextboxField | TextField | NewLineField | SingleChoiceField | RadioField | MatchField;
+export type TestField = TextboxField | RadioField | TextField | NewLineField | SingleChoiceField | MatchField;
 
-export type Option = { text: string; value: string };
+export interface Option {
+  text: string;
+  value: string;
+}
 
-export type TestItem = {
+export interface TestItem {
   id: string | number;
-  title?: string;
   fields: TestField[];
-};
+}
 
 export type Test = {
   id: string;
@@ -61,6 +63,7 @@ export type Test = {
   layout?: 'orderedList' | 'article' | 'grid';
   layoutColumns?: number;
   title?: string;
+  footnote?: string;
   commonOptions?: Array<string | Option>;
   hideCommonOptions?: boolean;
   items: TestItem[];

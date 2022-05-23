@@ -7,7 +7,8 @@ export const fetchCourses = createAsyncThunk<Course[], void, { state: { home: Ho
   'home/fetchCources',
   async (_, thunkApi) => {
     try {
-      return courseService.getCourses();
+      const courses = await courseService.getCourses();
+      return courses;
     } catch (e: any) {
       alertService.showError(e);
       return thunkApi.rejectWithValue(e.toString());

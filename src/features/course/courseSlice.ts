@@ -8,7 +8,8 @@ export const fetchCourse = createAsyncThunk<Course, string, { state: { course: C
   'course/fetchCource',
   async (id, thunkApi) => {
     try {
-      return courseService.getCourse(id);
+      const course = await courseService.getCourse(id);
+      return course;
     } catch (e: any) {
       alertService.showError(e);
       return thunkApi.rejectWithValue(e.toString());

@@ -3,6 +3,7 @@ import { createToken, CstParser, Lexer, Rule } from 'chevrotain';
 const AnyText = createToken({ name: 'AnyText', pattern: Lexer.NA });
 const Word = createToken({ name: 'Word', pattern: /[\w'`&?.!-]+/, categories: AnyText });
 const Textbox = createToken({ name: 'Textbox', pattern: /textbox/, longer_alt: Word });
+const Radio = createToken({ name: 'Textbox', pattern: /radio/, longer_alt: Word });
 const True = createToken({ name: 'True', pattern: /true/ });
 const False = createToken({ name: 'False', pattern: /false/ });
 const Null = createToken({ name: 'Null', pattern: /null/ });
@@ -13,7 +14,7 @@ const RSquare = createToken({ name: 'RSquare', pattern: /]/ });
 const LParen = createToken({ name: 'LParen', pattern: /\(/, categories: AnyText });
 const RParen = createToken({ name: 'RParen', pattern: /\)/, categories: AnyText });
 const Comma = createToken({ name: 'Comma', pattern: /,/, categories: AnyText });
-const Colon = createToken({ name: 'Colon', pattern: /:/ });
+const Colon = createToken({ name: 'Colon', pattern: /:/, categories: AnyText });
 const SemiColon = createToken({ name: 'SemiColon', pattern: /;/, categories: AnyText });
 const Slash = createToken({ name: 'Slash', pattern: /\//, categories: AnyText });
 const BoldMd = createToken({ name: 'BoldMd', pattern: /\*\*/ });
@@ -26,6 +27,7 @@ const WhiteSpace = createToken({ name: 'WhiteSpace', pattern: /[ \t]/, categorie
 const allTokens = [
   AnyText,
   Textbox,
+  Radio,
   StringLiteral,
   NumberLiteral,
   True,
@@ -70,6 +72,7 @@ class FieldsParserTypeScript extends CstParser {
     this.OR([
       // using ES6 Arrow functions to reduce verbosity.
       { ALT: () => this.SUBRULE(this.textbox) },
+      { ALT: () => this.SUBRULE(this.radio) },
       { ALT: () => this.SUBRULE(this.boldText) },
       { ALT: () => this.SUBRULE(this.italicText) },
       { ALT: () => this.SUBRULE(this.text) },
@@ -100,6 +103,19 @@ class FieldsParserTypeScript extends CstParser {
 
   private textbox = this.RULE('textbox', () => {
     this.CONSUME(Textbox);
+    this.CONSUME(LParen);
+    this.OPTION(() => {
+      this.SUBRULE(this.value);
+      this.MANY(() => {
+        this.CONSUME(SemiColon);
+        this.SUBRULE2(this.value);
+      });
+    });
+    this.CONSUME(RParen);
+  });
+
+  private radio = this.RULE('radio', () => {
+    this.CONSUME(Radio);
     this.CONSUME(LParen);
     this.OPTION(() => {
       this.SUBRULE(this.value);

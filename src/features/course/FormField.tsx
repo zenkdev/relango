@@ -10,33 +10,6 @@ import { TestContext } from './TestContent';
 import getSelectedFromValues from './utils/getSelectFromValues';
 import prepareOptions from './utils/prepareOptions';
 
-// type ErrorFields = ValidateErrorEntity['errorFields'];
-
-// const getErrors = (errorFields: ErrorFields, name: string) => errorFields.find(x => x.name[0] === name)?.errors;
-// const getRules = (field: TestField): Rule[] => {
-//   if (field.type === 'singleChoice' || field.type === 'openText' || field.type === 'radio') {
-//     return [
-//       {
-//         type: 'string',
-//         validator: (_: any, value: string) =>
-//           new Promise((resolve, reject) => {
-//             if (!value) {
-//               // eslint-disable-next-line prefer-promise-reject-errors
-//               reject(field.type === 'openText' ? 'Please type!' : 'Please select!');
-//             } else if (Array.isArray(field.value) && !field.value.includes(value)) {
-//               reject(field.value.join('/'));
-//             } else if (!Array.isArray(field.value) && field.value !== value) {
-//               reject(field.value);
-//             } else {
-//               resolve();
-//             }
-//           }),
-//       },
-//     ];
-//   }
-//   return [];
-// };
-
 type OptionsType = Array<any>;
 
 function getOptions(options: Option[] | undefined, selected: string[]): OptionsType | undefined {

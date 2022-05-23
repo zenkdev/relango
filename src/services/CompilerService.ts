@@ -1,4 +1,4 @@
-import { FieldsCstNode, TextboxCstNode, TextCstNode } from '../parser_cst';
+import { FieldsCstNode, RadioCstNode, TextboxCstNode, TextCstNode } from '../parser_cst';
 import { parseText } from './parser';
 
 interface TextboxField {
@@ -7,6 +7,13 @@ interface TextboxField {
   value: string | string[];
   useCommonOptions?: boolean;
   size?: number;
+}
+
+interface RadioField {
+  type: 'radio';
+  value: string;
+  options: string[];
+  layout?: 'horizontal' | 'vertical';
 }
 
 interface TextField {
@@ -29,14 +36,6 @@ type SingleChoiceField = {
   style: unknown;
 };
 
-type RadioField = {
-  type: 'radio';
-  value: string;
-  options: string[];
-  style: unknown;
-  layout?: 'horizontal' | 'vertical';
-};
-
 type MatchField = {
   type: 'match';
   value: string;
@@ -44,7 +43,7 @@ type MatchField = {
   style: unknown;
 };
 
-export type Field = TextboxField | TextField | NewLineField | SingleChoiceField | RadioField | MatchField;
+export type Field = TextboxField | RadioField | TextField | NewLineField | SingleChoiceField | MatchField;
 
 function unquote(value?: string) {
   if (value && value[0] === '"' && value[value.length - 1] === '"') {
@@ -82,6 +81,8 @@ class CompilerService {
     for (const field of cst.children.field) {
       if (field.children.textbox) {
         fields.push(this.createTextboxField(field.children.textbox));
+      } else if (field.children.radio) {
+        fields.push(this.createRadioField(field.children.radio));
       } else if (field.children.text) {
         fields.push(this.createTextField(field.children.text));
       } else if (field.children.boldText) {
@@ -132,6 +133,35 @@ class CompilerService {
       value,
       size,
       useCommonOptions,
+    };
+  }
+
+  private createRadioField([radio]: RadioCstNode[]): RadioField {
+    const params = radio.children.value!;
+
+    const value = unquote(params[0].children.StringLiteral?.[0].image) ?? '';
+
+    const options: string[] = [];
+    if (params[1].children.array) {
+      const arrValue = params[1].children.array[0]?.children?.value ?? [];
+      for (let n = 0; n < arrValue.length; n += 1) {
+        const valueChildren = arrValue[n].children;
+        if (valueChildren.StringLiteral) {
+          options.push(unquote(valueChildren.StringLiteral[0].image) ?? '');
+        }
+      }
+    }
+
+    let layout: RadioField['layout'] = undefined;
+    if (params.length > 2 && (params[2].children.True || params[2].children.False)) {
+      layout = params[2].children.True ? 'horizontal' : 'vertical';
+    }
+
+    return {
+      type: 'radio',
+      value,
+      options,
+      layout,
     };
   }
 
