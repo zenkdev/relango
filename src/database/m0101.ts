@@ -19,137 +19,49 @@ const cource = {
         items: [
           {
             id: 1,
-            fields: [
-              ...compile('Elizabeth '),
-              {
-                type: 'singleChoice',
-                value: 'usually goes',
-                options: ['usually goes', 'is usually going'],
-                style: { width: '150px' },
-              },
-              ...compile(" to bed at around eleven o'clock."),
-            ],
+            fields: compile(`Elizabeth select("usually goes";["usually goes","is usually going"]) to bed at around eleven o'clock.`),
           },
           {
             id: 2,
-            fields: [
-              ...compile('Dan '),
-              {
-                type: 'singleChoice',
-                value: 'is talking',
-                options: ['talks', 'is talking'],
-                style: { width: '150px' },
-              },
-              ...compile(' on the other phone right now.'),
-            ],
+            fields: compile(`Dan select("is talking";["talks","is talking"]) on the other phone right now.`),
           },
           {
             id: 3,
-            fields: [
-              ...compile('We '),
-              {
-                type: 'singleChoice',
-                value: "aren't eating",
-                options: ["don't eat", "aren't eating"],
-                style: { width: '150px' },
-              },
-              ...compile(" any meat at the moment as we're both on a diet."),
-            ],
+            fields: compile(`We select("aren't eating";["don't eat","aren't eating"]) any meat at the moment as we're both on a diet.`),
           },
           {
             id: 4,
-            fields: [
-              {
-                type: 'singleChoice',
-                value: 'Is air travel getting',
-                options: ['Does air travel get', 'Is air travel getting'],
-                style: { width: '200px' },
-              },
-              ...compile(' increasingly safe?'),
-            ],
+            fields: compile(`select("Is air travel getting";["Does air travel get","Is air travel getting"]) increasingly safe?`),
           },
           {
             id: 5,
-            fields: [
-              ...compile('My mum '),
-              {
-                type: 'singleChoice',
-                value: 'calls',
-                options: ['calls', 'is calling'],
-                style: { width: '150px' },
-              },
-              ...compile(' me every weekend without fail.'),
-            ],
+            fields: compile(`My mum select("calls";["calls","is calling"]) me every weekend without fail.`),
           },
           {
             id: 6,
-            fields: [
-              ...compile('How much '),
-              {
-                type: 'singleChoice',
-                value: 'do babysitters generally earn',
-                options: ['do babysitters generally earn', 'are babysitters generally earning'],
-                style: { width: '250px' },
-              },
-              ...compile('?'),
-            ],
+            fields: compile(
+              `How much select("do babysitters generally earn";["do babysitters generally earn","are babysitters generally earning"])?`,
+            ),
           },
           {
             id: 7,
-            fields: [
-              {
-                type: 'singleChoice',
-                value: "You're always coming",
-                options: ['You always come', "You're always coming"],
-                style: { width: '200px' },
-              },
-              ...compile(" up with excuses for not having done your homework. It's so annoying!"),
-            ],
+            fields: compile(
+              `select("You're always coming";["You always come","You're always coming"]) up with excuses for not having done your homework. It's so annoying!`,
+            ),
           },
           {
             id: 8,
-            fields: [
-              {
-                type: 'singleChoice',
-                value: "I don't go",
-                options: ["I don't go", "I'm not going"],
-                style: { width: '150px' },
-              },
-              ...compile(' out much during the week, but '),
-              {
-                type: 'singleChoice',
-                value: 'I always try',
-                options: ['I always try', "I'm always trying"],
-                style: { width: '150px' },
-              },
-              ...compile(' to go out somewhere on Saturday night.'),
-            ],
+            fields: compile(
+              `select("I don't go";["I don't go","I'm not going"]) out much during the week, but select("I always try";["I always try","I'm always trying"]) to go out somewhere on Saturday night.`,
+            ),
           },
           {
             id: 9,
-            fields: [
-              ...compile('No, the train '),
-              {
-                type: 'singleChoice',
-                value: 'does stop',
-                options: ['does stop', 'Is stopping'],
-                style: { width: '150px' },
-              },
-              ...compile(' at Cirencester on Saturdays.'),
-            ],
+            fields: compile(`No, the train select("does stop";["does stop","is stopping"]) at Cirencester on Saturdays.`),
           },
           {
             id: 10,
-            fields: [
-              ...compile('My mum '),
-              {
-                type: 'singleChoice',
-                value: 'takes',
-                options: ['takes', 'is taking'],
-                style: { width: '150px' },
-              },
-              ...compile(' part in ice-skating competitions almost every weekend.'),
-            ],
+            fields: compile(`My mum select("takes";["takes","is taking"]) part in ice-skating competitions almost every weekend.`),
           },
         ],
       },
@@ -259,133 +171,43 @@ const cource = {
         items: [
           {
             id: 1,
-            fields: [
-              ...compile(`Have you `),
-              {
-                type: 'singleChoice',
-                value: 'ever',
-                useCommonOptions: true,
-                style: { width: '150px' },
-              },
-              ...compile(` dreamt of winning the lotter?`),
-            ],
+            fields: compile(`Have you select("ever") dreamt of winning the lotter?`),
           },
           {
             id: 2,
-            fields: [
-              ...compile(`I haven't worked out how to set the timmer on the video `),
-              {
-                type: 'singleChoice',
-                value: 'yet',
-                useCommonOptions: true,
-                style: { width: '150px' },
-              },
-              ...compile(`.`),
-            ],
+            fields: compile(`I haven't worked out how to set the timmer on the video select("yet").`),
           },
           {
             id: 3,
-            fields: [
-              ...compile(`My dad's lived in the same house`),
-              {
-                type: 'singleChoice',
-                value: 'since',
-                useCommonOptions: true,
-                style: { width: '150px' },
-              },
-              ...compile(` he was born.`),
-            ],
+            fields: compile(`My dad's lived in the same house select("since") he was born.`),
           },
           {
             id: 4,
-            fields: [
-              ...compile(`The film's only been on `),
-              {
-                type: 'singleChoice',
-                value: 'for',
-                useCommonOptions: true,
-                style: { width: '150px' },
-              },
-              ...compile(` a couple of minutes.`),
-            ],
+            fields: compile(`The film's only been on select("for") a couple of minutes.`),
           },
           {
             id: 5,
-            fields: [
-              ...compile(`Bruce has knocked three men out of the competition `),
-              {
-                type: 'singleChoice',
-                value: 'so',
-                useCommonOptions: true,
-                style: { width: '150px' },
-              },
-              ...compile(` far.`),
-            ],
+            fields: compile(`Bruce has knocked three men out of the competition select("so") far.`),
           },
           {
             id: 6,
-            fields: [
-              ...compile(`I `),
-              {
-                type: 'singleChoice',
-                value: 'rarely',
-                useCommonOptions: true,
-                style: { width: '150px' },
-              },
-              ...compile(` get the chance to get any exercise - I'm just too busy`),
-            ],
+            fields: compile(`I select("rarely") get the chance to get any exercise - I'm just too busy.`),
           },
           {
             id: 7,
-            fields: [
-              ...compile(`He's only `),
-              {
-                type: 'singleChoice',
-                value: 'just',
-                useCommonOptions: true,
-                style: { width: '150px' },
-              },
-              ...compile(` got home.`),
-            ],
+            fields: compile(`He's only select("just") got home.`),
           },
           {
             id: 8,
-            fields: [
-              ...compile(`It's eleven o'clock and Todd `),
-              {
-                type: 'singleChoice',
-                value: 'still',
-                useCommonOptions: true,
-                style: { width: '150px' },
-              },
-              ...compile(` hasn't come home. Where could he be?`),
-            ],
+            fields: compile(`It's eleven o'clock and Todd select("still") hasn't come home. Where could he be?`),
           },
           {
             id: 9,
-            fields: [
-              ...compile(`I've never met Ruth `),
-              {
-                type: 'singleChoice',
-                value: 'before',
-                useCommonOptions: true,
-                style: { width: '150px' },
-              },
-              ...compile(`. What's she like?`),
-            ],
+            fields: compile(`I've never met Ruth select("before"). What's she like?`),
           },
           {
             id: 10,
-            fields: [
-              ...compile(`Have you finished `),
-              {
-                type: 'singleChoice',
-                value: 'already',
-                useCommonOptions: true,
-                style: { width: '150px' },
-              },
-              ...compile(`? That was quick!`),
-            ],
+            fields: compile(`Have you finished select("already")? That was quick!`),
           },
         ],
       },
@@ -495,21 +317,13 @@ const cource = {
         items: [
           {
             id: 1,
-            fields: [
-              // {
-              //   type: 'staticText',
-              //   value: '1.',
-              //   bold: true,
-              //   style: { marginRight: '24px' },
-              // },
-              ...compile(`**1.** I think `),
-              {
-                type: 'singleChoice',
-                value: 'B',
-                useCommonOptions: true,
-                style: { width: '100px' },
-              },
-            ],
+            fields: compile(`**1.** I think select("B")`),
+            // {
+            //   type: 'staticText',
+            //   value: '1.',
+            //   bold: true,
+            //   style: { marginRight: '24px' },
+            // },
           },
           {
             id: 'A',
@@ -523,21 +337,13 @@ const cource = {
           },
           {
             id: 2,
-            fields: [
-              // {
-              //   type: 'staticText',
-              //   value: '2.',
-              //   bold: true,
-              //   style: { marginRight: '24px' },
-              // },
-              ...compile(`**2.** I'm thinking `),
-              {
-                type: 'singleChoice',
-                value: 'F',
-                useCommonOptions: true,
-                style: { width: '100px' },
-              },
-            ],
+            fields: compile(`**2.** I'm thinking select("F")`),
+            // {
+            //   type: 'staticText',
+            //   value: '2.',
+            //   bold: true,
+            //   style: { marginRight: '24px' },
+            // },
           },
           {
             id: 'B',
@@ -551,21 +357,13 @@ const cource = {
           },
           {
             id: 3,
-            fields: [
-              // {
-              //   type: 'staticText',
-              //   value: '3.',
-              //   bold: true,
-              //   style: { marginRight: '24px' },
-              // },
-              ...compile(`**3.** Phil's looking `),
-              {
-                type: 'singleChoice',
-                value: 'D',
-                useCommonOptions: true,
-                style: { width: '100px' },
-              },
-            ],
+            fields: compile(`**3.** Phil's looking select("D")`),
+            // {
+            //   type: 'staticText',
+            //   value: '3.',
+            //   bold: true,
+            //   style: { marginRight: '24px' },
+            // },
           },
           {
             id: 'C',
@@ -579,21 +377,13 @@ const cource = {
           },
           {
             id: 4,
-            fields: [
-              // {
-              //   type: 'staticText',
-              //   value: '4.',
-              //   bold: true,
-              //   style: { marginRight: '24px' },
-              // },
-              ...compile(`**4.** Phil looks `),
-              {
-                type: 'singleChoice',
-                value: 'H',
-                useCommonOptions: true,
-                style: { width: '100px' },
-              },
-            ],
+            fields: compile(`**4.** Phil looks select("H")`),
+            // {
+            //   type: 'staticText',
+            //   value: '4.',
+            //   bold: true,
+            //   style: { marginRight: '24px' },
+            // },
           },
           {
             id: 'D',
@@ -607,21 +397,13 @@ const cource = {
           },
           {
             id: 5,
-            fields: [
-              // {
-              //   type: 'staticText',
-              //   value: '5.',
-              //   bold: true,
-              //   style: { marginRight: '24px' },
-              // },
-              ...compile(`**5.** Claire has `),
-              {
-                type: 'singleChoice',
-                value: 'A',
-                useCommonOptions: true,
-                style: { width: '100px' },
-              },
-            ],
+            fields: compile(`**5.** Claire has select("A")`),
+            // {
+            //   type: 'staticText',
+            //   value: '5.',
+            //   bold: true,
+            //   style: { marginRight: '24px' },
+            // },
           },
           {
             id: 'E',
@@ -635,21 +417,13 @@ const cource = {
           },
           {
             id: 6,
-            fields: [
-              // {
-              //   type: 'staticText',
-              //   value: '6.',
-              //   bold: true,
-              //   style: { marginRight: '24px' },
-              // },
-              ...compile(`**6.** Claire is having `),
-              {
-                type: 'singleChoice',
-                value: 'C',
-                useCommonOptions: true,
-                style: { width: '100px' },
-              },
-            ],
+            fields: compile(`**6.** Claire is having select("C")`),
+            // {
+            //   type: 'staticText',
+            //   value: '6.',
+            //   bold: true,
+            //   style: { marginRight: '24px' },
+            // },
           },
           {
             id: 'F',
@@ -663,21 +437,13 @@ const cource = {
           },
           {
             id: 7,
-            fields: [
-              // {
-              //   type: 'staticText',
-              //   value: '7.',
-              //   bold: true,
-              //   style: { marginRight: '24px' },
-              // },
-              ...compile(`**7.** Andy is `),
-              {
-                type: 'singleChoice',
-                value: 'E',
-                useCommonOptions: true,
-                style: { width: '100px' },
-              },
-            ],
+            fields: compile(`**7.** Andy is select("E")`),
+            // {
+            //   type: 'staticText',
+            //   value: '7.',
+            //   bold: true,
+            //   style: { marginRight: '24px' },
+            // },
           },
           {
             id: 'G',
@@ -691,21 +457,13 @@ const cource = {
           },
           {
             id: 8,
-            fields: [
-              // {
-              //   type: 'staticText',
-              //   value: '8.',
-              //   bold: true,
-              //   style: { marginRight: '24px' },
-              // },
-              ...compile(`**8.** Andy is being `),
-              {
-                type: 'singleChoice',
-                value: 'G',
-                useCommonOptions: true,
-                style: { width: '100px' },
-              },
-            ],
+            fields: compile(`**8.** Andy is being select("G")`),
+            // {
+            //   type: 'staticText',
+            //   value: '8.',
+            //   bold: true,
+            //   style: { marginRight: '24px' },
+            // },
           },
           {
             id: 'H',

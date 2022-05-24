@@ -1,23 +1,14 @@
-import { Input, Radio, Select, Typography } from 'antd';
+import { Input, Radio, Typography } from 'antd';
 // import { Rule } from 'antd/lib/form';
 import { Field, FieldProps, useFormikContext } from 'formik';
 // import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { Option, TestField } from '../../models';
+import { TestField } from '../../models';
 import ErrorIcon from './ErrorIcon';
+import SelectFormField from './SelectFormField';
 import { TestContext } from './TestContent';
 import getSelectedFromValues from './utils/getSelectFromValues';
-import prepareOptions from './utils/prepareOptions';
-
-type OptionsType = Array<any>;
-
-function getOptions(options: Option[] | undefined, selected: string[]): OptionsType | undefined {
-  if (options == null || options.length === 0) {
-    return undefined;
-  }
-  return options.map(option => ({ text: option.text, value: option.value, disabled: selected.includes(option.value) }));
-}
 
 interface FormFieldProps {
   name: string;
@@ -26,7 +17,7 @@ interface FormFieldProps {
 
 function FormField({ name, field }: FormFieldProps) {
   const { values, errors, setFieldValue } = useFormikContext<any>();
-  const { commonOptionNames, commonOptions, disabled } = useContext(TestContext);
+  const { commonOptionNames, disabled } = React.useContext(TestContext);
   // const rules = useMemo(() => getRules(field), [field]);
   const selected = getSelectedFromValues(values, commonOptionNames);
   const err = errors?.[name] ? [errors?.[name] as string] : undefined;
@@ -45,29 +36,8 @@ function FormField({ name, field }: FormFieldProps) {
       );
     case 'newLine':
       return <br />;
-    case 'singleChoice': {
-      return (
-        <Field name={name}>
-          {({ field: { value } }: FieldProps) => {
-            const options = field.useCommonOptions ? commonOptions : prepareOptions(field.options);
-            return (
-              <>
-                <Select
-                  value={value}
-                  className={className}
-                  style={field.style}
-                  disabled={disabled}
-                  allowClear={field.useCommonOptions}
-                  options={getOptions(options, selected)}
-                  onChange={val => setFieldValue(name, val, false)}
-                />
-                <ErrorIcon errors={err} />
-              </>
-            );
-          }}
-        </Field>
-      );
-    }
+    case 'select':
+      return <SelectFormField name={name} field={field} onChange={val => setFieldValue(name, val, false)} />;
     case 'textbox':
       return (
         <Field name={name}>

@@ -38,7 +38,7 @@ function TestContent({ moduleId, test }: TestContentProps) {
 
       test.items.forEach(item => {
         item.fields.forEach((field, m) => {
-          if (field.type === 'singleChoice' || field.type === 'textbox' || field.type === 'radio') {
+          if (field.type === 'textbox' || field.type === 'radio' || field.type === 'select') {
             const name = getFieldName(test.id, item.id, m);
             const value = values[name];
             if (!value) {

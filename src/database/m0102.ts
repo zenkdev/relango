@@ -87,94 +87,31 @@ const cource = {
         items: [
           {
             id: 1,
-            fields: [
-              ...compile(`I hope to go on a trip round the `),
-              {
-                type: 'singleChoice',
-                value: 'world',
-                options: ['world', 'earth'],
-                style: { width: '150px' },
-              },
-              ...compile(` one day.`),
-            ],
+            fields: compile(`I hope to go on a trip round the select("world";["world","earth"])`),
           },
           {
             id: 2,
-            fields: [
-              ...compile(`You learn a lot about the local `),
-              {
-                type: 'singleChoice',
-                value: 'area',
-                options: ['territory', 'area'],
-                style: { width: '150px' },
-              },
-              ...compile(` by speaking to local people.`),
-            ],
+            fields: compile(`You learn a lot about the local select("area";["territory","area"]) by speaking to local people.`),
           },
           {
             id: 3,
-            fields: [
-              ...compile(`It's good to have someone to `),
-              {
-                type: 'singleChoice',
-                value: 'guide',
-                options: ['lead', 'guide'],
-                style: { width: '150px' },
-              },
-              ...compile(` you when you are on holiday.`),
-            ],
+            fields: compile(`It's good to have someone to select("guide";["lead","guide"]) you when you are on holiday.`),
           },
           {
             id: 4,
-            fields: [
-              ...compile(`I get the train to work every day and the `),
-              {
-                type: 'singleChoice',
-                value: 'fare',
-                options: ['fare', 'fee'],
-                style: { width: '150px' },
-              },
-              ...compile(` is quite expensive.`),
-            ],
+            fields: compile(`I get the train to work every day and the select("fare";["fare","fee"]) is quite expensive.`),
           },
           {
             id: 5,
-            fields: [
-              ...compile(`Captain Cook discovered Australia on a `),
-              {
-                type: 'singleChoice',
-                value: 'voyage',
-                options: ['voyage', 'travel'],
-                style: { width: '150px' },
-              },
-              ...compile(` to the Pacific.`),
-            ],
+            fields: compile(`Captain Cook discovered Australia on a select("voyage";["voyage","travel"]) to the Pacific.`),
           },
           {
             id: 6,
-            fields: [
-              ...compile(`Most tourist attractions in London charge an admission `),
-              {
-                type: 'singleChoice',
-                value: 'fee',
-                options: ['fee', 'ticket'],
-                style: { width: '150px' },
-              },
-              ...compile(`.`),
-            ],
+            fields: compile(`Most tourist attractions in London charge an admission select("fee";["fee","ticket"]).`),
           },
           {
             id: 7,
-            fields: [
-              ...compile(`The sunset over Niagara Falls really is a magnificent `),
-              {
-                type: 'singleChoice',
-                value: 'sight',
-                options: ['look', 'sight'],
-                style: { width: '150px' },
-              },
-              ...compile(`.`),
-            ],
+            fields: compile(`The sunset over Niagara Falls really is a magnificent select("sight";["look","sight"]).`),
           },
         ],
       },

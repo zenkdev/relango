@@ -3,7 +3,8 @@ import { createToken, CstParser, Lexer, Rule } from 'chevrotain';
 const AnyText = createToken({ name: 'AnyText', pattern: Lexer.NA });
 const Word = createToken({ name: 'Word', pattern: /[\w'`&?.!-]+/, categories: AnyText });
 const Textbox = createToken({ name: 'Textbox', pattern: /textbox/, longer_alt: Word });
-const Radio = createToken({ name: 'Textbox', pattern: /radio/, longer_alt: Word });
+const Radio = createToken({ name: 'Radio', pattern: /radio/, longer_alt: Word });
+const Select = createToken({ name: 'Select', pattern: /select/, longer_alt: Word });
 const True = createToken({ name: 'True', pattern: /true/ });
 const False = createToken({ name: 'False', pattern: /false/ });
 const Null = createToken({ name: 'Null', pattern: /null/ });
@@ -28,6 +29,7 @@ const allTokens = [
   AnyText,
   Textbox,
   Radio,
+  Select,
   StringLiteral,
   NumberLiteral,
   True,
@@ -73,6 +75,7 @@ class FieldsParserTypeScript extends CstParser {
       // using ES6 Arrow functions to reduce verbosity.
       { ALT: () => this.SUBRULE(this.textbox) },
       { ALT: () => this.SUBRULE(this.radio) },
+      { ALT: () => this.SUBRULE(this.select) },
       { ALT: () => this.SUBRULE(this.boldText) },
       { ALT: () => this.SUBRULE(this.italicText) },
       { ALT: () => this.SUBRULE(this.text) },
@@ -116,6 +119,19 @@ class FieldsParserTypeScript extends CstParser {
 
   private radio = this.RULE('radio', () => {
     this.CONSUME(Radio);
+    this.CONSUME(LParen);
+    this.OPTION(() => {
+      this.SUBRULE(this.value);
+      this.MANY(() => {
+        this.CONSUME(SemiColon);
+        this.SUBRULE2(this.value);
+      });
+    });
+    this.CONSUME(RParen);
+  });
+
+  private select = this.RULE('select', () => {
+    this.CONSUME(Select);
     this.CONSUME(LParen);
     this.OPTION(() => {
       this.SUBRULE(this.value);

@@ -25,18 +25,16 @@ interface TextField {
   style?: CSSProperties;
 }
 
+export interface SelectField {
+  type: 'select';
+  value: string | string[];
+  options?: string[];
+  style?: CSSProperties;
+}
+
 interface NewLineField {
   type: 'newLine';
 }
-
-type SingleChoiceField = {
-  type: 'singleChoice';
-  taskId: string | number;
-  value: string | string[];
-  useCommonOptions?: boolean;
-  options: string[];
-  style: any;
-};
 
 type MatchField = {
   type: 'match';
@@ -45,7 +43,7 @@ type MatchField = {
   style: any;
 };
 
-export type TestField = TextboxField | RadioField | TextField | NewLineField | SingleChoiceField | MatchField;
+export type TestField = TextboxField | RadioField | SelectField | TextField | NewLineField | MatchField;
 
 export interface Option {
   text: string;

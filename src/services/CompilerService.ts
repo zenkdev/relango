@@ -1,4 +1,4 @@
-import { FieldsCstNode, RadioCstNode, TextboxCstNode, TextCstNode } from '../parser_cst';
+import { FieldsCstNode, RadioCstNode, SelectCstNode, TextboxCstNode, TextCstNode } from '../parser_cst';
 import { parseText } from './parser';
 
 interface TextboxField {
@@ -16,6 +16,12 @@ interface RadioField {
   layout?: 'horizontal' | 'vertical';
 }
 
+interface SelectField {
+  type: 'select';
+  value: string | string[];
+  options?: string[];
+}
+
 interface TextField {
   type: 'text';
   value: string;
@@ -27,15 +33,6 @@ interface NewLineField {
   type: 'newLine';
 }
 
-type SingleChoiceField = {
-  type: 'singleChoice';
-  taskId: string | number;
-  value: string | string[];
-  useCommonOptions?: boolean;
-  options: string[];
-  style: unknown;
-};
-
 type MatchField = {
   type: 'match';
   value: string;
@@ -43,7 +40,7 @@ type MatchField = {
   style: unknown;
 };
 
-export type Field = TextboxField | RadioField | TextField | NewLineField | SingleChoiceField | MatchField;
+export type Field = TextboxField | RadioField | SelectField | TextField | NewLineField | MatchField;
 
 function unquote(value?: string) {
   if (value && value[0] === '"' && value[value.length - 1] === '"') {
@@ -83,6 +80,8 @@ class CompilerService {
         fields.push(this.createTextboxField(field.children.textbox));
       } else if (field.children.radio) {
         fields.push(this.createRadioField(field.children.radio));
+      } else if (field.children.select) {
+        fields.push(this.createSelectField(field.children.select));
       } else if (field.children.text) {
         fields.push(this.createTextField(field.children.text));
       } else if (field.children.boldText) {
@@ -162,6 +161,42 @@ class CompilerService {
       value,
       options,
       layout,
+    };
+  }
+
+  private createSelectField([select]: SelectCstNode[]): SelectField {
+    const params = select.children.value!;
+
+    let value: string | string[] = '';
+    if (params[0].children.StringLiteral) {
+      value = unquote(params[0].children.StringLiteral[0].image) ?? '';
+    } else if (params[0].children.array) {
+      value = [];
+      const arrValue = params[0].children.array[0]?.children?.value ?? [];
+      for (let n = 0; n < arrValue.length; n += 1) {
+        const valueChildren = arrValue[n].children;
+        if (valueChildren.StringLiteral) {
+          value.push(unquote(valueChildren.StringLiteral[0].image) ?? '');
+        }
+      }
+    }
+
+    let options: string[] | undefined = undefined;
+    if (params[1]?.children.array && params[1].children.array[0]?.children?.value) {
+      options = [];
+      const arrValue = params[1].children.array[0].children.value;
+      for (let n = 0; n < arrValue.length; n += 1) {
+        const valueChildren = arrValue[n].children;
+        if (valueChildren.StringLiteral) {
+          options.push(unquote(valueChildren.StringLiteral[0].image) ?? '');
+        }
+      }
+    }
+
+    return {
+      type: 'select',
+      value,
+      options,
     };
   }
 
