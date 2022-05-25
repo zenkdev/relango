@@ -1,3 +1,6 @@
+import { parse } from 'yaml';
+
+import { Test } from '../models';
 import { FieldsCstNode, RadioCstNode, SelectCstNode, TextboxCstNode, TextCstNode } from '../parser_cst';
 import { parseText } from './parser';
 
@@ -57,11 +60,35 @@ function ensureArray<T>(value: T | T[]): T[] {
 }
 
 class CompilerService {
-  constructor() {
-    this.compile = this.compile.bind(this);
+  public compile(text: string): Test[] {
+    const parsed = parse(text);
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+
+    return parsed.map((test: Record<string, any>) => {
+      const { items, ...rest } = test;
+      const parsedItems: any[] = [];
+      if (Array.isArray(items)) {
+        items.forEach((item, n) => {
+          if (typeof item === 'string') {
+            const fields = this.fields(item);
+            parsedItems.push({ id: n + 1, fields });
+          } else if (typeof item?.fields === 'string') {
+            parsedItems.push({ id: item.id, fields: this.fields(item.fields) });
+          } else if (Array.isArray(item?.fields)) {
+            parsedItems.push({ id: item.id, fields: item.fields });
+          }
+        });
+      }
+      return {
+        ...rest,
+        items: parsedItems,
+      } as Test;
+    });
   }
 
-  public compile(text: string): Field[] {
+  private fields(text: string): Field[] {
     const result = parseText(text);
 
     if (result.lexErrors?.length) throw new Error(`Lex errors: ${JSON.stringify(result.lexErrors, null, 2)}`);
