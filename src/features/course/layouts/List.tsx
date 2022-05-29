@@ -1,18 +1,17 @@
-import React from 'react';
+import { TestField, TestItem } from '../../../models';
+import { FormField } from '../form-fields';
+import getFieldName from '../utils/getFieldName';
+import styles from './Layout.module.scss';
 
-import { TestField, TestItem } from '../../models';
-import FormField from './FormField';
-import getFieldName from './utils/getFieldName';
-
-interface OrderedListProps {
+interface ListProps {
   testId: string;
   items: TestItem[];
   columns?: number;
 }
 
-function OrderedList({ testId, items, columns }: OrderedListProps) {
+function List({ testId, items, columns }: ListProps) {
   return (
-    <ol className="tests-orderedList" style={{ columnCount: columns }}>
+    <ol className={styles.list} style={{ columnCount: columns }}>
       {items.map(({ id: itemId, fields }) => (
         <li key={getFieldName(testId, itemId)}>
           {fields.map((field: TestField, m: number) => {
@@ -25,4 +24,4 @@ function OrderedList({ testId, items, columns }: OrderedListProps) {
   );
 }
 
-export default OrderedList;
+export default List;

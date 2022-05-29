@@ -1,14 +1,13 @@
-import { Input, Radio, Typography } from 'antd';
-// import { Rule } from 'antd/lib/form';
+import { Input, Radio } from 'antd';
 import { Field, FieldProps, useFormikContext } from 'formik';
-// import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import React from 'react';
 
-import { TestField } from '../../models';
+import { TestField } from '../../../models';
+import { TestContext } from '../TestContent';
+import getSelectedFromValues from '../utils/getSelectFromValues';
 import ErrorIcon from './ErrorIcon';
 import SelectFormField from './SelectFormField';
-import { TestContext } from './TestContent';
-import getSelectedFromValues from './utils/getSelectFromValues';
+import TextFormField from './TextFormField';
 
 interface FormFieldProps {
   name: string;
@@ -25,15 +24,7 @@ function FormField({ name, field }: FormFieldProps) {
 
   switch (field.type) {
     case 'text':
-      const style = field.style ?? {};
-      if (field.italic) {
-        style.fontStyle = 'italic';
-      }
-      return (
-        <Typography.Text strong={field.bold} style={style}>
-          {field.value}
-        </Typography.Text>
-      );
+      return <TextFormField field={field} />;
     case 'newLine':
       return <br />;
     case 'select':

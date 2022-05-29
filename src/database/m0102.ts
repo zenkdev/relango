@@ -5,7 +5,7 @@ const tests = compilerService.compile(`
 - id: A
   name: Choose the correct answer.
   title: Topic vocabulary in contrast
-  layout: orderedList
+  layout: list
   layoutColumns: 2
   items:
     - |
@@ -46,7 +46,7 @@ const tests = compilerService.compile(`
       radio("home";["birth","home","native","origin"])
 - id: B
   name: Circle the correct word.
-  layout: orderedList
+  layout: list
   items:
     - I hope to go on a trip round the select("world";["world","earth"])
     - You learn a lot about the local select("area";["territory","area"]) by speaking to local people.
@@ -58,7 +58,7 @@ const tests = compilerService.compile(`
 - id: C
   name: Complete using the correct form of the words in the box.
   title: Phrasal verbs
-  layout: orderedList
+  layout: list
   commonOptions:
     - catch
     - check
@@ -81,7 +81,7 @@ const tests = compilerService.compile(`
     - We're going on holiday tomorrow, but we'll call you when we textbox("get";true) back.
 - id: D
   name: Write a phrasal verb in the correct form to replace the words in italics. Add any other words you need.
-  layout: orderedList
+  layout: list
   items:
     - We can *start our journey* textbox("set out") towards the mountains at dawn.
     - Dad fetched the luggage while Mum *registered* textbox("checked in") at the hotel.
@@ -93,7 +93,7 @@ const tests = compilerService.compile(`
 - id: E
   name: Write one word in each gap.
   title: Phrases and collocations
-  layout: orderedList
+  layout: list
   items:
     - The speed textbox("limit") in towns is 30 km/h and you shouldn't go faster than that.
     - Why don't we textbox("take") the scenic route along the coast?
@@ -111,7 +111,7 @@ const tests = compilerService.compile(`
 - id: F
   name: Choose the correct answer.
   title: Word patterns
-  layout: orderedList
+  layout: list
   items:
     - |
       I've always dreamt ...... China.
@@ -139,7 +139,7 @@ const tests = compilerService.compile(`
       radio("from";["to","from","in","at"];true)
 - id: G
   name: Find the extra word in each tine
-  layout: orderedList
+  layout: list
   title: The cancelled trip
   items:
     - textbox("be") Oh, let me tell you about our trip. Did you know that Sara is afraid of be
@@ -159,33 +159,21 @@ const tests = compilerService.compile(`
   layout: grid
   layoutColumns: 2
   items:
-    - id: 1
-      fields: It's not always easy being a textbox("(1)";"tourist") You spend half your
-    - id: A
-      fields: '**TOUR**'
-    - id: 2
-      fields: time making textbox("(2)";"arrangements") for your holiday and the other half
-    - id: B
-      fields: '**ARRANGE**'
-    - id: 3
-      fields: worrying about sticking to the textbox("(3)";"timetable") I think it's relaxing
-    - id: C
-      fields: '**TIME**'
-    - id: 4
-      fields: sometimes to spend a holiday at home. There are no textbox("(4)";"cultural")
-    - id: D
-      fields: '**CULTURE**'
-    - id: 5
-      fields: problems, you don't need someone to be the textbox("(5)";"photographer") and
-    - id: E
-      fields: '**PHOTOGRAPH**'
-    - id: 6
-      fields: you know that the local textbox("(6)";"inhabitants") are always friendly!
-    - id: F
-      fields: '**INHABIT**'
+    - It's not always easy being a textbox("(1)";"tourist") You spend half your
+    - '**TOUR**'
+    - time making textbox("(2)";"arrangements") for your holiday and the other half
+    - '**ARRANGE**'
+    - worrying about sticking to the textbox("(3)";"timetable") I think it's relaxing
+    - '**TIME**'
+    - sometimes to spend a holiday at home. There are no textbox("(4)";"cultural")
+    - '**CULTURE**'
+    - problems, you don't need someone to be the textbox("(5)";"photographer") and
+    - '**PHOTOGRAPH**'
+    - you know that the local textbox("(6)";"inhabitants") are always friendly!
+    - '**INHABIT**'
 - id: I
   name: Complete the sentences by changing the form of the word in capitals when this is necessary
-  layout: orderedList
+  layout: list
   items:
     - Beijing has changed so much in the last few years that it's almost textbox("unrecognisable") **(RECOGNISE)**.
     - The number of cars textbox("worldwide") **(WORLD)** is about a billion and is increasing all the time.

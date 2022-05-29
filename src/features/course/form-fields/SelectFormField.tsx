@@ -2,11 +2,11 @@ import { Select } from 'antd';
 import { Field, FieldProps } from 'formik';
 import React from 'react';
 
-import { SelectField as SelectFieldModel } from '../../models';
+import { SelectField as SelectFieldModel } from '../../../models';
+import { TestContext } from '../TestContent';
+import getSelectedFromValues from '../utils/getSelectFromValues';
+import prepareOptions from '../utils/prepareOptions';
 import ErrorIcon from './ErrorIcon';
-import { TestContext } from './TestContent';
-import getSelectedFromValues from './utils/getSelectFromValues';
-import prepareOptions from './utils/prepareOptions';
 
 interface SelectFieldProps {
   name: string;

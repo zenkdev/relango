@@ -17,7 +17,7 @@ interface RadioField {
   style?: CSSProperties;
 }
 
-interface TextField {
+export interface TextField {
   type: 'text';
   value: string;
   bold?: boolean;
@@ -58,7 +58,7 @@ export interface TestItem {
 export type Test = {
   id: string;
   name: string;
-  layout?: 'orderedList' | 'article' | 'grid';
+  layout: 'article' | 'grid' | 'list';
   layoutColumns?: number;
   title?: string;
   footnote?: string;

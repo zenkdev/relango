@@ -6,7 +6,7 @@ describe('CompilerService', () => {
 ---
 - id: A
   name: Circle the correct word or phrase.
-  layout: orderedList
+  layout: list
   items:
     - |
       **What** textbox("1";"does") the phrase 'the great British seaside' bring to mind?

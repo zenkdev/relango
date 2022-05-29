@@ -4,7 +4,7 @@ const tests = compilerService.compile(`
 ---
 - id: A
   name: Circle the correct word or phrase.
-  layout: orderedList
+  layout: list
   items:
     - Elizabeth select("usually goes";["usually goes","is usually going"]) to bed at around eleven o'clock.
     - Dan select("is talking";["talks","is talking"]) on the other phone right now.
@@ -18,7 +18,7 @@ const tests = compilerService.compile(`
     - My mum select("takes";["takes","is taking"]) part in ice-skating competitions almost every weekend.
 - id: B
   name: Rewrite correctly. Change the words or phrases in bold.
-  layout: orderedList
+  layout: list
   items:
     - |
       My dad **is often getting up** late on Saturday mornings.
@@ -46,7 +46,7 @@ const tests = compilerService.compile(`
       textbox("Does Melanie need")
 - id: C
   name: Complete using the correct form of the verb in brackets.
-  layout: orderedList
+  layout: list
   items:
     - It's the first time textbox("I've ever eaten") **(I / ever / eat)** octopus!
     - Sandy textbox("hasn't seen") **(not / see)** his sister since she went to university.
@@ -60,7 +60,7 @@ const tests = compilerService.compile(`
     - textbox("I've never heard") **(I / never / hear)** such nonsense!
 - id: D
   name: Complete using the words in the box.
-  layout: orderedList
+  layout: list
   commonOptions:
     - already
     - before
@@ -85,7 +85,7 @@ const tests = compilerService.compile(`
     - Have you finished select("already")? That was quick!
 - id: E
   name: Choose the correct answer.
-  layout: orderedList
+  layout: list
   layoutColumns: 2
   items:
     - |
@@ -225,7 +225,7 @@ const tests = compilerService.compile(`
           text: like he needs a holiday!
 - id: H
   name: Find the extra word in each tine
-  layout: orderedList
+  layout: list
   title: International friends
   items:
     - textbox("to") I've been to travelling round Europe all summer. It's the first time I've
@@ -262,7 +262,7 @@ const tests = compilerService.compile(`
       \`Agreed!\` said Sheila and Alison.
 - id: J
   name: Complete each second sentence using the word given so that it has a similar meaning to the first sentence. Write between two and five words in each gap.
-  layout: orderedList
+  layout: list
   items:
     - |
       What's the price of the tickets, Jimmy? **much**

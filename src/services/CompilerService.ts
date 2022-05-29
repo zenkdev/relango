@@ -227,13 +227,12 @@ class CompilerService {
     };
   }
 
-  private createTextField([text]: TextCstNode[], { bold, italic }: { bold?: boolean; italic?: boolean } = {}): TextField {
+  private createTextField([text]: TextCstNode[], rest: Omit<TextField, 'type' | 'value'> = {}): TextField {
     const { AnyText } = text.children;
     return {
       type: 'text',
       value: AnyText.map(value => value.image).join(''),
-      bold,
-      italic,
+      ...rest,
     };
   }
 }

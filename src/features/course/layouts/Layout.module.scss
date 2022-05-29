@@ -1,0 +1,23 @@
+.article__content {
+  line-height: 36px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.grid {
+  display: grid;
+  padding: 12px 24px;
+  grid-template-columns: 100%;
+}
+
+.grid__cell {
+  padding: 12px 24px;
+}
+
+.list {
+  padding: 12px 24px;
+
+  li {
+    padding: 12px 24px;
+  }
+}

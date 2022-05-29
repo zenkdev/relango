@@ -5,11 +5,9 @@ import React, { useCallback, useMemo } from 'react';
 
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { Option, Test } from '../../models';
-import Article from './Article';
 import CommonOptions from './CommonOptions';
 import FormikProps from './FormikProps';
-import Grid from './Grid';
-import OrderedList from './OrderedList';
+import { Layout } from './layouts';
 import getCommonOptionNames from './utils/getCommonOptionNames';
 import getFieldName from './utils/getFieldName';
 import mergeModuleContent from './utils/mergeModuleContent';
@@ -87,9 +85,7 @@ function TestContent({ moduleId, test }: TestContentProps) {
                 {test.title}
               </Typography.Title>
             )}
-            {test.layout === 'orderedList' && <OrderedList testId={test.id} items={test.items} columns={test.layoutColumns} />}
-            {test.layout === 'article' && <Article testId={test.id} items={test.items} columns={test.layoutColumns} />}
-            {test.layout === 'grid' && <Grid testId={test.id} items={test.items} columns={test.layoutColumns} />}
+            <Layout test={test} />
           </div>
           {test.footnote && (
             <Typography.Title level={5} className="tests-footnote">
