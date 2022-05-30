@@ -1,22 +1,21 @@
 import { Button, Card, List, PageHeader, Spin } from 'antd';
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { ReloadOutlined } from '@ant-design/icons';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { alertService } from '../../services';
+import { getModuleUrl } from '../../utils';
 import { fetchCourses } from './homeSlice';
-
-const { Meta } = Card;
 
 function HomePage() {
   const dispatch = useAppDispatch();
   const { isLoading, data } = useAppSelector(state => state.home);
-  const fetchData = useCallback(() => {
+  const fetchData = React.useCallback(() => {
     dispatch(fetchCourses());
   }, [dispatch]);
-  useEffect(() => fetchData(), [fetchData]);
+  React.useEffect(() => fetchData(), [fetchData]);
 
   return (
     <div>
@@ -31,9 +30,9 @@ function HomePage() {
         dataSource={data}
         renderItem={item => (
           <List.Item>
-            <Link to={`/course/${item.id}`}>
+            <Link to={getModuleUrl(item.id)}>
               <Card title={item.title} cover={item.image ? <img src={item.image} alt={item.title} /> : undefined}>
-                <Meta description={item.subTitle} />
+                <Card.Meta description={item.subTitle} />
               </Card>
             </Link>
           </List.Item>

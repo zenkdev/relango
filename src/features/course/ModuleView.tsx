@@ -1,43 +1,52 @@
 import { Button, PageHeader } from 'antd';
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Link, useLocation } from 'react-router-dom';
 
 import { BackwardOutlined, ForwardOutlined, InfoOutlined } from '@ant-design/icons';
 
-import { Module } from '../../models';
+import { useAppSelector } from '../../hooks';
 import ModalContent from './ModalContent';
 import ModuleTests from './ModuleTests';
+import { selectCurrentModule } from './selectors';
 
 interface ModuleViewProps {
-  module: Module;
-  prev?: string;
-  next?: string;
+  moduleId?: string;
 }
 
-function ModuleView({ module, prev, next }: ModuleViewProps) {
+function ModuleView({ moduleId }: ModuleViewProps) {
+  const module = useAppSelector(state => selectCurrentModule(state, moduleId));
   const { pathname } = useLocation();
-  const extra: any[] = [];
-  if (module.modalContent) {
-    extra.push(
-      <Link key="modal" to={{ pathname, hash: 'modal' }}>
-        <Button type="primary" icon={<InfoOutlined />} />
-      </Link>,
-    );
+  const extra = React.useMemo(() => {
+    const extra: any[] = [];
+    if (module?.modalContent) {
+      extra.push(
+        <Link key="modal" to={{ pathname, hash: 'modal' }}>
+          <Button type="primary" icon={<InfoOutlined />} />
+        </Link>,
+      );
+    }
+    if (module?.prev) {
+      extra.push(
+        <Link key="prev" to={module.prev}>
+          <Button type="primary" icon={<BackwardOutlined />} />
+        </Link>,
+      );
+    }
+    if (module?.next) {
+      extra.push(
+        <Link key="next" to={module.next}>
+          <Button type="primary" icon={<ForwardOutlined />} />
+        </Link>,
+      );
+    }
+    return extra;
+  }, [module, pathname]);
+
+  if (!module) {
+    return null;
   }
-  if (prev) {
-    extra.push(
-      <Link key="prev" to={prev}>
-        <Button type="primary" icon={<BackwardOutlined />} />
-      </Link>,
-    );
-  }
-  if (next) {
-    extra.push(
-      <Link key="next" to={next}>
-        <Button type="primary" icon={<ForwardOutlined />} />
-      </Link>,
-    );
-  }
+
   return (
     <div>
       <PageHeader title={module.name} subTitle={module.subject} extra={extra}>
