@@ -1,11 +1,12 @@
-import { Input, Radio } from 'antd';
+import { Input } from 'antd';
 import { Field, FieldProps, useFormikContext } from 'formik';
 import React from 'react';
 
 import { TestField } from '../../../models';
-import { TestContext } from '../TestContent';
+import { TestContext } from '../TestView';
 import getSelectedFromValues from '../utils/getSelectFromValues';
 import ErrorIcon from './ErrorIcon';
+import RadioFormField from './RadioFormField';
 import SelectFormField from './SelectFormField';
 import TextFormField from './TextFormField';
 
@@ -17,7 +18,6 @@ interface FormFieldProps {
 function FormField({ name, field }: FormFieldProps) {
   const { values, errors, setFieldValue } = useFormikContext<any>();
   const { commonOptionNames, disabled } = React.useContext(TestContext);
-  // const rules = useMemo(() => getRules(field), [field]);
   const selected = getSelectedFromValues(values, commonOptionNames);
   const err = errors?.[name] ? [errors?.[name] as string] : undefined;
   const className = err == null ? undefined : `item--${errors.length ? 'error' : 'success'}`;
@@ -58,36 +58,8 @@ function FormField({ name, field }: FormFieldProps) {
           }}
         </Field>
       );
-    case 'radio': {
-      const radioStyle =
-        field.layout === 'horizontal'
-          ? undefined
-          : {
-              display: 'block',
-              height: '30px',
-              lineHeight: '30px',
-            };
-      return (
-        <Field name={name}>
-          {({ field: { value, onChange } }: FieldProps) => {
-            return (
-              <>
-                <Radio.Group
-                  id={name}
-                  name={name}
-                  value={value}
-                  className={className}
-                  disabled={disabled}
-                  options={field.options.map(opt => ({ label: opt, value: opt, style: radioStyle }))}
-                  onChange={onChange}
-                />
-                <ErrorIcon errors={err} />
-              </>
-            );
-          }}
-        </Field>
-      );
-    }
+    case 'radio':
+      return <RadioFormField name={name} field={field} />;
     case 'match':
       return (
         <div className="tests-matches">

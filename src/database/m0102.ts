@@ -115,28 +115,28 @@ const tests = compilerService.compile(`
   items:
     - |
       I've always dreamt ...... China.
-      radio("of visiting";["to visit","of visiting","I visit","visit"];true)
+      radio("of visiting";["to visit","of visiting","I visit","visit"])
     - |
       The travel agency is arranging for us ...... at a really nice hotel.
-      radio("to stay";["stay","of staying","to stay","staying"];true)
+      radio("to stay";["stay","of staying","to stay","staying"])
     - |
       My dad says he always regrets ...... more.
-      radio("not travelling";["to not travel","not travelling","he not travel","of not travelling"];true)
+      radio("not travelling";["to not travel","not travelling","he not travel","of not travelling"])
     - |
       John seems keen ...... how to drive as soon as he can.
-      radio("to learn";["of learning","he learn","for learn","to learn"];true)
+      radio("to learn";["of learning","he learn","for learn","to learn"])
     - |
       Now, class. I'd like you all to write ...... a description of your last holiday.
-      radio("me";["me","to me","it me","about me"];true)
+      radio("me";["me","to me","it me","about me"])
     - |
       When you arrive ...... have your passport ready.
-      radio("at the airport";["to the airport","in the airport","on the airport","at the airport"];true)
+      radio("at the airport";["to the airport","in the airport","on the airport","at the airport"])
     - |
       The Joneses have invited us ...... to Australia with them this summer.
-      radio("to go";["going","for going","about going","to go"];true)
+      radio("to go";["going","for going","about going","to go"])
     - |
       The in-flight entertainment may differ ...... that advertised.
-      radio("from";["to","from","in","at"];true)
+      radio("from";["to","from","in","at"])
 - id: G
   name: Find the extra word in each tine
   layout: list

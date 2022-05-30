@@ -9,11 +9,10 @@ interface TextboxField {
   style?: CSSProperties;
 }
 
-interface RadioField {
+export interface RadioField {
   type: 'radio';
   value: string;
   options: string[];
-  layout?: 'horizontal' | 'vertical';
   style?: CSSProperties;
 }
 
@@ -60,6 +59,7 @@ export type Test = {
   name: string;
   layout: 'article' | 'grid' | 'list';
   layoutColumns?: number;
+  listStart?: number;
   title?: string;
   footnote?: string;
   commonOptions?: Array<string | Option>;

@@ -2,19 +2,19 @@ import { Select } from 'antd';
 import { Field, FieldProps } from 'formik';
 import React from 'react';
 
-import { SelectField as SelectFieldModel } from '../../../models';
-import { TestContext } from '../TestContent';
+import { SelectField } from '../../../models';
+import { TestContext } from '../TestView';
 import getSelectedFromValues from '../utils/getSelectFromValues';
 import prepareOptions from '../utils/prepareOptions';
 import ErrorIcon from './ErrorIcon';
 
-interface SelectFieldProps {
+interface SelectFormFieldProps {
   name: string;
-  field: SelectFieldModel;
+  field: SelectField;
   onChange: (value: any) => void;
 }
 
-function SelectFormField({ name, field, onChange }: SelectFieldProps) {
+function SelectFormField({ name, field, onChange }: SelectFormFieldProps) {
   const { commonOptions, commonOptionNames /*, disabled*/ } = React.useContext(TestContext);
   const useCommonOptions = !field.options?.length;
   const options = (useCommonOptions ? commonOptions : prepareOptions(field.options)) || [];

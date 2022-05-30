@@ -16,7 +16,6 @@ interface RadioField {
   type: 'radio';
   value: string;
   options: string[];
-  layout?: 'horizontal' | 'vertical';
 }
 
 interface SelectField {
@@ -178,16 +177,10 @@ class CompilerService {
       }
     }
 
-    let layout: RadioField['layout'] = undefined;
-    if (params.length > 2 && (params[2].children.True || params[2].children.False)) {
-      layout = params[2].children.True ? 'horizontal' : 'vertical';
-    }
-
     return {
       type: 'radio',
       value,
       options,
-      layout,
     };
   }
 
