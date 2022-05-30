@@ -4,8 +4,6 @@
   border-radius: 2px;
   background-color: #fafafa;
   min-height: 200px;
-  text-align: center;
-  // padding-top: 80px;
 }
 
 .steps-action {
@@ -21,13 +19,6 @@
 }
 
 .tests {
-  text-align: left;
-
-  &-header {
-    padding: 12px 24px;
-    border-bottom: 1px solid #f0f0f0;
-  }
-
   &-commonOptions {
     margin: 12px;
     padding: 12px 24px;
@@ -38,11 +29,6 @@
     &--selected {
       text-decoration: line-through;
     }
-  }
-
-  &-title {
-    text-align: center;
-    padding: 12px 24px;
   }
 
   &-matches {

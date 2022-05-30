@@ -8,6 +8,7 @@ import { Option, Test } from '../../models';
 import CommonOptions from './CommonOptions';
 import FormikProps from './FormikProps';
 import { Layout } from './layouts';
+import styles from './TestView.module.scss';
 import getCommonOptionNames from './utils/getCommonOptionNames';
 import getFieldName from './utils/getFieldName';
 import mergeModuleContent from './utils/mergeModuleContent';
@@ -23,17 +24,16 @@ export const TestContext = React.createContext(
   },
 );
 
-interface TestContentProps {
+interface TestViewProps {
   moduleId: string;
   test: Test;
 }
 
-function TestContent({ moduleId, test }: TestContentProps) {
+function TestView({ moduleId, test }: TestViewProps) {
   const [testContent, setTestContent] = useLocalStorage<Values>('testContent', {});
   const handleValidate = useCallback(
     (values: Values) => {
       const errors: Values = {};
-
       test.items.forEach(item => {
         item.fields.forEach((field, m) => {
           if (field.type === 'textbox' || field.type === 'radio' || field.type === 'select') {
@@ -74,32 +74,28 @@ function TestContent({ moduleId, test }: TestContentProps) {
   return (
     <TestContext.Provider value={context}>
       <Formik initialValues={initialValues ?? {}} enableReinitialize validate={handleValidate} onSubmit={handleOnSubmit}>
-        <Form className="ant-form ant-form-horizontal tests">
-          <Typography.Title level={3} className="tests-header">
+        <Form className={`ant-form ant-form-horizontal ${styles.form}`}>
+          <Typography.Title level={3} className={styles.header}>
             {test.name}
           </Typography.Title>
           <CommonOptions hide={test.hideCommonOptions} />
-          <div className="tests-content">
+          <div className={styles.content}>
             {test.title && (
-              <Typography.Title level={4} className="tests-title">
+              <Typography.Title level={4} className={styles.title}>
                 {test.title}
               </Typography.Title>
             )}
             <Layout test={test} />
+            {test.footnote && (
+              <div className={styles.footnote}>
+                <Typography.Text>{test.footnote}</Typography.Text>
+              </div>
+            )}
           </div>
-          {test.footnote && (
-            <Typography.Title level={5} className="tests-footnote">
-              {test.footnote}
-            </Typography.Title>
-          )}
-          <div className="tests-footer">
-            <TestContext.Consumer>
-              {({ disabled }) => (
-                <Button type="primary" htmlType="submit" disabled={disabled}>
-                  Validate
-                </Button>
-              )}
-            </TestContext.Consumer>
+          <div className={styles.footer}>
+            <Button type="primary" htmlType="submit" disabled={context.disabled}>
+              Validate
+            </Button>
           </div>
           <FormikProps />
         </Form>
@@ -108,4 +104,4 @@ function TestContent({ moduleId, test }: TestContentProps) {
   );
 }
 
-export default TestContent;
+export default TestView;

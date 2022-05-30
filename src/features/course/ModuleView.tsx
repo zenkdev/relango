@@ -1,21 +1,20 @@
 import { Button, PageHeader } from 'antd';
-import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Link, useLocation } from 'react-router-dom';
 
 import { BackwardOutlined, ForwardOutlined, InfoOutlined } from '@ant-design/icons';
 
 import { Module } from '../../models';
-import ModuleTests from './ModuleTests';
 import ModalContent from './ModalContent';
+import ModuleTests from './ModuleTests';
 
-interface ModuleContentProps {
+interface ModuleViewProps {
   module: Module;
   prev?: string;
   next?: string;
 }
 
-function ModuleContent({ module, prev, next }: ModuleContentProps) {
+function ModuleView({ module, prev, next }: ModuleViewProps) {
   const { pathname } = useLocation();
   const extra: any[] = [];
   if (module.modalContent) {
@@ -51,4 +50,4 @@ function ModuleContent({ module, prev, next }: ModuleContentProps) {
   );
 }
 
-export default ModuleContent;
+export default ModuleView;

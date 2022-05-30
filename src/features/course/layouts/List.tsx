@@ -7,11 +7,12 @@ interface ListProps {
   testId: string;
   items: TestItem[];
   columns?: number;
+  start?: number;
 }
 
-function List({ testId, items, columns }: ListProps) {
+function List({ testId, items, columns, start }: ListProps) {
   return (
-    <ol className={styles.list} style={{ columnCount: columns }}>
+    <ol className={styles.list} style={{ columnCount: columns }} start={start}>
       {items.map(({ id: itemId, fields }) => (
         <li key={getFieldName(testId, itemId)}>
           {fields.map((field: TestField, m: number) => {

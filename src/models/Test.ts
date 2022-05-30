@@ -57,7 +57,7 @@ export interface TestItem {
 export type Test = {
   id: string;
   name: string;
-  layout: 'article' | 'grid' | 'list';
+  layout: 'article' | 'list';
   layoutColumns?: number;
   listStart?: number;
   title?: string;

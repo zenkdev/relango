@@ -156,21 +156,14 @@ const tests = compilerService.compile(`
 - id: H
   name: Use the word given in capitals at the end of each line to form a word that fits in the gap in the same line.
   title: Word formation
-  layout: grid
-  layoutColumns: 2
+  layout: article
   items:
-    - It's not always easy being a textbox("(1)";"tourist") You spend half your
-    - '**TOUR**'
-    - time making textbox("(2)";"arrangements") for your holiday and the other half
-    - '**ARRANGE**'
-    - worrying about sticking to the textbox("(3)";"timetable") I think it's relaxing
-    - '**TIME**'
-    - sometimes to spend a holiday at home. There are no textbox("(4)";"cultural")
-    - '**CULTURE**'
-    - problems, you don't need someone to be the textbox("(5)";"photographer") and
-    - '**PHOTOGRAPH**'
-    - you know that the local textbox("(6)";"inhabitants") are always friendly!
-    - '**INHABIT**'
+    - It's not always easy being a textbox("(1)";"tourist") **(TOUR)** You spend half your
+    - time making textbox("(2)";"arrangements") **(ARRANGE)** for your holiday and the other half
+    - worrying about sticking to the textbox("(3)";"timetable") **(TIME)** I think it's relaxing
+    - sometimes to spend a holiday at home. There are no textbox("(4)";"cultural") **(CULTURE)**
+    - problems, you don't need someone to be the textbox("(5)";"photographer") **(PHOTOGRAPH)** and
+    - you know that the local textbox("(6)";"inhabitants") **(INHABIT)** are always friendly!
 - id: I
   name: Complete the sentences by changing the form of the word in capitals when this is necessary
   layout: list

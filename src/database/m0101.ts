@@ -150,7 +150,7 @@ const tests = compilerService.compile(`
       textbox("(9)";["looks","seems"];true) like Omsk may also have a bright future - as a popular destination for tourists.
 - id: G
   name: Match to make sentences.
-  layout: grid
+  layout: article
   layoutColumns: 2
   commonOptions:
     - A
@@ -165,59 +165,57 @@ const tests = compilerService.compile(`
   items:
     - id: 1
       fields: '**1.** I think select("B")' # style: { marginRight: '24px' }
+    - id: 2
+      fields: >
+              **2.** I'm thinking select("F")
+    - id: 3
+      fields: >
+              **3.** Phil's looking select("D")
+    - id: 4
+      fields: '**4.** Phil looks select("H")'
+    - id: 5
+      fields: '**5.** Claire has select("A")'
+    - id: 6
+      fields: '**6.** Claire is having select("C")'
+    - id: 7
+      fields: '**7.** Andy is select("E")'
+    - id: 8
+      fields: '**8.** Andy is being select("G")'
     - id: A
       fields:
         - type: match
           value: A
           text: darker hair than her sister.
-    - id: 2
-      fields: >
-              **2.** I'm thinking select("F")
-      # style: { marginRight: '24px' }
     - id: B
       fields:
         - type: match
           value: B
           text: "I'm going to buy the new Racetrack CD."
-    - id: 3
-      fields: >
-              **3.** Phil's looking select("D")
-      # style: { marginRight: '24px' }
     - id: C
       fields:
         - type: match
           value: C
           text: a haircut at the moment.
-    - id: 4
-      fields: '**4.** Phil looks select("H")' # style: { marginRight: '24px' }
     - id: D
       fields:
         - type: match
           value: D
           text: for his glasses. Have you seen them?
-    - id: 5
-      fields: '**5.** Claire has select("A")' # style: { marginRight: '24px' }
     - id: E
       fields:
         - type: match
           value: E
           text: not old enough to drive a car.
-    - id: 6
-      fields: '**6.** Claire is having select("C")' # style: { marginRight: '24px' }
     - id: F
       fields:
         - type: match
           value: F
           text: of getting Dad a CD for his birthday.
-    - id: 7
-      fields: '**7.** Andy is select("E")' # style: { marginRight: '24px' }
     - id: G
       fields:
         - type: match
           value: G
           text: very annoying at the moment!
-    - id: 8
-      fields: '**8.** Andy is being select("G")' # style: { marginRight: '24px' }
     - id: H
       fields:
         - type: match

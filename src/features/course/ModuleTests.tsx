@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router';
 import parse from 'url-parse';
 
 import { Test } from '../../models';
-import TestContent from './TestContent';
+import TestView from './TestView';
 
 interface ModuleTestsProps {
   moduleId: string;
@@ -60,7 +60,7 @@ function ModuleTests({ moduleId, tests }: ModuleTestsProps) {
         ))}
       </Steps>
       <div className="steps-content">
-        <TestContent moduleId={moduleId} test={tests[current]} />
+        <TestView moduleId={moduleId} test={tests[current]} />
       </div>
       <div className="steps-action">
         {current < tests.length - 1 && (
