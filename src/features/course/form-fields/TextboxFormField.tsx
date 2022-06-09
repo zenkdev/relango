@@ -1,37 +1,33 @@
-import { Radio } from 'antd';
+import { Input } from 'antd';
 import { Field, FieldProps } from 'formik';
 
-import { RadioField } from '../../../models';
+import { TextboxField } from '../../../models';
 import ErrorIcon from './ErrorIcon';
 
-interface RadioFormFieldProps {
+interface TextboxFormFieldProps {
   name: string;
-  field: RadioField;
+  field: TextboxField;
   className?: string;
   errors?: string[];
 }
 
-const optionStyle = {
-  display: 'block',
-  height: '36px',
-  lineHeight: '36px',
-};
-
-function RadioFormField({ name, field, className, errors }: RadioFormFieldProps) {
-  // const { disabled } = React.useContext(TestContext);
+function TextboxFormField({ name, field, className, errors }: TextboxFormFieldProps) {
+  const style = field.style ?? { width: 'unset' };
 
   return (
     <Field name={name}>
       {({ field: { value, onChange } }: FieldProps) => (
         <>
-          <Radio.Group
+          <Input
+            type="text"
             id={name}
             name={name}
             value={value}
             className={className}
+            style={style}
             // disabled={disabled}
-            options={field.options.map(opt => ({ label: opt, value: opt, style: optionStyle }))}
             onChange={onChange}
+            htmlSize={field.size}
           />
           <ErrorIcon errors={errors} />
         </>
@@ -40,4 +36,4 @@ function RadioFormField({ name, field, className, errors }: RadioFormFieldProps)
   );
 }
 
-export default RadioFormField;
+export default TextboxFormField;

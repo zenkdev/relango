@@ -1,8 +1,7 @@
 import { CSSProperties } from 'react';
 
-interface TextboxField {
+export interface TextboxField {
   type: 'textbox';
-  label?: string;
   value: string | string[];
   useCommonOptions?: boolean;
   size?: number;

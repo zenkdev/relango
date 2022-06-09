@@ -1,13 +1,13 @@
-import { Input } from 'antd';
-import { Field, FieldProps, useFormikContext } from 'formik';
+import { useFormikContext } from 'formik';
 import React from 'react';
 
 import { TestField } from '../../../models';
 import { TestContext } from '../TestView';
 import getSelectedFromValues from '../utils/getSelectFromValues';
-import ErrorIcon from './ErrorIcon';
+import styles from './FormField.module.scss';
 import RadioFormField from './RadioFormField';
 import SelectFormField from './SelectFormField';
+import TextboxFormField from './TextboxFormField';
 import TextFormField from './TextFormField';
 
 interface FormFieldProps {
@@ -16,11 +16,11 @@ interface FormFieldProps {
 }
 
 function FormField({ name, field }: FormFieldProps) {
-  const { values, errors, setFieldValue } = useFormikContext<any>();
-  const { commonOptionNames, disabled } = React.useContext(TestContext);
+  const { values, setFieldValue, errors } = useFormikContext<any>();
+  const { commonOptionNames } = React.useContext(TestContext);
   const selected = getSelectedFromValues(values, commonOptionNames);
-  const err = errors?.[name] ? [errors?.[name] as string] : undefined;
-  const className = err == null ? undefined : `item--${errors.length ? 'error' : 'success'}`;
+  const fieldErrors = errors?.[name] ? [errors?.[name] as string] : undefined;
+  const className = fieldErrors && (fieldErrors.length ? styles.error : styles.success);
 
   switch (field.type) {
     case 'text':
@@ -28,38 +28,19 @@ function FormField({ name, field }: FormFieldProps) {
     case 'newLine':
       return <br />;
     case 'select':
-      return <SelectFormField name={name} field={field} onChange={val => setFieldValue(name, val, false)} />;
-    case 'textbox':
       return (
-        <Field name={name}>
-          {({ field: { value, onChange } }: FieldProps) => {
-            const style = field.style ?? { width: 'unset' };
-            return (
-              <>
-                {field.label && (
-                  <label htmlFor={name}>
-                    <strong>{field.label}</strong>
-                  </label>
-                )}
-                <Input
-                  type="text"
-                  id={name}
-                  name={name}
-                  value={value}
-                  className={className}
-                  style={style}
-                  disabled={disabled}
-                  onChange={onChange}
-                  htmlSize={field.size}
-                />
-                <ErrorIcon errors={err} />
-              </>
-            );
-          }}
-        </Field>
+        <SelectFormField
+          name={name}
+          field={field}
+          onChange={val => setFieldValue(name, val, false)}
+          className={className}
+          errors={fieldErrors}
+        />
       );
+    case 'textbox':
+      return <TextboxFormField name={name} field={field} className={className} errors={fieldErrors} />;
     case 'radio':
-      return <RadioFormField name={name} field={field} />;
+      return <RadioFormField name={name} field={field} className={className} errors={fieldErrors} />;
     case 'match':
       return (
         <div className="tests-matches">

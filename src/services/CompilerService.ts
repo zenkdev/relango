@@ -6,7 +6,6 @@ import { parseText } from './parser';
 
 interface TextboxField {
   type: 'textbox';
-  label?: string;
   value: string | string[];
   useCommonOptions?: boolean;
   size?: number;
@@ -125,12 +124,6 @@ class CompilerService {
   private createTextboxField([textbox]: TextboxCstNode[]): TextboxField {
     const params = textbox.children.value!;
 
-    let label: string | undefined = undefined;
-    if (params.length > 1 && (params[1].children.StringLiteral || params[1].children.array)) {
-      label = unquote(params[0].children.StringLiteral?.[0].image);
-      params.shift();
-    }
-
     let value: string | string[] = '';
     if (params[0].children.StringLiteral) {
       value = unquote(params[0].children.StringLiteral[0].image) ?? '';
@@ -154,7 +147,6 @@ class CompilerService {
 
     return {
       type: 'textbox',
-      label,
       value,
       size,
       useCommonOptions,

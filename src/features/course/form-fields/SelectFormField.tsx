@@ -12,9 +12,11 @@ interface SelectFormFieldProps {
   name: string;
   field: SelectField;
   onChange: (value: any) => void;
+  className?: string;
+  errors?: string[];
 }
 
-function SelectFormField({ name, field, onChange }: SelectFormFieldProps) {
+function SelectFormField({ name, field, onChange, className, errors }: SelectFormFieldProps) {
   const { commonOptions, commonOptionNames /*, disabled*/ } = React.useContext(TestContext);
   const useCommonOptions = !field.options?.length;
   const options = (useCommonOptions ? commonOptions : prepareOptions(field.options)) || [];
@@ -24,15 +26,13 @@ function SelectFormField({ name, field, onChange }: SelectFormFieldProps) {
 
   return (
     <Field name={name}>
-      {({ field: { value }, form: { values, errors } }: FieldProps) => {
+      {({ field: { value }, form: { values } }: FieldProps) => {
         const selected = getSelectedFromValues(values, commonOptionNames);
         const selectOptions = options.map(option => ({
           text: option.text,
           value: option.value,
           disabled: selected.includes(option.value),
         }));
-        const err = errors?.[name] ? [errors?.[name] as string] : undefined;
-        const className = err == null ? undefined : `item--${errors.length ? 'error' : 'success'}`;
         return (
           <>
             <Select
@@ -44,7 +44,7 @@ function SelectFormField({ name, field, onChange }: SelectFormFieldProps) {
               options={selectOptions}
               onChange={onChange}
             />
-            <ErrorIcon errors={err} />
+            <ErrorIcon errors={errors} />
           </>
         );
       }}
