@@ -138,16 +138,16 @@ const tests = compilerService.compile(`
     - understand
   items:
     - >
-      Everyone textbox("(1)";"knows";true) about the stunning sights to see in Moscow and St. Petersburg. The beautiful city of Omsk, one of the oldest cities in western Siberia,
-      textbox("(2)";"is";true) not so well-known. Unfortunately, the 2700 km journey from Moscow just
-      textbox("(3)";["looks","seems"];true) too far for many travellers to Russia. For those who
-      textbox("(4)";"do";true) travel there, however, there are a number of interesting things to see and do. These
-      textbox("(5)";"include";true) visiting the Tobolskie and Tarskie Gates, which were the first stone buildings in Omsk, the Museum of Local Lore and the modern shops on Lyubinsky Avenue. When you
-      textbox("(6)";"see";true) Krestovozdvizhensky Cathedral lit up in the moonlight, you
-      textbox("(7)";"understand";true) why it's worth making the effort to come here.
+      Everyone **(1)** textbox("knows";true) about the stunning sights to see in Moscow and St. Petersburg. The beautiful city of Omsk, one of the oldest cities in western Siberia,
+      **(2)** textbox("is";true) not so well-known. Unfortunately, the 2700 km journey from Moscow just
+      **(3)** textbox(["looks","seems"];true) too far for many travellers to Russia. For those who
+      **(4)** textbox("do";true) travel there, however, there are a number of interesting things to see and do. These
+      **(5)** textbox("include";true) visiting the Tobolskie and Tarskie Gates, which were the first stone buildings in Omsk, the Museum of Local Lore and the modern shops on Lyubinsky Avenue. When you
+      **(6)** textbox("see";true) Krestovozdvizhensky Cathedral lit up in the moonlight, you
+      **(7)** textbox("understand";true) why it's worth making the effort to come here.
     - >
-      Few historians textbox("(8)";"disagree";true) with Omsk's historical importance - it was even the capital of Russia for a short period at the beginning of the 20-th century. As travelling across Russia becomes easier, it
-      textbox("(9)";["looks","seems"];true) like Omsk may also have a bright future - as a popular destination for tourists.
+      Few historians **(8)** textbox("disagree";true) with Omsk's historical importance - it was even the capital of Russia for a short period at the beginning of the 20-th century. As travelling across Russia becomes easier, it
+      **(9)** textbox(["looks","seems"];true) like Omsk may also have a bright future - as a popular destination for tourists.
 - id: G
   name: Match to make sentences.
   layout: article
@@ -241,22 +241,22 @@ const tests = compilerService.compile(`
   layout: article
   items:
     - |
-      \`You've textbox("(1)";"been") looking at that timetable for the last ten minutes. It can't be that confusing!\` said Sheila angrily.
+      \`You've **(1)** textbox("been") looking at that timetable for the last ten minutes. It can't be that confusing!\` said Sheila angrily.
     - |
-      \`I textbox("(2)";["do","really"]) wish you'd be quiet! I've textbox("(3)";"got") splitting headache thanks to you!\` replied Matt.
+      \`I **(2)** textbox(["do","really"]) wish you'd be quiet! I've **(3)** textbox("got") splitting headache thanks to you!\` replied Matt.
     - |
-      \`Mum! Dad! Please!\` said Alison. \`You're both textbox("(4)";"being") very silly. textbox("(5)";"There") is no point at all in blaming each other. That's not going to help us find out what time the next train to Budapest is due to leave.\`
+      \`Mum! Dad! Please!\` said Alison. \`You're both **(4)** textbox("being") very silly. **(5)** textbox("There") is no point at all in blaming each other. That's not going to help us find out what time the next train to Budapest is due to leave.\`
     - |
-      \`You textbox("(6)";"are") quite right, darling. I textbox("(7)";"am") sorry,\` said Sheila.
+      \`You **(6)** textbox("are") quite right, darling. I **(7)** textbox("am") sorry,\` said Sheila.
     - |
-      \`Me too,\` mumbled Matt. \`Now, let's have another look at this timetable. Well, it textbox("(8)";["looks","seems"]) like we textbox("(9)";"have")  definitely missed the last train today. That was the 18.20 we just missed, wasn't it?\`
+      \`Me too,\` mumbled Matt. \`Now, let's have another look at this timetable. Well, it **(8)** textbox(["looks","seems"]) like we **(9)** textbox("have")  definitely missed the last train today. That was the 18.20 we just missed, wasn't it?\`
     - |
-      \`I textbox("(10)";"think") so,\` said Sheila. \`I mean, it did leave at 18.20. Whether it's actually going to Budapest or not is another question.\`
+      \`I **(10)** textbox("think") so,\` said Sheila. \`I mean, it did leave at 18.20. Whether it's actually going to Budapest or not is another question.\`
     - |
-      \`Well, one thing is textbox("(11)";"not") in doubt,\` said Matt.
+      \`Well, one thing is **(11)** textbox("not") in doubt,\` said Matt.
       \`What's that?\` asked Sheila and Alison together.
     - |
-      \`This is the worst holiday we've textbox("(12)";"ever") been on,\` said Matt. \`Next year, we're going to try something far less adventurous.\`
+      \`This is the worst holiday we've **(12)** textbox("ever") been on,\` said Matt. \`Next year, we're going to try something far less adventurous.\`
       \`Agreed!\` said Sheila and Alison.
 - id: J
   name: Complete each second sentence using the word given so that it has a similar meaning to the first sentence. Write between two and five words in each gap.

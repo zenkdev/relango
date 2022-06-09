@@ -2,6 +2,7 @@ import m0100 from './m0100';
 import m0101 from './m0101';
 import m0101r from './m0101r';
 import m0102 from './m0102';
+import m0103 from './m0103';
 
 export const courseData = [
   {
@@ -19,15 +20,7 @@ export const moduleData = [
   m0101,
   m0102,
   m0101r,
-  {
-    key: '0103',
-    courseId: '01',
-    val: () => ({
-      name: 'Unit 3',
-      subject: 'Grammar',
-      description: `Past time: past simple, past continuous, past perfect simple, past perfect continuous, would, used to / be/get used to`,
-    }),
-  },
+  m0103,
   {
     key: '0104',
     courseId: '01',
