@@ -3,6 +3,7 @@ import m0101 from './m0101';
 import m0101r from './m0101r';
 import m0102 from './m0102';
 import m0103 from './m0103';
+import m0104 from './m0104';
 
 export const courseData = [
   {
@@ -21,15 +22,7 @@ export const moduleData = [
   m0102,
   m0101r,
   m0103,
-  {
-    key: '0104',
-    courseId: '01',
-    val: () => ({
-      name: 'Unit 4',
-      subject: 'Vocabulary',
-      description: `Hobbies, sport and games`,
-    }),
-  },
+  m0104,
   {
     key: '0105',
     courseId: '01',
