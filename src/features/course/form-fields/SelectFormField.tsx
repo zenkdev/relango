@@ -3,6 +3,7 @@ import { Field, FieldProps } from 'formik';
 import React from 'react';
 
 import { SelectField } from '../../../models';
+import { ensureArray } from '../../../utils';
 import { TestContext } from '../TestView';
 import getSelectedFromValues from '../utils/getSelectFromValues';
 import prepareOptions from '../utils/prepareOptions';
@@ -31,7 +32,7 @@ function SelectFormField({ name, field, onChange, className, errors }: SelectFor
         const selectOptions = options.map(option => ({
           text: option.text,
           value: option.value,
-          disabled: selected.includes(option.value),
+          disabled: selected.some(s => ensureArray(option.value).includes(s)),
         }));
         return (
           <>

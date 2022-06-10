@@ -19,18 +19,6 @@
 }
 
 .tests {
-  &-commonOptions {
-    margin: 12px;
-    padding: 12px 24px;
-    border: 1px solid #000;
-    display: flex;
-    justify-content: space-evenly;
-
-    &--selected {
-      text-decoration: line-through;
-    }
-  }
-
   &-matches {
     list-style: none;
     padding: 0;

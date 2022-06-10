@@ -45,7 +45,7 @@ export type TestField = TextboxField | RadioField | SelectField | TextField | Ne
 
 export interface Option {
   text: string;
-  value: string;
+  value: string | string[];
 }
 
 export interface TestItem {

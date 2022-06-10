@@ -1,12 +1,14 @@
 import { useFormikContext } from 'formik';
-import React, { useContext } from 'react';
+import React from 'react';
 
+import { ensureArray } from '../../utils';
+import styles from './CommonOptions.module.scss';
 import { TestContext } from './TestView';
 import getSelectedFromValues from './utils/getSelectFromValues';
 
 function CommonOptions({ hide }: { hide?: boolean }) {
   const { values } = useFormikContext<any>();
-  const { commonOptionNames, commonOptions } = useContext(TestContext);
+  const { commonOptionNames, commonOptions } = React.useContext(TestContext);
 
   if (!commonOptions || hide) {
     return null;
@@ -15,9 +17,9 @@ function CommonOptions({ hide }: { hide?: boolean }) {
   const selected = getSelectedFromValues(values, commonOptionNames);
 
   return (
-    <div className="tests-commonOptions">
+    <div className={styles.block}>
       {commonOptions.map(({ text, value }) => (
-        <span key={value} className={selected.includes(value) ? 'tests-commonOptions--selected' : undefined}>
+        <span key={text} className={selected.some(s => ensureArray(value).includes(s)) ? styles.selected : undefined}>
           {text}
         </span>
       ))}
