@@ -82,6 +82,16 @@
             "definition": [
               {
                 "type": "NonTerminal",
+                "name": "match",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
                 "name": "boldText",
                 "idx": 0
               }
@@ -218,14 +228,7 @@
         "name": "Textbox",
         "label": "Textbox",
         "idx": 0,
-        "pattern": "textbox"
-      },
-      {
-        "type": "Terminal",
-        "name": "LParen",
-        "label": "LParen",
-        "idx": 0,
-        "pattern": "\\("
+        "pattern": "textbox\\("
       },
       {
         "type": "Option",
@@ -275,14 +278,7 @@
         "name": "Radio",
         "label": "Radio",
         "idx": 0,
-        "pattern": "radio"
-      },
-      {
-        "type": "Terminal",
-        "name": "LParen",
-        "label": "LParen",
-        "idx": 0,
-        "pattern": "\\("
+        "pattern": "radio\\("
       },
       {
         "type": "Option",
@@ -332,14 +328,57 @@
         "name": "Select",
         "label": "Select",
         "idx": 0,
-        "pattern": "select"
+        "pattern": "select\\("
+      },
+      {
+        "type": "Option",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "value",
+            "idx": 0
+          },
+          {
+            "type": "Repetition",
+            "idx": 0,
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "SemiColon",
+                "label": "SemiColon",
+                "idx": 0,
+                "pattern": ";"
+              },
+              {
+                "type": "NonTerminal",
+                "name": "value",
+                "idx": 2
+              }
+            ]
+          }
+        ]
       },
       {
         "type": "Terminal",
-        "name": "LParen",
-        "label": "LParen",
+        "name": "RParen",
+        "label": "RParen",
         "idx": 0,
-        "pattern": "\\("
+        "pattern": "\\)"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "match",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "Match",
+        "label": "Match",
+        "idx": 0,
+        "pattern": "match\\("
       },
       {
         "type": "Option",

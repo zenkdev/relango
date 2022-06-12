@@ -1,7 +1,7 @@
 import { parse } from 'yaml';
 
 import { Test } from '../models';
-import { FieldsCstNode, RadioCstNode, SelectCstNode, TextboxCstNode, TextCstNode } from '../parser_cst';
+import { FieldsCstNode, MatchCstNode, RadioCstNode, SelectCstNode, TextboxCstNode, TextCstNode } from '../parser_cst';
 import { parseText } from './parser';
 
 interface TextboxField {
@@ -34,12 +34,11 @@ interface NewLineField {
   type: 'newLine';
 }
 
-type MatchField = {
+interface MatchField {
   type: 'match';
   value: string;
   text: string;
-  style: unknown;
-};
+}
 
 export type Field = TextboxField | RadioField | SelectField | TextField | NewLineField | MatchField;
 
@@ -70,8 +69,7 @@ class CompilerService {
       if (Array.isArray(items)) {
         items.forEach((item, n) => {
           if (typeof item === 'string') {
-            const fields = this.fields(item);
-            parsedItems.push({ id: n + 1, fields });
+            parsedItems.push({ id: n + 1, fields: this.fields(item) });
           } else if (typeof item?.fields === 'string') {
             parsedItems.push({ id: item.id, fields: this.fields(item.fields) });
           } else if (Array.isArray(item?.fields)) {
@@ -91,7 +89,6 @@ class CompilerService {
 
     if (result.lexErrors?.length) throw new Error(`Lex errors: ${JSON.stringify(result.lexErrors, null, 2)}`);
     if (result.parseErrors?.length) throw new Error(`Parse errors: ${JSON.stringify(result.parseErrors, null, 2)}`);
-    //console.log('cst', JSON.stringify(result.cst, null, 2));
 
     const cst = result.cst as FieldsCstNode;
     const fields: Field[] = [];
@@ -107,6 +104,8 @@ class CompilerService {
         fields.push(this.createRadioField(field.children.radio));
       } else if (field.children.select) {
         fields.push(this.createSelectField(field.children.select));
+      } else if (field.children.match) {
+        fields.push(this.matchSelectField(field.children.match));
       } else if (field.children.text) {
         fields.push(this.createTextField(field.children.text));
       } else if (field.children.boldText) {
@@ -209,6 +208,19 @@ class CompilerService {
       type: 'select',
       value,
       options,
+    };
+  }
+
+  private matchSelectField([match]: MatchCstNode[]): MatchField {
+    const params = match.children.value!;
+
+    const value = unquote(params[0].children.StringLiteral?.[0]?.image) ?? '';
+    const text = unquote(params[1].children.StringLiteral?.[0]?.image) ?? '';
+
+    return {
+      type: 'match',
+      value,
+      text,
     };
   }
 
