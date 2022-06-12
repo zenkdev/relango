@@ -92,7 +92,7 @@ const tests = compilerService.compile(`
 - id: E
   name: Choose the correct answer
   layout: list
-  layoutColumns: 2
+  columns: 2
   items:
   - |
     My brother and I ...... swimming almost every day last summer.

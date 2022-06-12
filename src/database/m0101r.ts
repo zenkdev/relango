@@ -72,7 +72,7 @@ const tests = compilerService.compile(`
 - id: D
   name: Choose the correct answer.
   layout: list
-  layoutColumns: 2
+  columns: 2
   listStart: 31
   footnote: (1 marks per answer)
   items:
@@ -101,7 +101,7 @@ const tests = compilerService.compile(`
 - id: E
   name: Choose the correct answer.
   layout: list
-  layoutColumns: 2
+  columns: 2
   listStart: 37
   footnote: (1 marks per answer)
   items:

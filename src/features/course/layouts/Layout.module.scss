@@ -2,6 +2,10 @@
   line-height: 36px;
 }
 
+.article {
+  display: grid;
+}
+
 .article__content {
   @include line-height;
 

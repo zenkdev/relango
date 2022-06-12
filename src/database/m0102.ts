@@ -6,7 +6,7 @@ const tests = compilerService.compile(`
   name: Choose the correct answer.
   title: Topic vocabulary in contrast
   layout: list
-  layoutColumns: 2
+  columns: 2
   items:
     - |
       You need a passport to cross the ...... between Mexico and the United States.

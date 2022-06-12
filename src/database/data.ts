@@ -4,6 +4,7 @@ import m0101r from './m0101r';
 import m0102 from './m0102';
 import m0103 from './m0103';
 import m0104 from './m0104';
+import m0104r from './m0104r';
 
 export const courseData = [
   {
@@ -23,6 +24,7 @@ export const moduleData = [
   m0101r,
   m0103,
   m0104,
+  m0104r,
   {
     key: '0105',
     courseId: '01',

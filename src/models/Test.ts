@@ -57,7 +57,7 @@ export type Test = {
   id: string;
   name: string;
   layout: 'article' | 'list';
-  layoutColumns?: number;
+  columns?: number;
   listStart?: number;
   title?: string;
   footnote?: string;

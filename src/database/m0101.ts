@@ -86,7 +86,7 @@ const tests = compilerService.compile(`
 - id: E
   name: Choose the correct answer.
   layout: list
-  layoutColumns: 2
+  columns: 2
   items:
     - |
       Ian ...... a shower at the moment, so could you call back in about half an hour?
@@ -151,7 +151,7 @@ const tests = compilerService.compile(`
 - id: G
   name: Match to make sentences.
   layout: article
-  layoutColumns: 2
+  columns: 2
   commonOptions:
     - A
     - B
@@ -163,64 +163,30 @@ const tests = compilerService.compile(`
     - H
   hideCommonOptions: true
   items:
-    - id: 1
-      fields: '**1.** I think select("B")' # style: { marginRight: '24px' }
-    - id: 2
-      fields: >
-              **2.** I'm thinking select("F")
-    - id: 3
-      fields: >
-              **3.** Phil's looking select("D")
-    - id: 4
-      fields: '**4.** Phil looks select("H")'
-    - id: 5
-      fields: '**5.** Claire has select("A")'
-    - id: 6
-      fields: '**6.** Claire is having select("C")'
-    - id: 7
-      fields: '**7.** Andy is select("E")'
-    - id: 8
-      fields: '**8.** Andy is being select("G")'
-    - id: A
-      fields:
-        - type: match
-          value: A
-          text: darker hair than her sister.
-    - id: B
-      fields:
-        - type: match
-          value: B
-          text: "I'm going to buy the new Racetrack CD."
-    - id: C
-      fields:
-        - type: match
-          value: C
-          text: a haircut at the moment.
-    - id: D
-      fields:
-        - type: match
-          value: D
-          text: for his glasses. Have you seen them?
-    - id: E
-      fields:
-        - type: match
-          value: E
-          text: not old enough to drive a car.
-    - id: F
-      fields:
-        - type: match
-          value: F
-          text: of getting Dad a CD for his birthday.
-    - id: G
-      fields:
-        - type: match
-          value: G
-          text: very annoying at the moment!
-    - id: H
-      fields:
-        - type: match
-          value: H
-          text: like he needs a holiday!
+    - >
+      **1.** I think select("B")
+    - match("A";"darker hair than her sister.")
+    - >
+      **2.** I'm thinking select("F")
+    - match("B";"I'm going to buy the new Racetrack CD.")
+    - >
+      **3.** Phil's looking select("D")
+    - match("C";"a haircut at the moment.")
+    - >
+      **4.** Phil looks select("H")
+    - match("D";"for his glasses. Have you seen them?")
+    - >
+      **5.** Claire has select("A")
+    - match("E";"not old enough to drive a car.")
+    - >
+      **6.** Claire is having select("C")
+    - match("F";"of getting Dad a CD for his birthday.")
+    - >
+      **7.** Andy is select("E")
+    - match("G";"very annoying at the moment!")
+    - >
+      **8.** Andy is being select("G")
+    - match("H";"like he needs a holiday!")
 - id: H
   name: Find the extra word in each tine
   layout: list
