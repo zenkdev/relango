@@ -12,7 +12,7 @@
     "@types/node": "16.18.3",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
-    "antd": "4.24.0",
+    "antd": "4.24.1",
     "chevrotain": "10.4.0",
     "craco-antd": "2.0.0",
     "formik": "2.2.9",
