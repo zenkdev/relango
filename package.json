@@ -11,7 +11,7 @@
     "@types/jest": "28.1.8",
     "@types/node": "16.18.3",
     "@types/react": "18.0.25",
-    "@types/react-dom": "18.0.8",
+    "@types/react-dom": "18.0.9",
     "antd": "4.24.2",
     "chevrotain": "10.4.1",
     "craco-antd": "2.0.0",
