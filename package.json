@@ -28,7 +28,7 @@
     "typescript": "5.0.3",
     "url-parse": "1.5.10",
     "uuid": "9.0.0",
-    "web-vitals": "3.3.0",
+    "web-vitals": "3.3.1",
     "workbox-background-sync": "6.5.4",
     "workbox-broadcast-update": "6.5.4",
     "workbox-cacheable-response": "6.5.4",
