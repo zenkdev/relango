@@ -15,7 +15,7 @@
     "antd": "4.24.10",
     "chevrotain": "10.5.0",
     "craco-antd": "2.0.0",
-    "formik": "2.4.0",
+    "formik": "2.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-markdown": "8.0.7",
