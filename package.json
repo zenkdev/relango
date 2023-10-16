@@ -41,7 +41,7 @@
     "workbox-routing": "6.6.1",
     "workbox-strategies": "6.6.1",
     "workbox-streams": "6.6.1",
-    "yaml": "2.3.2",
+    "yaml": "2.3.3",
     "zen-observable": "0.10.0"
   },
   "scripts": {
