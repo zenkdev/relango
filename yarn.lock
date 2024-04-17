@@ -2455,10 +2455,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@types/zen-observable@0.8.4":
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/@types/zen-observable/-/zen-observable-0.8.4.tgz#e06f78a43387899cfa60c02f166620907fc534c8"
-  integrity sha512-XWquk4B9Y9bP++I9FsKBVDR+cM1duIqTksuD4l+XUDcqKdngHrtLBe6A5DQX5sdJPWDhLFM9xHZBCiWcecZ0Jg==
+"@types/zen-observable@0.8.7":
+  version "0.8.7"
+  resolved "https://registry.yarnpkg.com/@types/zen-observable/-/zen-observable-0.8.7.tgz#114e2ffc8d5be4915fdd5bc90668fc0ceaadb760"
+  integrity sha512-LKzNTjj+2j09wAo/vvVjzgw5qckJJzhdGgWHW7j69QIGdq/KnZrMAMIHQiWGl3Ccflh5/CudBAntTPYdprPltA==
 
 "@typescript-eslint/eslint-plugin@^5.5.0":
   version "5.25.0"
