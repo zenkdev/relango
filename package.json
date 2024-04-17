@@ -86,7 +86,7 @@
     "@types/react-router-dom": "5.3.3",
     "@types/url-parse": "1.4.11",
     "@types/uuid": "9.0.8",
-    "@types/webpack-env": "1.18.2",
+    "@types/webpack-env": "1.18.4",
     "@types/zen-observable": "0.8.4",
     "eslint": "8.51.0",
     "eslint-config-airbnb": "19.0.4",
