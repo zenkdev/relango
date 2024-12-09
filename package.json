@@ -24,7 +24,7 @@
     "react-router-dom": "6.24.1",
     "react-scripts": "5.0.1",
     "redux": "4.2.1",
-    "sass": "1.77.6",
+    "sass": "1.82.0",
     "typescript": "5.5.3",
     "url-parse": "1.5.10",
     "uuid": "9.0.1",
